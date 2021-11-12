@@ -1,0 +1,73 @@
+
+<mat-toolbar  class="mat-elevation-z8 toolbar">
+  <button mat-icon-button *ngIf="sidenav.mode === 'over'" (click)="sidenav.toggle()">
+    <mat-icon *ngIf="!sidenav.opened">
+      menu
+    </mat-icon>
+    <mat-icon *ngIf="sidenav.opened">
+      close
+    </mat-icon>
+  </button>
+  <h1 >
+    <a href="#top" style="color: inherit;text-decoration: inherit;" href="#top">Rockmend me!
+    </a>
+  </h1>
+  <button [routerLink]="'login'" class="loginBtn" mat-raised-button>Login!</button>
+  <button [routerLink]="'register'" class="registerBtn" mat-raised-button>Register</button>
+</mat-toolbar>
+<div ></div>
+<mat-sidenav-container >
+  <mat-sidenav #sidenav="matSidenav" class="mat-elevation-z8">
+
+    <img alt="doesnt load" style="width: 150px"
+         src="https://www.freeiconspng.com/uploads/black-skull-26.png"/>
+    <img alt="doesnt load" style="width: 100px; height: 50px; "
+         src="https://static.vecteezy.com/system/resources/previews/001/208/219/non_2x/music-genre-heavy-metal-png.png"/>
+
+    <h4 class="name">Rockmend me</h4>
+    <p class="designation">Who wants to explore new music?</p>
+
+    <mat-divider></mat-divider>
+
+    <button [routerLink]="'home'" mat-button class="menu-button, colorFulButton">
+      <mat-icon>home</mat-icon>
+      <span>Home</span>
+    </button>
+    <br>
+    <button [routerLink]="'login'" mat-button class="menu-button, colorFulButton">
+      <mat-icon>person</mat-icon>
+      <span>Profile</span>
+    </button>
+    <br>
+    <div class="bg-image hover-overlay">
+
+      <button [routerLink]="'playlists'" mat-button class="menu-button, colorFulButton">
+        <mat-icon>library_music</mat-icon>
+        <span>Playlists</span>
+      </button>
+      <div class="mask" style="background-color: rgba(251, 251, 251, 0.2);"></div>
+    </div>
+    <mat-divider class="devider-button"></mat-divider>
+
+    <button [routerLink]="'about'"  mat-button class="menu-button about-help devider-button">
+      <mat-icon>info</mat-icon>
+      <span>About</span>
+    </button>
+    <br>
+    <button [routerLink]="'help'" mat-button class="menu-button about-help devider-button">
+      <mat-icon>help</mat-icon>
+      <span>Help</span>
+    </button>
+
+  </mat-sidenav>
+
+  <mat-sidenav-content style="background-color: rgb(255,254,205); scroll-behavior: smooth;">
+    <div id ="top"></div>
+    <div style="background-color: #ffffff" class="content mat-elevation-z8">
+      <!--      The components (login/register/home) will be loaded here -->
+<!--      <iframe src="https://open.spotify.com/embed/playlist/37i9dQZF1E35X9THpCpSvT" width="300" height="380" frameborder="0" allowtransparency="true" allow="encrypted-media"></iframe>-->
+      <router-outlet></router-outlet>
+
+    </div>
+  </mat-sidenav-content>
+</mat-sidenav-container>

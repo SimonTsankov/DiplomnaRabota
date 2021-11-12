@@ -1,0 +1,79 @@
+
+:host{
+  --bckg-menu: #630000;
+  --LogRegColor: #dec905;
+
+  --about-help-divider-color: #dec905;
+
+  --main-color-one: #000000;/* #002b5c  og color*/
+
+  --main-color-two: rgb(255, 0, 0);  /*  #28a3e0 */
+
+  --button-color-one: rgb(54, 0, 0);
+  --button-color-two: rgba(255, 114, 0, 0.75);
+}
+
+mat-sidenav {
+  margin: 16px;
+  width: 225px;
+  border-right: none;
+  background:var(--bckg-menu);
+  color: white;
+  border-radius: 10px;
+  padding: 16px;
+  text-align: center;
+}
+
+.content {
+  height: calc(100vh - 98px);
+  border-radius: 10px;
+  margin: 16px;
+  margin-left: 32px;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  font-size: 2rem;
+  color: lightgray;
+  /*background-color: #4ac1f7;*/
+}
+
+mat-sidenav-container {
+  height: calc(100vh - 65px);
+}
+
+.loginBtn {
+  background-color: var(--LogRegColor);
+  color: white;
+  margin-left: 76%;
+}
+.toolbar{
+  color: white;
+  height: 10%;
+  background: linear-gradient(
+    45deg,
+    var(--main-color-one) ,
+    var(--main-color-two)120%
+  );
+}
+.registerBtn {
+  background-color: var(--LogRegColor);
+  color: white;
+  margin-left: 1%;
+}
+.colorFulButton{
+  background: linear-gradient(
+    45deg,
+    var(--button-color-one),
+    var(--button-color-two) 100%
+  );
+  width: 70%;
+  margin-bottom: 4%;
+}
+.devider-button{
+  background-color: var(--about-help-divider-color)
+}
+.about-help{
+  margin-top: 5px
+}

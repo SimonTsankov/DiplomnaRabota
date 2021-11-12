@@ -1,0 +1,45 @@
+:host {
+  width: 50%;
+  margin-right: 8%;
+  height: 90%;
+
+}
+
+.forgottenPasswordButton {
+  border: transparent;
+  background-color: transparent;
+  color: #1800f8
+}
+
+.title {
+  color: #ffffff;
+}
+
+.loginFields {
+  border-radius: 25px;
+  width: 100%;
+  padding: 15%;
+  padding-right: 0%;
+  background: linear-gradient(
+    45deg,
+    var(--LogRegColor),
+    var(--main-color-two) 80%
+  );
+}
+
+
+.form {
+  min-width: 50px;
+  max-width: 500px;
+  width: 100%;
+
+}
+
+.full-width {
+  width: 100%;
+}
+
+form {
+  font-size: medium;
+  margin-left: 10%
+}
