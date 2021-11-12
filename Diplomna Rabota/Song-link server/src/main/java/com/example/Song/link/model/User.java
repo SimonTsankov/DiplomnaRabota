@@ -15,6 +15,8 @@ public class User {
     private String email;
 
     @Column
+    private String username;
+    @Column
     private String password;
 
     @Column(name="emailverification")
@@ -63,4 +65,11 @@ public class User {
         this.dateCreated = dateCreated;
     }
 
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
+    }
 }
