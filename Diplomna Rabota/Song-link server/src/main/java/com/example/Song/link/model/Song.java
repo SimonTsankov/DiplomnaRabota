@@ -3,14 +3,21 @@ package com.example.Song.link.model;
 import javax.persistence.*;
 
 @Entity
-@Table(name="testTable")
-public class TestModel {
-    @Id
+@Table
+public class Song {
+
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Id
     private long id;
 
-    @Column(length = 300)
+    @Column(length = 50)
     private String name;
+
+    @Column
+    private String artist;
+
+    @Column
+    private String imgUrl;
 
     public long getId() {
         return id;
@@ -27,11 +34,20 @@ public class TestModel {
     public void setName(String name) {
         this.name = name;
     }
-    public TestModel(String name) {
-        this.name = name;
+
+    public String getArtist() {
+        return artist;
     }
 
-    public TestModel() {
+    public void setArtist(String artist) {
+        this.artist = artist;
+    }
 
+    public String getImgUrl() {
+        return imgUrl;
+    }
+
+    public void setImgUrl(String imgUrl) {
+        this.imgUrl = imgUrl;
     }
 }
