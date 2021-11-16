@@ -1,0 +1,33 @@
+.example-form {
+  min-width: 400px;
+  max-width: 700px;
+  width: 100%;
+  font-size: large;
+}
+
+.example-full-width {
+  width: 100%;
+}
+
+.text-field{
+  max-height: 400px
+}
+
+.postCreationFields {
+  width: 70%;
+  height: 400px;
+  background-color: white;
+}
+:host{
+  width: 70%;
+  height: 70%;
+  background: linear-gradient(
+    45deg,
+    var(--main-color-one) ,
+    var(--main-color-two)120%
+  );
+
+}
+.p-button-warning{
+  margin: 4% ;
+}

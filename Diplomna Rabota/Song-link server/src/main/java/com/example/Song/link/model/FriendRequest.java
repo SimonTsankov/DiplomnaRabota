@@ -2,12 +2,10 @@ package com.example.Song.link.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
-import javax.persistence.Column;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 import java.time.LocalDateTime;
-
+@Entity
+@Table
 public class FriendRequest {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id

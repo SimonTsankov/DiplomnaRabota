@@ -1,0 +1,21 @@
+<!--<form class="example-form">-->
+<!--  <mat-form-field  color="accent" class="example-full-width" appearance="fill">-->
+<!--    <mat-label>Name of your post</mat-label>-->
+<!--    <input [(ngModel)]="name" matInput  value="Name: ">-->
+<!--  </mat-form-field>-->
+
+<!--  <mat-form-field   color="accent" class="example-full-width" appearance="fill">-->
+<!--    <mat-label>Content of post</mat-label>-->
+<!--    <textarea [(ngModel)]="content" class="text-field" matInput></textarea>-->
+<!--  </mat-form-field>-->
+<!--</form>-->
+<div class="postCreationFields">
+  <angular-editor [placeholder]="'Enter text here...'" [config]="editorConfig" [(ngModel)]="text"
+                  style="background-color: white"></angular-editor>
+
+  <input style="display: none" type="file" (change)="onFileSelected($event)" #fileInput>
+  <button (click)="fileInput.click()" pButton pRipple type="button" label="Select File" class="p-button-raised p-button-warning"></button>
+  <button (click)="onUpload()" pButton pRipple type="button" label="Select File" class="p-button-raised p-button-warning"></button>
+  <img *ngIf="url" [src]="url" style="width: 200px">
+</div>
+
