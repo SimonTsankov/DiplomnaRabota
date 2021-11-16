@@ -14,20 +14,21 @@
 }
 
 .postCreationFields {
-  width: 70%;
+  width: 90%;
   height: 400px;
   background-color: white;
 }
+
 :host{
-  width: 70%;
-  height: 70%;
+  width: 100%;
+  height: 100%;
   background: linear-gradient(
     45deg,
-    var(--main-color-one) ,
-    var(--main-color-two)120%
+    var(--LogRegColor),
+    var(--main-color-two) 80%
   );
 
 }
 .p-button-warning{
-  margin: 4% ;
+  margin: 2% ;
 }
