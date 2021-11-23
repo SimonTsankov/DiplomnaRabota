@@ -1,25 +1,25 @@
-
+<h3>Create a post</h3>
 <input style="display: none" type="file" (change)="onFileSelected($event)" #fileInput>
 
 <div class="content flow" >
   <div class="grid-ish">
-    <div class="col redBCKG">
-      <p style="margin: 0 0 0 0">Name of post: </p>
+    <div class="col">
+      <p >Name of post: </p>
     <input style="width: 60%; height: 40% " type="text" pInputText [(ngModel)]="name">
     </div>
-    <div class="col redBCKG">
+    <div class="col">
       <button (click)="fileInput.click()" pButton pRipple type="button" label="Select File"
               class="p-button-raised p-button-warning" style="margin-right: 1em"></button>
-      <button (click)="onUpload()" pButton pRipple type="button" label="Save file"
-              class="p-button-raised p-button-warning"></button>
+      <button (click)="onUpload()" pButton pRipple type="button" label="Publish Post"
+              class="p-button-raised p-button-label publish_button" ></button>
 
     </div>
-    <div class="col redBCKG" >
-      <img [src]="url" style="width: 70%;max-width: 50%;aspect-ratio: 1/1">
+    <div class="col" >
+      <img [src]="url">
     </div>
 
 
-    <div class="col redBCKG">
+    <div class="col">
       <h5>Post tags/topics</h5>
       <p-chips [(ngModel)]="values2" separator=","></p-chips>
 
@@ -28,6 +28,9 @@
     <div  style="background-color: white; padding-top: 3%" >
       <angular-editor [placeholder]="'Enter text here...'" [config]="editorConfig" [(ngModel)]="text"
                       style="background-color: white"></angular-editor>
+      <button (click)="onUpload()" pButton pRipple type="button" label="Publish Post"
+              class="p-button-raised p-button-label publish_button" ></button>
+
     </div>
   </div>
 </div>

@@ -1,8 +1,10 @@
 :host {
-  width: 50%;
-  margin-right: 8%;
-  height: 90%;
+  margin-inline: 5%;
   --main-c-one: rgba(0, 0, 0, 0.69)
+}
+
+.title {
+  color: #000000;
 }
 
 .forgottenPasswordButton {
@@ -11,29 +13,28 @@
   background-color: transparent;
   color: #1800f8
 }
-.mat-form-field{
+
+.mat-form-field {
   color: var(--main-c-one);
 }
-.mat-labelCustom{
+
+.mat-labelCustom {
   color: var(--main-c-one);
 }
-.mat-hint{
+
+.mat-hint {
   color: var(--main-c-one);
 }
+
 .registerFields {
   border-radius: 25px;
-  width: 100%;
-  padding: 15%;
-  padding-right: 0%;
+  width: auto;
+  padding: 20%;
   background: linear-gradient(
     45deg,
     var(--LogRegColor),
     var(--main-color-two) 100%
   );
-}
-
-.title{
-  color: #ffffff;
 }
 
 .form {
@@ -46,10 +47,11 @@
 .full-width {
   width: 100%;
 }
+
 mat {
 
 }
+
 form {
   font-size: medium;
-  margin-left: 10%
 }

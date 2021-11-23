@@ -1,25 +1,16 @@
-:host {
-  width: 50%;
-  margin-right: 8%;
-  height: 90%;
-
+:host{
+  margin-top: 10%;
+  margin-inline: 5%;
+  margin-bottom: auto;
 }
-
-.forgottenPasswordButton {
-  border: transparent;
-  background-color: transparent;
-  color: #1800f8
-}
-
 .title {
-  color: #ffffff;
+  color: #000000;
 }
 
 .loginFields {
   border-radius: 25px;
-  width: 100%;
-  padding: 15%;
-  padding-right: 0%;
+  width: auto;
+  padding: 20%;
   background: linear-gradient(
     45deg,
     var(--LogRegColor),
@@ -27,6 +18,11 @@
   );
 }
 
+.forgottenPasswordButton {
+  border: transparent;
+  background-color: transparent;
+  color: #1800f8
+}
 
 .form {
   min-width: 50px;
@@ -41,5 +37,4 @@
 
 form {
   font-size: medium;
-  margin-left: 10%
 }
