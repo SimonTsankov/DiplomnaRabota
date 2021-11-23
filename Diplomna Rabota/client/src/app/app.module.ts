@@ -21,6 +21,7 @@ import {AutoCompleteModule} from "primeng/autocomplete";
 import {ButtonModule} from "primeng/button";
 import {TableModule} from "primeng/table";
 import { AngularEditorModule } from '@kolkov/angular-editor';
+import {ChipsModule} from "primeng/chips";
 
 
 @NgModule({
@@ -51,7 +52,7 @@ import { AngularEditorModule } from '@kolkov/angular-editor';
     MatInputModule,
     FormsModule,
     EditorModule,
-    AutoCompleteModule,
+    AutoCompleteModule, ChipsModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

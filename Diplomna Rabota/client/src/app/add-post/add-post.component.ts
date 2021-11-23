@@ -28,6 +28,7 @@ export class AddPostComponent implements OnInit {
         'insertVideo']
     ]
   };
+  values2: string[] | undefined;
 
   constructor(private http: HttpClient) {
   }

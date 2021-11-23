@@ -1,26 +1,33 @@
+
 <input style="display: none" type="file" (change)="onFileSelected($event)" #fileInput>
-<div style="float: left; width: 70%; " >
-<div class="postCreationFields">
 
-  <angular-editor [placeholder]="'Enter text here...'" [config]="editorConfig" [(ngModel)]="text"
-                  style="background-color: white"></angular-editor>
-</div>
-<div style="text-align: center">Image of post:</div>
-<div >
-  <button (click)="fileInput.click()" pButton pRipple type="button" label="Select File"
-          class="p-button-raised p-button-warning"></button>
-  <button (click)="onUpload()" pButton pRipple type="button" label="Save file"
-          class="p-button-raised p-button-warning"></button>
+<div class="content flow" >
+  <div class="grid-ish">
+    <div class="col redBCKG">
+      <p style="margin: 0 0 0 0">Name of post: </p>
+    <input style="width: 60%; height: 40% " type="text" pInputText [(ngModel)]="name">
+    </div>
+    <div class="col redBCKG">
+      <button (click)="fileInput.click()" pButton pRipple type="button" label="Select File"
+              class="p-button-raised p-button-warning" style="margin-right: 1em"></button>
+      <button (click)="onUpload()" pButton pRipple type="button" label="Save file"
+              class="p-button-raised p-button-warning"></button>
 
-<img [src]="url" style="width: 20%; height: 20%; aspect-ratio: 1/1">
-</div>
-</div>
-<div style=" float: right; margin-right: 10%; margin-top: 1.5%;height: 20%; width: 20%;">
- <span style="font-size: large" class="p-float-label">
-    <input id="float-input" type="text" pInputText [(ngModel)]="name">
-    <label for="float-input">Name</label>
-</span>
-  <div>
+    </div>
+    <div class="col redBCKG" >
+      <img [src]="url" style="width: 70%;max-width: 50%;aspect-ratio: 1/1">
+    </div>
 
+
+    <div class="col redBCKG">
+      <h5>Post tags/topics</h5>
+      <p-chips [(ngModel)]="values2" separator=","></p-chips>
+
+    </div>
+
+    <div  style="background-color: white; padding-top: 3%" >
+      <angular-editor [placeholder]="'Enter text here...'" [config]="editorConfig" [(ngModel)]="text"
+                      style="background-color: white"></angular-editor>
+    </div>
   </div>
 </div>
