@@ -8,7 +8,7 @@
     <input style="width: 60%; height: 40% " type="text" pInputText [(ngModel)]="name">
     </div>
     <div class="col">
-      <button (click)="fileInput.click()" pButton pRipple type="button" label="Select File"
+      <button (click)="fileInput.click()" pButton pRipple type="button" label="Select image"
               class="p-button-raised p-button-warning" style="margin-right: 1em"></button>
       <button (click)="onUpload()" pButton pRipple type="button" label="Publish Post"
               class="p-button-raised p-button-label publish_button" ></button>
@@ -28,9 +28,9 @@
     <div  style="background-color: white; padding-top: 3%" >
       <angular-editor [placeholder]="'Enter text here...'" [config]="editorConfig" [(ngModel)]="text"
                       style="background-color: white"></angular-editor>
-      <button (click)="onUpload()" pButton pRipple type="button" label="Publish Post"
-              class="p-button-raised p-button-label publish_button" ></button>
 
     </div>
   </div>
 </div>
+<button (click)="onUpload()" pButton pRipple type="button" label="Publish Post"
+        class="p-button-raised p-button-label publish_button fixedbutton" ></button>

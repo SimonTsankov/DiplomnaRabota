@@ -1,23 +1,88 @@
 
-:host{
+:host {
+  --neon-clr: hsl(317, 100%, 54%);
   --bckg-menu: #630000;
   --LogRegColor: #dec905;
 
   --about-help-divider-color: #dec905;
 
-  --main-color-one: #000000;/* #002b5c  og color*/
+  --main-color-one: #000000; /* #002b5c  og color*/
 
-  --main-color-two: rgb(255, 0, 0);  /*  #28a3e0 */
+  --main-color-two: rgb(255, 0, 0); /*  #28a3e0 */
 
   --button-color-one: rgb(54, 0, 0);
   --button-color-two: rgba(255, 114, 0, 0.75);
+}
+
+.neon-button {
+  margin-left: 1em;
+  font-size: 2.5rem;
+  font-family: "Balsamiq Sans", cursive;
+  display: inline-block;
+  cursor: pointer;
+  text-decoration: none;
+  color: var(--neon-clr);
+  border: var(--neon-clr) 4px solid;
+  padding: 0.25em 1em;
+  border-radius: 0.25em;
+
+  text-shadow: 0 0 0.125em hsl(0, 0%, 50%), 0 0 0.45em currentColor;
+
+  box-shadow: inset 0 0 1em 0 var(--neon-clr), 0 0 1em 0 var(--neon-clr);
+  position: relative;
+}
+.neon-button-small {
+  font-size: 1rem !important;
+}
+.neon-button::before {
+
+  pointer-events: none;
+  content: '';
+  position: absolute;
+  background: var(--neon-clr);
+  top: 100%;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  width: 100%;
+  height: 100%;
+
+  transform: perspective(2em) rotateX(45deg) scale(1, 0.50);
+  filter: blur(0.7em);
+}
+
+.neon-button:hover,
+.neon-button:focus {
+  background: var(--neon-clr);
+  color: #6d0468;
+  text-shadow: none;
+}
+
+.neon-button::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  box-shadow: 0 0 1em 0.5em var(--neon-clr);
+  opacity: 0;
+  transition: opacity 150ms linear;
+}
+
+.neon-button:hover::before {
+  opacity: 1;
+}
+
+.neon-button:hover::after {
+  opacity: 1;
 }
 
 mat-sidenav {
   margin: 16px;
   width: 225px;
   border-right: none;
-  background:var(--bckg-menu);
+  background: var(--bckg-menu);
   color: white;
   border-radius: 10px;
   padding: 16px;
@@ -49,24 +114,28 @@ mat-sidenav-container {
   margin-right: 1%;
   margin-left: auto;
 }
-.toolbar{
+
+.toolbar {
   color: white;
-  height: 10%;
+  height: 13%;
   background: linear-gradient(
     45deg,
-    var(--main-color-one) ,
-    var(--main-color-two)120%
+    var(--main-color-one),
+    var(--main-color-two) 120%
   );
 }
+
 .funTimes {
   background-color: transparent;
 }
+
 .registerBtn {
   background-color: var(--LogRegColor);
   color: white;
   margin-left: 1%;
 }
-.colorFulButton{
+
+.colorFulButton {
   background: linear-gradient(
     45deg,
     var(--button-color-one),
@@ -75,9 +144,11 @@ mat-sidenav-container {
   width: 70%;
   margin-bottom: 4%;
 }
-.devider-button{
+
+.devider-button {
   background-color: var(--about-help-divider-color)
 }
-.about-help{
+
+.about-help {
   margin-top: 5px
 }
