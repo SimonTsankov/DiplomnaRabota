@@ -15,7 +15,7 @@
     45deg,
 
     var(--LogRegColor),
-    var(--main-color-two) 80%
+    var(--LogRegColorTwo) 80%
   );
 }
 

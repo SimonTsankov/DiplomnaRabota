@@ -2,6 +2,7 @@
 :host {
   margin-top: 1em;
   margin-bottom: auto;
+  --background-EditField: #f3f3f3;
 }
 
 h3 {
@@ -32,7 +33,7 @@ p {
   margin: 3rem auto;
   background: linear-gradient(
     70deg,
-    #ff8d03,
+    var(--LogRegColorTwo),
     var(--main-color-two) 100%);
 
 }

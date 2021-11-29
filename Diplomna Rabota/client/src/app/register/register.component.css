@@ -33,7 +33,7 @@
   background: linear-gradient(
     45deg,
     var(--LogRegColor),
-    var(--main-color-two) 100%
+    var(--LogRegColorTwo) 100%
   );
 }
 

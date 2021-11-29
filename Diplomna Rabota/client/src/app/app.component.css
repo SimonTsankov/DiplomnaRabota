@@ -1,19 +1,24 @@
 
 :host {
-  --neon-clr: hsl(50, 100%, 50%);
-  --neon-clr2: #a15f00;
-
-  --bckg-menu: #630000;
-  --LogRegColor: #dec905;
-
+  --neon-clr: hsl(80, 100%, 50%);
+  --neon-clr2: #005201;
+  /* #18c43b */
+  --bckg-menu: #18c43b;
+  --LogRegColor: #18c43b;
+  --LogRegColorTwo: #0b8421;
   --about-help-divider-color: #dec905;
 
   --main-color-one: #000000; /* #002b5c  og color*/
 
-  --main-color-two: rgb(255, 0, 0); /*  #28a3e0 */
+  --main-color-two: rgb(123, 255, 0); /*  #28a3e0 */
 
-  --button-color-one: rgb(54, 0, 0);
-  --button-color-two: rgba(255, 114, 0, 0.75);
+  --button-color-one: #191414;
+  --button-color-two: #1DB954;
+
+  /*--content-bckg-color: #090000;*/
+  /*--content-bckg-color-Back: #767676;*/
+  --content-bckg-color: #c4c4c4;
+  --content-bckg-color-Back: #090000;
 }
 
 .neon-button {
@@ -101,7 +106,7 @@ mat-sidenav {
   align-items: center;
 
   font-size: 2rem;
-  color: lightgray;
+  color: #979797;
   /*background-color: #4ac1f7;*/
 }
 
@@ -122,7 +127,7 @@ mat-sidenav-container {
   background: linear-gradient(
     45deg,
     var(--main-color-one),
-    var(--main-color-two) 120%
+    var(--main-color-two) 130%
   );
 }
 
