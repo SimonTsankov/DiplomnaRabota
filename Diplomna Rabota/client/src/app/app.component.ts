@@ -15,31 +15,29 @@ export class AppComponent implements OnInit {
   sidenav!: MatSidenav;
   component: string = "";
   // @ts-ignore
-   bMobile = navigator.userAgent.indexOf( "Mobile" ) !== -1 ||
+   bMobile = navigator.userAgent.indexOf( "Mobile" ) !== -1 || //checks if the device is mobile
     navigator.userAgent.indexOf( "iPhone" ) !== -1 ||
     navigator.userAgent.indexOf( "Android" ) !== -1 ||
     navigator.userAgent.indexOf( "Windows Phone" ) !== -1 ;
+
   constructor(private router: Router, private observer: BreakpointObserver) {
     console.log("Yoohoo")
+
   }
 
 
   ngOnInit(): void {
-    this.randomNum()
-    this.observer
-      .observe(['(max-width: 800px)'])
-      .pipe(delay(1))
-      .subscribe((res) => {
-        this.sidenav.open();
-      });
+
+    this.startAnimation()
     let element = document.getElementById("neon-btn")
     if(this.bMobile){
       // @ts-ignore
       element.classList.add("neon-button-small")
     }
+    this.changePage("posts");
   }
 
-  async randomNum() {
+  async startAnimation() {
 
     let element = document.getElementById("neon-btn");
 
@@ -52,21 +50,19 @@ export class AppComponent implements OnInit {
       [
         {
 
-          color: '#2b0229',
-          boxShadow: '0 0 1em 0.5em var(--neon-clr',
+          color: 'var(--neon-clr2)',
+          boxShadow: '0 0 1em 0.5em var(--neon-clr)',
           textShadow: 'none',
-          "background": "hsl(317, 100%, 54%)"//hsl(31, 100%, 50%) orange
+          "background": "var(--neon-clr)"//hsl(31, 100%, 50%) orange
         }
 
       ],
-      {duration: 1000, iterations: Math.random() * 2, easing: "ease-out"}
+      {duration: 1000, iterations: Math.random() * 2}
       )
       , 1000)
 
-    console.log(element)
-
     setTimeout(() => {
-      this.randomNum()
+      this.startAnimation()
     }, Math.random() * 10000)
 
   }

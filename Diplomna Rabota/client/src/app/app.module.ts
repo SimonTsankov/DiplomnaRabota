@@ -22,6 +22,7 @@ import {ButtonModule} from "primeng/button";
 import {TableModule} from "primeng/table";
 import { AngularEditorModule } from '@kolkov/angular-editor';
 import {ChipsModule} from "primeng/chips";
+import { PostsComponent } from './posts/posts.component';
 
 
 @NgModule({
@@ -30,7 +31,8 @@ import {ChipsModule} from "primeng/chips";
     AppComponent,
     LoginComponent,
     RegisterComponent,
-    AddPostComponent
+    AddPostComponent,
+    PostsComponent
   ],
   imports: [FormsModule,
     BrowserModule,

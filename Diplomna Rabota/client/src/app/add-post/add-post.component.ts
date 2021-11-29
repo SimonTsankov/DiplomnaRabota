@@ -61,10 +61,10 @@ export class AddPostComponent implements OnInit {
     const uploadImageData = new FormData();
 
     // @ts-ignore
-    uploadImageData.append('file', this.selectedFile, this.selectedFile.name)
+    uploadImageData.append('file', this.selectedFile, this.selectedFile?.name)
     uploadImageData.append('name', this.name);
-    uploadImageData.append('content', this.content);
-
+    uploadImageData.append('content', this.text);
+    console.log(this.name+"\n"+this.text)
     this.http.post(this.postSaveUrl, uploadImageData).subscribe(
       res => console.log("Done!")
     )

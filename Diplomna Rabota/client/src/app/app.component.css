@@ -1,6 +1,8 @@
 
 :host {
-  --neon-clr: hsl(317, 100%, 54%);
+  --neon-clr: hsl(50, 100%, 50%);
+  --neon-clr2: #a15f00;
+
   --bckg-menu: #630000;
   --LogRegColor: #dec905;
 
@@ -54,7 +56,7 @@
 .neon-button:hover,
 .neon-button:focus {
   background: var(--neon-clr);
-  color: #6d0468;
+  color: var(--neon-clr2);
   text-shadow: none;
 }
 
@@ -92,8 +94,7 @@ mat-sidenav {
 .content {
   height: calc(100vh - 98px);
   border-radius: 10px;
-  margin: 16px;
-  margin-left: 32px;
+  margin: 16px 16px 16px 32px;
 
   display: flex;
   justify-content: center;

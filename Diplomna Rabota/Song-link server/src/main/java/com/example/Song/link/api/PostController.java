@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
+import java.util.List;
 
 @CrossOrigin(origins = "*", maxAge = 3600)
 @RestController
@@ -34,7 +35,11 @@ public class PostController {
             postRepository.save(post);
             return ResponseEntity.ok().body("Updated");
         }
+    }
 
-
+    @GetMapping("/findAll")
+    public ResponseEntity<?> findAll(){
+        List<Post> postsList = postRepository.findAll();
+        return ResponseEntity.ok().body(postsList);
     }
 }

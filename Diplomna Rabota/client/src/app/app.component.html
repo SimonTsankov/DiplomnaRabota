@@ -1,5 +1,4 @@
-
-<mat-toolbar  class="mat-elevation-z8 toolbar">
+<mat-toolbar class="mat-elevation-z8 toolbar">
   <button mat-icon-button *ngIf="sidenav.mode === 'over'" (click)="sidenav.toggle()">
     <mat-icon *ngIf="!sidenav.opened">
       menu
@@ -9,16 +8,16 @@
     </mat-icon>
   </button>
   <h1 style="width: 3%;">
-    <a   id="neon-btn" href="#top" class="neon-button">Song Link!
+    <a id="neon-btn" href="#top" class="neon-button">Song Link!
     </a>
-<!--    <a  *ngIf="bMobile" id="neon-btnMobile" href="#top" class="neon-button-small">Song Link!-->
-<!--    </a>-->
+    <!--    <a  *ngIf="bMobile" id="neon-btnMobile" href="#top" class="neon-button-small">Song Link!-->
+    <!--    </a>-->
   </h1>
   <button [routerLink]="'login'" class="loginBtn" mat-raised-button>Login!</button>
   <button [routerLink]="'register'" class="registerBtn" mat-raised-button>Register</button>
 </mat-toolbar>
-<div ></div>
-<mat-sidenav-container >
+<div></div>
+<mat-sidenav-container>
   <mat-sidenav #sidenav="matSidenav" class="mat-elevation-z8">
 
     <img alt="doesnt load" style="width: 150px"
@@ -51,7 +50,7 @@
     </div>
     <mat-divider class="devider-button"></mat-divider>
 
-    <button [routerLink]="'about'"  mat-button class="menu-button about-help devider-button">
+    <button [routerLink]="'about'" mat-button class="menu-button about-help devider-button">
       <mat-icon>info</mat-icon>
       <span>About</span>
     </button>
@@ -64,10 +63,9 @@
   </mat-sidenav>
 
   <mat-sidenav-content style="background-color: rgb(255,254,205); scroll-behavior: smooth;">
-    <div id ="top"></div>
-    <div style="background-color: #ffffff;height: auto; min-height: 100%" class="content mat-elevation-z8">
-      <!--      The components (login/register/home) will be loaded here -->
-<!--      <iframe src="https://open.spotify.com/embed/playlist/37i9dQZF1E35X9THpCpSvT" width="300" height="380" frameborder="0" allowtransparency="true" allow="encrypted-media"></iframe>-->
+    <div id="top"></div>
+    <div
+      style="background: white;height: auto; min-height: 100%" class="content mat-elevation-z8">
       <router-outlet></router-outlet>
 
     </div>

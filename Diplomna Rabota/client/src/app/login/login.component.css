@@ -13,6 +13,7 @@
   padding: 20%;
   background: linear-gradient(
     45deg,
+
     var(--LogRegColor),
     var(--main-color-two) 80%
   );
