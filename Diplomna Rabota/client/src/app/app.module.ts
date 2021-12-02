@@ -23,6 +23,9 @@ import {TableModule} from "primeng/table";
 import { AngularEditorModule } from '@kolkov/angular-editor';
 import {ChipsModule} from "primeng/chips";
 import { PostsComponent } from './posts/posts.component';
+import {SelectButtonModule} from "primeng/selectbutton";
+import {MatButtonToggleModule} from "@angular/material/button-toggle";
+import {SplitterModule} from "primeng/splitter";
 
 
 @NgModule({
@@ -34,28 +37,28 @@ import { PostsComponent } from './posts/posts.component';
     AddPostComponent,
     PostsComponent
   ],
-  imports: [FormsModule,
-    BrowserModule,
-    ButtonModule,
-    TableModule,
-    AngularEditorModule,
-    HttpClientModule,
-    BrowserModule,
-    RouterModule,
-    BrowserAnimationsModule,
-    MatToolbarModule,
-    MatSidenavModule,
-    MatButtonModule,
-    MatIconModule,
-    MatDividerModule,
-    AppRoutingModule,
-    ReactiveFormsModule,
-    MatFormFieldModule,
-    MatInputModule,
-    FormsModule,
-    EditorModule,
-    AutoCompleteModule, ChipsModule,
-  ],
+    imports: [FormsModule,
+        BrowserModule,
+        ButtonModule,
+        TableModule,
+        AngularEditorModule,
+        HttpClientModule,
+        BrowserModule,
+        RouterModule,
+        BrowserAnimationsModule,
+        MatToolbarModule,
+        MatSidenavModule,
+        MatButtonModule,
+        MatIconModule,
+        MatDividerModule,
+        AppRoutingModule,
+        ReactiveFormsModule,
+        MatFormFieldModule,
+        MatInputModule,
+        FormsModule,
+        EditorModule,
+        AutoCompleteModule, ChipsModule, SelectButtonModule, MatButtonToggleModule, SplitterModule,
+    ],
   providers: [],
   bootstrap: [AppComponent]
 })

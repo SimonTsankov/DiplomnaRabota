@@ -1,2 +1,16 @@
-<p>posts works!</p>
-<button (click)="refreshPosts()">dwad </button>
+
+<br>
+<div  style="background-color: #8dbcee;" class="card row" *ngFor="let post of allPosts">
+  <h1 >{{post.name}} </h1>
+
+
+  <p-splitter [style]="{'border-width':'0px'}" [panelSizes]="[0,10000]">
+    <ng-template pTemplate>
+      <img style="width: 100%; min-width: 30em;max-width: 40em" src="{{'data:image/jpg;base64,' + post.picByte.toString()}}"/>
+    </ng-template>
+    <ng-template  pTemplate>
+      <div [innerHTML]="post.content"></div>
+      <h2>{{getHtml(post.content)}}</h2>
+    </ng-template>
+  </p-splitter>
+</div>

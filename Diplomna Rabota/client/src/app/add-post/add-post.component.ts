@@ -37,6 +37,7 @@ export class AddPostComponent implements OnInit {
   values2: string[] | undefined;
 
   constructor(private http: HttpClient) {
+
   }
 
   ngOnInit(): void {
@@ -77,6 +78,10 @@ export class AddPostComponent implements OnInit {
 
   show() {
     console.log(this.text)
+  }
+
+  themeChange() {
+    console.log("Changed theme")
   }
 }
 

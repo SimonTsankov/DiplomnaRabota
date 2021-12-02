@@ -10,8 +10,6 @@
   <h1 style="width: 3%;">
     <a id="neon-btn" href="#top" class="neon-button">Song Link!
     </a>
-    <!--    <a  *ngIf="bMobile" id="neon-btnMobile" href="#top" class="neon-button-small">Song Link!-->
-    <!--    </a>-->
   </h1>
   <button [routerLink]="'login'" class="loginBtn" mat-raised-button>Login!</button>
   <button [routerLink]="'register'" class="registerBtn" mat-raised-button>Register</button>
@@ -19,7 +17,6 @@
 <div></div>
 <mat-sidenav-container>
   <mat-sidenav #sidenav="matSidenav" class="mat-elevation-z8">
-
     <img alt="doesnt load" style="width: 150px"
          src="https://www.freeiconspng.com/uploads/black-skull-26.png"/>
     <img alt="doesnt load" style="width: 100px; height: 50px; "
@@ -63,11 +60,26 @@
   </mat-sidenav>
 
   <mat-sidenav-content style="background-color: var(--content-bckg-color-Back); scroll-behavior: smooth;">
+
+
+    <section class="fixedThemeMenu">
+
+
+      <mat-button-toggle-group *ngIf="hideThemePicker" style="font-size: small;" name="favoriteColor" aria-label="Favorite Color">
+        <mat-button-toggle   id="red" class= "mat-button-toggle"  style="color: #c76a80" (click)="clickTest('red')" value="red">Red</mat-button-toggle>
+        <mat-button-toggle id="green" class= "mat-button-toggle" style="color: #a3c76a" (click)="clickTest('green')" value="green">Green</mat-button-toggle>
+        <mat-button-toggle id="purple" class= "mat-button-toggle"  style="color: #a66ac7" (click)="clickTest('purple')" value="blue">Purple</mat-button-toggle>
+      </mat-button-toggle-group>
+    </section>
+
+    <button class="themes-show-hide-btn"  (click)="toggleThemesPicker()">
+      <mat-icon>color_lens</mat-icon>
+    </button>
     <div id="top"></div>
     <div
       style="background: var(--content-bckg-color);height: auto; min-height: 100%" class="content mat-elevation-z8">
       <router-outlet></router-outlet>
-
     </div>
   </mat-sidenav-content>
+
 </mat-sidenav-container>

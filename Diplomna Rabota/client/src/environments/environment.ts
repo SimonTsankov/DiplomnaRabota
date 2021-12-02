@@ -3,7 +3,46 @@
 // The list of file replacements can be found in `angular.json`.
 
 export const environment = {
-  production: false
+  production: false,
+  redTheme: [
+    { attribute: "--neon-clr", value: "hsl(50, 100%, 50%)"},
+    { attribute: "--neon-clr2", value: "#a15f00"},
+    { attribute: "--bckg-menu", value: "#630000"},
+    { attribute: "--LogRegColor", value: "#b4a702"},
+    { attribute: "--LogRegColorTwo", value: "rgb(175, 1, 1)"},
+    { attribute: "--main-color-one", value: "#000000"},
+    { attribute: "--main-color-two", value: "rgb(255, 0, 0)"},
+    { attribute: "--button-color-one", value: "#191414"},
+    { attribute: "--button-color-two", value: "#ff9900"},
+    { attribute: "--content-bckg-color", value: "#e5e5e5"},
+    { attribute: "--content-bckg-color-Back", value: "#ffffff"},
+  ],
+  purpleTheme: [
+    { attribute: "--neon-clr", value: "hsl(315, 100%, 50%)"},
+    { attribute: "--neon-clr2", value: "#32003e"},
+    { attribute: "--bckg-menu", value: "#35004e"},
+    { attribute: "--LogRegColor", value: "#13d0c1"},
+    { attribute: "--LogRegColorTwo", value: "#520b84"},
+    { attribute: "--main-color-one", value: "#5d0980"},
+    { attribute: "--main-color-two", value: "rgb(54, 220, 227)"},
+    { attribute: "--button-color-one", value: "rgba(0, 241, 241, 0.79)"},
+    { attribute: "--button-color-two", value: "#450068"},
+    { attribute: "--content-bckg-color", value: "#f1fffc"},
+    { attribute: "--content-bckg-color-Back", value: "#ccfff9"},
+  ],
+  greenTheme: [
+    { attribute: "--neon-clr", value: "hsl(80, 100%, 50%)"},
+    { attribute: "--neon-clr2", value: "#005201"},
+    { attribute: "--bckg-menu", value: "#18c43b"},
+    { attribute: "--LogRegColor", value: "#18c43b"},
+    { attribute: "--LogRegColorTwo", value: "#0b8421"},
+    { attribute: "--main-color-one", value: "#000000"},
+    { attribute: "--main-color-two", value: "#7BFF00FF"},
+    { attribute: "--button-color-one", value: "#191414"},
+    { attribute: "--button-color-two", value: "#1DB954"},
+    { attribute: "--content-bckg-color", value: "#c4c4c4"},
+    { attribute: "--content-bckg-color-Back", value: "#090000"},
+  ]
 };
 
 /*

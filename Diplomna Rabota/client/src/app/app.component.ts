@@ -1,8 +1,9 @@
-import {Component, OnInit, ViewChild} from '@angular/core';
+import {Component, ElementRef, OnInit, ViewChild} from '@angular/core';
 import {MatSidenav} from "@angular/material/sidenav";
 import {BreakpointObserver} from "@angular/cdk/layout";
 import {delay} from "rxjs/operators";
 import {Router} from "@angular/router";
+import {environment} from "../environments/environment";
 
 @Component({
   selector: 'app-root',
@@ -10,6 +11,8 @@ import {Router} from "@angular/router";
   styleUrls: ['./app.component.css']
 })
 export class AppComponent implements OnInit {
+
+
   title = 'Rockmend me';
   @ViewChild(MatSidenav)
   sidenav!: MatSidenav;
@@ -20,14 +23,28 @@ export class AppComponent implements OnInit {
     navigator.userAgent.indexOf("Android") !== -1 ||
     navigator.userAgent.indexOf("Windows Phone") !== -1;
 
-  constructor(private router: Router, private observer: BreakpointObserver) {
+  //theme picker variables
+  themes: any;
+  valueThemePicker: any;
+  themeButtons = ['red', 'green', 'purple']
+  originalButton = document.getElementById("themePicker");
+  hideThemePicker = false;
+
+  host = document.querySelector(':host');
+
+  constructor(private elementRef: ElementRef, private router: Router, private observer: BreakpointObserver) {
     console.log("Yoohoo")
-    // this.changePage("posts");
+
   }
 
 
   ngOnInit(): void {
-
+    let themePicker = document.getElementById("red");
+    if (themePicker != null) {
+      themePicker.style.setProperty("background-color", "#8dbcee")
+      themePicker.style.setProperty("color", "black")
+      themePicker.style.setProperty("font-size", "medium")
+    }
     this.startAnimation()
     let element = document.getElementById("neon-btn")
     if (this.bMobile) {
@@ -38,7 +55,6 @@ export class AppComponent implements OnInit {
   }
 
   async startAnimation() {
-
     let element = document.getElementById("neon-btn");
 
     const mouseoverEvent = new Event('mouseover');
@@ -65,14 +81,37 @@ export class AppComponent implements OnInit {
 
   }
 
-  clickTest() {
-    console.log("clicked!")
-    this.router.navigate(["/login"]);
+  clickTest(item: any) {
+    this.themeButtons.forEach(element => this.resetButton(element));
+    switch (item) {
+      case 'red':
+        environment.redTheme.forEach(element => this.elementRef.nativeElement.style.setProperty(element.attribute, element.value))
+        break;
+      case'purple':
+        environment.purpleTheme.forEach(element => this.elementRef.nativeElement.style.setProperty(element.attribute, element.value))
+        break;
+      case 'green':
+        environment.greenTheme.forEach(element => this.elementRef.nativeElement.style.setProperty(element.attribute, element.value))
+        break;
+    }
+    environment.redTheme.forEach(element => console.log(element.attribute + "  " + element.value))
+  }
 
+  resetButton(btnName: any) {
+    let themePicker = document.getElementById(btnName);
+    if (themePicker != null) {
+      themePicker.style.setProperty("background-color", "white")
+      themePicker.style.setProperty("color", btnName)
+      themePicker.style.setProperty("font-size", "small")
+    }
   }
 
   changePage(route: string) {
     this.router.navigate(["/" + route]);
   }
 
+  toggleThemesPicker() {
+
+    this.hideThemePicker = !this.hideThemePicker
+  }
 }

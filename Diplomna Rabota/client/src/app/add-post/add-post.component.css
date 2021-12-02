@@ -46,6 +46,7 @@ img {
   max-height: 20rem;
   max-width: 100%
 }
+
 .fixedbutton {
   position: fixed;
   bottom: 25px;
@@ -53,6 +54,9 @@ img {
   width: 10em;
   height: 3em;
 }
+
+
+
 .publish_button {
   background-color: #06ff12;
   color: black;
