@@ -1,16 +1,19 @@
-
+<h1 *ngIf="allPosts.length==0">No posts were retrieved. Strange...</h1>
 <br>
-<div  style="background-color: #8dbcee;" class="card row" *ngFor="let post of allPosts">
+<div *ngIf="allPosts.length>0">
+<div  style="background-color: var(--bckg-menu);border-radius: 25px" class="card row" *ngFor="let post of allPosts">
   <h1 >{{post.name}} </h1>
 
 
   <p-splitter [style]="{'border-width':'0px'}" [panelSizes]="[0,10000]">
-    <ng-template pTemplate>
-      <img style="width: 100%; min-width: 30em;max-width: 40em" src="{{'data:image/jpg;base64,' + post.picByte.toString()}}"/>
-    </ng-template>
     <ng-template  pTemplate>
-      <div [innerHTML]="post.content"></div>
-      <h2>{{getHtml(post.content)}}</h2>
+      <div style="padding: 5em">
+      <img  style="width: 100%;min-width: 30em;max-width: 40em" src="{{'data:image/jpg;base64,' + post.picByte.toString()}}"/>
+    </div>
+    </ng-template>
+    <ng-template style="width: auto" pTemplate>
+      <div style=" width: 100%" [innerHTML]="post.content | safeHtml"></div>
     </ng-template>
   </p-splitter>
+</div>
 </div>

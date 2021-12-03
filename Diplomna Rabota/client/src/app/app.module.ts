@@ -26,6 +26,7 @@ import { PostsComponent } from './posts/posts.component';
 import {SelectButtonModule} from "primeng/selectbutton";
 import {MatButtonToggleModule} from "@angular/material/button-toggle";
 import {SplitterModule} from "primeng/splitter";
+import { SafeHtmlPipe } from './posts/safe-html.pipe';
 
 
 @NgModule({
@@ -35,7 +36,8 @@ import {SplitterModule} from "primeng/splitter";
     LoginComponent,
     RegisterComponent,
     AddPostComponent,
-    PostsComponent
+    PostsComponent,
+    SafeHtmlPipe
   ],
     imports: [FormsModule,
         BrowserModule,

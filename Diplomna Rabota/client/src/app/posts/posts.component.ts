@@ -13,9 +13,7 @@ import {DomSanitizer} from "@angular/platform-browser";
 export class PostsComponent implements OnInit {
   allposts: Post = {} as Post;
 
-  // @ts-ignore
-  allPosts: UPost[];
-
+  allPosts: UPost[] = [];
   constructor(private sanitizer: DomSanitizer,private _sanitizer: DomSanitizer, private postsService: PostsServiceService) {
   }
 

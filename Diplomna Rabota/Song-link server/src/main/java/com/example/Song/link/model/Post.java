@@ -15,7 +15,7 @@ public class Post {
 
     @Column
     private String name;
-
+    @Lob
     @Column
     private String content;
 
