@@ -2,6 +2,8 @@ import {Component, OnInit} from '@angular/core';
 import {FormControl, FormGroup, FormGroupDirective, NgForm, Validators} from '@angular/forms';
 import {ErrorStateMatcher} from '@angular/material/core';
 import {Router, RouterModule} from "@angular/router";
+import {RegisterService} from "./register.service";
+import {User} from "../model/User";
 
 
 @Component({
@@ -11,7 +13,7 @@ import {Router, RouterModule} from "@angular/router";
 })
 export class RegisterComponent implements OnInit {
   matcher = new MyErrorStateMatcher();
-
+  user: User = {} as User;
   email = new FormControl('', [Validators.email, Validators.required])
   password = new FormControl('', [Validators.required, Validators.minLength(3)])
   passwordConfirm = new FormControl('', [Validators.required, Validators.minLength(3)])
@@ -25,7 +27,7 @@ export class RegisterComponent implements OnInit {
   });
   hide = true;
 
-  constructor(private router: Router) {
+  constructor(private registerService: RegisterService,private router: Router) {
 
     // @ts-ignore
     this.email.setValue("");
@@ -37,8 +39,9 @@ export class RegisterComponent implements OnInit {
   }
 
   register() {
-
-    //TODO: this.registerService.doRegister(email.value, password.value, username)
+    this.user.password=this.password.value;
+    this.user.email=this.email.value;
+    this.registerService.register(this.user)
   }
 
   changePath(path: string) {
