@@ -3,6 +3,16 @@
 // The list of file replacements can be found in `angular.json`.
 
 export const environment = {
+  apiUrl:"http://localhost:4713/sl/api/",
+  loginUrl:"http://localhost:4713/sl/login",
+  urlsToSkip: [
+    "user/token/refresh",
+    "user/verify",
+    "user/register",
+    "user/send-password-reset",
+    "user/reset-password-request",
+    "post/findAll"
+  ],
   production: false,
   redTheme: [
     { attribute: "--neon-clr", value: "hsl(50, 100%, 50%)"},

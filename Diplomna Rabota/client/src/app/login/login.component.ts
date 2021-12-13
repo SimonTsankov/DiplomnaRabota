@@ -1,6 +1,8 @@
 import {Component, OnInit} from '@angular/core';
 import {FormControl, FormGroup, FormGroupDirective, NgForm, Validators} from '@angular/forms';
 import {ErrorStateMatcher} from '@angular/material/core';
+import {User} from "../model/User";
+import {LoginService} from "./login.service";
 
 
 
@@ -15,13 +17,14 @@ export class LoginComponent implements OnInit {
   password = new FormControl('', [Validators.required, Validators.minLength(3)])
   matcher = new MyErrorStateMatcher();
 
+
   signin: FormGroup = new FormGroup({
     email:this.email,
     password: this.password
   });
 
   hide = true;
-  constructor() {
+  constructor(private loginService: LoginService) {
 
     // @ts-ignore
     this.email.setValue("");
@@ -40,8 +43,9 @@ export class LoginComponent implements OnInit {
   }
 
   login() {
-
-    //TODO: this.loginService.doLogin(email.value, password.value)
+    console.log("dwdw")
+    this.loginService.login(this.email.value, this.password.value)
+    console.log("dwdw")
   }
 }
 

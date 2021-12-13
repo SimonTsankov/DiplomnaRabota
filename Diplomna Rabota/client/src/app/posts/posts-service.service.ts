@@ -1,12 +1,13 @@
 import {Injectable} from '@angular/core';
 import {HttpClient} from "@angular/common/http";
 import {Post} from "../models/Post";
+import {environment} from "../../environments/environment";
 
 @Injectable({
   providedIn: 'root'
 })
 export class PostsServiceService {
-  findAllUrl = "http://localhost:4713/sl/api/post/findAll"
+  findAllUrl = environment.apiUrl+"post/findAll"
   constructor(private http: HttpClient) { }
 
   getAllPosts() {

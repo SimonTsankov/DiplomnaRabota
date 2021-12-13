@@ -15,19 +15,19 @@ import {MatFormFieldModule} from "@angular/material/form-field";
 import {MatInputModule} from "@angular/material/input";
 import {RegisterComponent} from './register/register.component';
 import {AddPostComponent} from './add-post/add-post.component';
-import {HttpClientModule} from "@angular/common/http";
+import {HTTP_INTERCEPTORS, HttpClientModule} from "@angular/common/http";
 import {EditorModule} from "primeng/editor";
 import {AutoCompleteModule} from "primeng/autocomplete";
 import {ButtonModule} from "primeng/button";
 import {TableModule} from "primeng/table";
-import { AngularEditorModule } from '@kolkov/angular-editor';
+import {AngularEditorModule} from '@kolkov/angular-editor';
 import {ChipsModule} from "primeng/chips";
-import { PostsComponent } from './posts/posts.component';
+import {PostsComponent} from './posts/posts.component';
 import {SelectButtonModule} from "primeng/selectbutton";
 import {MatButtonToggleModule} from "@angular/material/button-toggle";
 import {SplitterModule} from "primeng/splitter";
-import { SafeHtmlPipe } from './posts/safe-html.pipe';
-
+import {SafeHtmlPipe} from './posts/safe-html.pipe';
+import {InterceptorInterceptor} from "./authentication/interceptor.interceptor";
 
 @NgModule({
   exports: [RouterModule],
@@ -39,29 +39,33 @@ import { SafeHtmlPipe } from './posts/safe-html.pipe';
     PostsComponent,
     SafeHtmlPipe
   ],
-    imports: [FormsModule,
-        BrowserModule,
-        ButtonModule,
-        TableModule,
-        AngularEditorModule,
-        HttpClientModule,
-        BrowserModule,
-        RouterModule,
-        BrowserAnimationsModule,
-        MatToolbarModule,
-        MatSidenavModule,
-        MatButtonModule,
-        MatIconModule,
-        MatDividerModule,
-        AppRoutingModule,
-        ReactiveFormsModule,
-        MatFormFieldModule,
-        MatInputModule,
-        FormsModule,
-        EditorModule,
-        AutoCompleteModule, ChipsModule, SelectButtonModule, MatButtonToggleModule, SplitterModule,
-    ],
-  providers: [],
+  imports: [
+    HttpClientModule,
+    FormsModule,
+    BrowserModule,
+    ButtonModule,
+    TableModule,
+    AngularEditorModule,
+    HttpClientModule,
+    BrowserModule,
+    RouterModule,
+    BrowserAnimationsModule,
+    MatToolbarModule,
+    MatSidenavModule,
+    MatButtonModule,
+    MatIconModule,
+    MatDividerModule,
+    AppRoutingModule,
+    ReactiveFormsModule,
+    MatFormFieldModule,
+    MatInputModule,
+    FormsModule,
+    EditorModule,
+    AutoCompleteModule, ChipsModule, SelectButtonModule, MatButtonToggleModule, SplitterModule,
+  ],
+  providers: [
+    { provide: HTTP_INTERCEPTORS, useClass: InterceptorInterceptor, multi: true }
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule {
