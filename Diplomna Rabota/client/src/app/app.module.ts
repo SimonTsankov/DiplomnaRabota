@@ -28,6 +28,8 @@ import {MatButtonToggleModule} from "@angular/material/button-toggle";
 import {SplitterModule} from "primeng/splitter";
 import {SafeHtmlPipe} from './posts/safe-html.pipe';
 import {InterceptorInterceptor} from "./authentication/interceptor.interceptor";
+import {MessagesModule} from "primeng/messages";
+import {MessageService} from "primeng/api";
 
 @NgModule({
   exports: [RouterModule],
@@ -59,12 +61,14 @@ import {InterceptorInterceptor} from "./authentication/interceptor.interceptor";
     ReactiveFormsModule,
     MatFormFieldModule,
     MatInputModule,
+    MessagesModule,
     FormsModule,
     EditorModule,
     AutoCompleteModule, ChipsModule, SelectButtonModule, MatButtonToggleModule, SplitterModule,
   ],
   providers: [
-    { provide: HTTP_INTERCEPTORS, useClass: InterceptorInterceptor, multi: true }
+    MessageService,
+    {provide: HTTP_INTERCEPTORS, useClass: InterceptorInterceptor, multi: true}
   ],
   bootstrap: [AppComponent]
 })

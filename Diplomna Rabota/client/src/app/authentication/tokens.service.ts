@@ -17,15 +17,15 @@ export class TokensService {
   }
 
   getAccessToken() {
-    if (!window.localStorage.getItem("access_token") === undefined)
+
       return window.localStorage.getItem("access_token") + "";
-    else return null
+
   }
 
   getRefreshToken() {
-    if (!window.localStorage.getItem("access_token") === undefined)
+
       return window.localStorage.getItem("refresh_token") + "";
-    else return null
+
   }
 
   saveTokens(access_token: any, refresh_token: any) {

@@ -4,6 +4,8 @@ import com.example.Song.link.model.ImageModel;
 import com.example.Song.link.model.Post;
 import com.example.Song.link.model.TestModel;
 import com.example.Song.link.repository.PostRepository;
+import com.example.Song.link.repository.UserRepository;
+import com.example.Song.link.repository.UserRoleRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.parameters.P;
@@ -11,6 +13,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
+import java.security.Principal;
 import java.util.List;
 
 @CrossOrigin(origins = "*", maxAge = 3600)
@@ -20,10 +23,12 @@ public class PostController {
 
     @Autowired
     PostRepository postRepository;
-
+    @Autowired
+    UserRepository userRepository;
     @RequestMapping(value = "/save", method = {RequestMethod.POST, RequestMethod.PUT})
-    public ResponseEntity<?> save(@RequestParam MultipartFile file, @RequestParam String name, @RequestParam String content) throws IOException {
+    public ResponseEntity<?> save(Principal principal, @RequestParam MultipartFile file, @RequestParam String name, @RequestParam String content) throws IOException {
         Post post= new Post();
+        post.setUser(userRepository.findByEmail(principal.getName()));
         post.setPicByte(file.getBytes());
         post.setName(name);
         post.setContent(content);

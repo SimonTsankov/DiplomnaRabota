@@ -4,6 +4,7 @@ import {BreakpointObserver} from "@angular/cdk/layout";
 import {delay} from "rxjs/operators";
 import {Router} from "@angular/router";
 import {environment} from "../environments/environment";
+import {MessageService} from "primeng/api";
 
 @Component({
   selector: 'app-root',
@@ -33,7 +34,7 @@ export class AppComponent implements OnInit {
 
   host = document.querySelector(':host');
 
-  constructor(private elementRef: ElementRef, private router: Router, private observer: BreakpointObserver) {
+  constructor( private messageService: MessageService, private elementRef: ElementRef, private router: Router, private observer: BreakpointObserver) {
     console.log("Yoohoo")
 
   }
@@ -114,5 +115,12 @@ export class AppComponent implements OnInit {
   toggleThemesPicker() {
 
     this.hideThemePicker = !this.hideThemePicker
+  }
+  public showToast(title: string, message: string, isError: boolean) {
+    this.messageService.add({
+      severity: isError ? 'error' : 'success',
+      summary: title,
+      detail: message
+    })
   }
 }

@@ -1,6 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {HttpClient, HttpClientModule} from "@angular/common/http";
 import {AngularEditorConfig} from '@kolkov/angular-editor';
+import {AppComponent} from "../app.component";
 
 @Component({
   selector: 'app-add-post',
@@ -37,7 +38,7 @@ export class AddPostComponent implements OnInit {
   };
   values2: string[] | undefined;
 
-  constructor(private http: HttpClient) {
+  constructor(private appCmp: AppComponent,private http: HttpClient) {
 
   }
 
@@ -71,9 +72,8 @@ export class AddPostComponent implements OnInit {
     }
     uploadImageData.append('name', this.name);
     uploadImageData.append('content', this.text);
-    console.log(this.name+"\n"+this.text)
-    this.http.post(this.postSaveUrl, uploadImageData).subscribe(
-      res => console.log("Done!")
+    this.http.post(this.postSaveUrl, uploadImageData,{responseType: "text"}).subscribe(
+      res => this.appCmp.showToast("Post added!","",false)
     )
 
   }
