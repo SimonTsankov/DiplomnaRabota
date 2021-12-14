@@ -5,14 +5,13 @@ import {delay} from "rxjs/operators";
 import {Router} from "@angular/router";
 import {environment} from "../environments/environment";
 import {MessageService} from "primeng/api";
-
+declare let $: any;
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css']
 })
 export class AppComponent implements OnInit {
-
 
   title = 'Rockmend me';
   @ViewChild(MatSidenav)
@@ -31,12 +30,14 @@ export class AppComponent implements OnInit {
   themeButtons = ['red', 'green', 'purple']
   originalButton = document.getElementById("themePicker");
   hideThemePicker = false;
-
+  savedTheme = window.localStorage.getItem("theme");
   host = document.querySelector(':host');
+  logged =  true;
 
   constructor( private messageService: MessageService, private elementRef: ElementRef, private router: Router, private observer: BreakpointObserver) {
-    console.log("Yoohoo")
-
+    if(this.savedTheme){
+        this.clickTest(this.savedTheme)
+    }
   }
 
 
@@ -85,6 +86,8 @@ export class AppComponent implements OnInit {
 
   clickTest(item: any) {
     this.themeButtons.forEach(element => this.resetButton(element));
+    window.localStorage.setItem("theme", item);
+    this.savedTheme= item
     switch (item) {
       case 'red':
         environment.redTheme.forEach(element => this.elementRef.nativeElement.style.setProperty(element.attribute, element.value))
@@ -113,7 +116,6 @@ export class AppComponent implements OnInit {
   }
 
   toggleThemesPicker() {
-
     this.hideThemePicker = !this.hideThemePicker
   }
   public showToast(title: string, message: string, isError: boolean) {
@@ -123,4 +125,5 @@ export class AppComponent implements OnInit {
       detail: message
     })
   }
+
 }

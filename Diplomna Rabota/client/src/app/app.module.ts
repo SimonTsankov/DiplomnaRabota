@@ -30,6 +30,8 @@ import {SafeHtmlPipe} from './posts/safe-html.pipe';
 import {InterceptorInterceptor} from "./authentication/interceptor.interceptor";
 import {MessagesModule} from "primeng/messages";
 import {MessageService} from "primeng/api";
+import {OverlayPanelModule} from "primeng/overlaypanel";
+import {DragDropModule} from "@angular/cdk/drag-drop";
 
 @NgModule({
   exports: [RouterModule],
@@ -64,7 +66,7 @@ import {MessageService} from "primeng/api";
     MessagesModule,
     FormsModule,
     EditorModule,
-    AutoCompleteModule, ChipsModule, SelectButtonModule, MatButtonToggleModule, SplitterModule,
+    AutoCompleteModule, ChipsModule, SelectButtonModule, MatButtonToggleModule, SplitterModule, OverlayPanelModule, DragDropModule,
   ],
   providers: [
     MessageService,

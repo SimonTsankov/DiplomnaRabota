@@ -11,8 +11,13 @@
     <a id="neon-btn" href="#top" class="neon-button">Song Link!
     </a>
   </h1>
-  <button [routerLink]="'login'" class="loginBtn" mat-raised-button>Login!</button>
-  <button [routerLink]="'register'" class="registerBtn" mat-raised-button>Register</button>
+  <button *ngIf="logged" (click)="op.toggle($event)"  pButton pRipple type="button" icon="pi pi-user"
+          class=" loginBtn p-button-rounded p-button-info p-button-outlined"></button>
+  <button *ngIf="!logged" [routerLink]="'login'" class="loginBtn" mat-raised-button>Login!</button>
+  <button *ngIf="!logged" [routerLink]="'register'" class="registerBtn" mat-raised-button>Register</button>
+
+
+
 </mat-toolbar>
 <div></div>
 <mat-sidenav-container>
@@ -62,19 +67,6 @@
   <mat-sidenav-content style="background-color: var(--content-bckg-color-Back); scroll-behavior: smooth;">
 
 
-    <section class="fixedThemeMenu">
-
-
-      <mat-button-toggle-group *ngIf="hideThemePicker" style="font-size: small;" name="favoriteColor" aria-label="Favorite Color">
-        <mat-button-toggle   id="red" class= "mat-button-toggle"  style="color: #c76a80" (click)="clickTest('red')" value="red">Red</mat-button-toggle>
-        <mat-button-toggle id="green" class= "mat-button-toggle" style="color: #a3c76a" (click)="clickTest('green')" value="green">Green</mat-button-toggle>
-        <mat-button-toggle id="purple" class= "mat-button-toggle"  style="color: #a66ac7" (click)="clickTest('purple')" value="blue">Purple</mat-button-toggle>
-      </mat-button-toggle-group>
-    </section>
-
-    <button class="themes-show-hide-btn"  (click)="toggleThemesPicker()">
-      <mat-icon>color_lens</mat-icon>
-    </button>
     <div id="top"></div>
     <div
       style="background: var(--content-bckg-color);height: auto; min-height: 100%" class="content mat-elevation-z8">
@@ -83,3 +75,37 @@
   </mat-sidenav-content>
 
 </mat-sidenav-container>
+
+<p-overlayPanel [style]="{'padding':0, 'background-color':'transparent', 'shadow': 'none'}" #opThemes>
+  <ng-template pTemplate>
+    <section class="fixedThemeMenu">
+      <mat-button-toggle-group  value="{{savedTheme}}" style="font-size: small;" name="favoriteColor" aria-label="Favorite Color">
+        <mat-button-toggle   id="red" class= "mat-button-toggle"  style="color: #c76a80" (click)="clickTest('red')" value="red">Red</mat-button-toggle>
+        <mat-button-toggle id="green" class= "mat-button-toggle" style="color: #a3c76a" (click)="clickTest('green')" value="green">Green</mat-button-toggle>
+        <mat-button-toggle id="purple" class= "mat-button-toggle"  style="color: #a66ac7" (click)="clickTest('purple')" value="purple">Purple</mat-button-toggle>
+      </mat-button-toggle-group>
+    </section>
+  </ng-template>
+</p-overlayPanel>
+
+
+<p-overlayPanel [style]="{'padding':0}" #op>
+  <ng-template pTemplate style="padding: 0 !important;">
+
+    <div class="rowOverlayMenu">
+      <button  pButton pRipple type="button" label="My profile"
+              class="p-button-secondary p-button-text button-user-dropdown"><i style="margin-right: 5px" class="pi pi-user-edit"></i>
+      </button>
+    </div>
+    <div  class="rowOverlayMenu">
+      <button  style="width: 100%"   pButton pRipple type="button" label="   Logout"
+               class="p-button-secondary p-button-text button-user-dropdown"><i style="margin-right: 5px" class="pi pi-sign-out"></i></button>
+    </div>
+  </ng-template>
+</p-overlayPanel>
+
+<div class="example-box" cdkDrag>
+  <button class="themes-show-hide-btn"  (click)="opThemes.toggle($event)">
+    <mat-icon>color_lens</mat-icon>
+  </button>
+</div>

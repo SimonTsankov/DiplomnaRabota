@@ -72,10 +72,7 @@ export class AddPostComponent implements OnInit {
     }
     uploadImageData.append('name', this.name);
     uploadImageData.append('content', this.text);
-    this.http.post(this.postSaveUrl, uploadImageData,{responseType: "text"}).subscribe(
-      res => this.appCmp.showToast("Post added!","",false)
-    )
-
+    this.http.post(this.postSaveUrl, uploadImageData,{responseType: "text"}).toPromise()
   }
 
   filterCountry($event: any) {

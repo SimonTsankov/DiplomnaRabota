@@ -155,12 +155,6 @@ mat-sidenav-container {
 }
 
 .fixedThemeMenu {
-  position: fixed;
-  bottom: 70%;
-  right: -3em;
-  left: auto;
-
-  transform: rotate(270deg);
 }
 
 .mat-button-toggle-checked {
@@ -169,13 +163,33 @@ mat-sidenav-container {
   font-size: medium !important;
 }
 
+::ng-deep.p-overlaypanel .p-overlaypanel-content {
+  padding: 0rem !important;
+}
+
 .themes-show-hide-btn {
-  position: fixed;
-  bottom: 83%;
-  right: 1em;
-  left: auto;
+  /*position: fixed;*/
+  /*bottom: 83%;*/
+  /*right: 1em;*/
+  /*left: auto;*/
   background-color: #fcf3f3;
   width: 3em;
   height: 3em;
   margin-left: 1em
 }
+
+.example-box {
+  width: 3em;
+  height: 3em;
+  cursor: move;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  bottom: 83%;
+  right: 0em;
+  left: auto;
+  z-index: 1;
+}
+
+
