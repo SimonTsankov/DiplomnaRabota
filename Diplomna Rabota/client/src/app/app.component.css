@@ -13,6 +13,42 @@
   --content-bckg-color: #f1fffc;
   --content-bckg-color-Back: #ccfff9;
 }
+.toolbar {
+  color: white;
+  height: 13%;
+  background: linear-gradient(
+    45deg,
+    var(--main-color-one),
+    var(--main-color-two) 130%
+  );
+}
+mat-sidenav {
+  margin: 16px;
+  width: 225px;
+  border-right: none;
+  background: var(--bckg-menu);
+  color: white;
+  border-radius: 10px;
+  padding: 16px;
+  text-align: center;
+}
+
+.content {
+  height: calc(100vh - 98px);
+  border-radius: 10px;
+  margin: 16px 16px 16px 32px;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  font-size: 2rem;
+  color: #979797;
+}
+
+mat-sidenav-container {
+  height: calc(100vh - 13%);
+}
 
 .neon-button {
   margin-left: 1em;
@@ -80,34 +116,7 @@
   opacity: 1;
 }
 
-mat-sidenav {
-  margin: 16px;
-  width: 225px;
-  border-right: none;
-  background: var(--bckg-menu);
-  color: white;
-  border-radius: 10px;
-  padding: 16px;
-  text-align: center;
-}
 
-.content {
-  height: calc(100vh - 98px);
-  border-radius: 10px;
-  margin: 16px 16px 16px 32px;
-
-  display: flex;
-  justify-content: center;
-  align-items: center;
-
-  font-size: 2rem;
-  color: #979797;
-  /*background-color: #4ac1f7;*/
-}
-
-mat-sidenav-container {
-  height: calc(100vh - 65px);
-}
 
 .loginBtn {
   background-color: var(--LogRegColor);
@@ -116,15 +125,6 @@ mat-sidenav-container {
   margin-left: auto;
 }
 
-.toolbar {
-  color: white;
-  height: 13%;
-  background: linear-gradient(
-    45deg,
-    var(--main-color-one),
-    var(--main-color-two) 130%
-  );
-}
 
 .funTimes {
   background-color: transparent;
@@ -168,16 +168,12 @@ mat-sidenav-container {
 }
 
 .themes-show-hide-btn {
-  /*position: fixed;*/
-  /*bottom: 83%;*/
-  /*right: 1em;*/
-  /*left: auto;*/
-  background-color: #fcf3f3;
-  width: 3em;
-  height: 3em;
-  margin-left: 1em
-}
+  background-color: var(--main-color-two);
 
+}
+::ng-deep.p-button-rounded{
+  border:none;
+}
 .example-box {
   width: 3em;
   height: 3em;
