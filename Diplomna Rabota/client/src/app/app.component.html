@@ -65,7 +65,7 @@
 
   </mat-sidenav>
 
-  <mat-sidenav-content style="background-color: var(--content-bckg-color-Back); scroll-behavior: smooth;">
+  <mat-sidenav-content  style="background-color: var(--content-bckg-color-Back); scroll-behavior: smooth;">
 
 
     <div id="top"></div>
@@ -74,7 +74,7 @@
 
       <router-outlet></router-outlet>
     </div>
-    <div class="example-box" cdkDrag >
+    <div class="example-box" cdkDrag cdkDragBoundary= "mat-sidenav-content">
       <button pButton pRipple class="themes-show-hide-btn p-button-rounded" (click)="opThemes.toggle($event)">
         <mat-icon>color_lens</mat-icon>
       </button>
