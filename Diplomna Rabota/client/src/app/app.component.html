@@ -11,7 +11,8 @@
     <a id="neon-btn" href="#top" class="neon-button">Song Link!
     </a>
   </h1>
-  <button pButton pRipple type="button" icon="pi pi-bell" class="loginBtn p-button-rounded p-button-lg"></button>
+  <button (click)="notifications.toggle($event)" pButton pRipple type="button" icon="pi pi-bell"
+          class="loginBtn p-button-rounded p-button-lg"></button>
   <button *ngIf="logged" (click)="op.toggle($event)" pButton pRipple type="button" icon="pi pi-user"
           class="p-button-rounded registerBtn p-button-lg"></button>
   <button *ngIf="!logged" [routerLink]="'login'" class="loginBtn" mat-raised-button>Login!</button>
@@ -33,12 +34,12 @@
 
     <mat-divider></mat-divider>
 
-    <button [routerLink]="'home'" mat-button class="menu-button, colorFulButton">
+    <button [routerLink]="'posts'" mat-button class="menu-button, colorFulButton">
       <mat-icon>home</mat-icon>
       <span>Home</span>
     </button>
     <br>
-    <button [routerLink]="'login'" mat-button class="menu-button, colorFulButton">
+    <button [routerLink]="'myprofile'" mat-button class="menu-button, colorFulButton">
       <mat-icon>person</mat-icon>
       <span>Profile</span>
     </button>
@@ -65,7 +66,7 @@
 
   </mat-sidenav>
 
-  <mat-sidenav-content  style="background-color: var(--content-bckg-color-Back); scroll-behavior: smooth;">
+  <mat-sidenav-content style="background-color: var(--content-bckg-color-Back); scroll-behavior: smooth;">
 
 
     <div id="top"></div>
@@ -74,7 +75,7 @@
 
       <router-outlet></router-outlet>
     </div>
-    <div class="example-box" cdkDrag cdkDragBoundary= "mat-sidenav-content">
+    <div class="example-box" cdkDrag cdkDragBoundary="mat-sidenav-content">
       <button pButton pRipple class="themes-show-hide-btn p-button-rounded" (click)="opThemes.toggle($event)">
         <mat-icon>color_lens</mat-icon>
       </button>
@@ -108,13 +109,13 @@
   <ng-template pTemplate style="padding: 0 !important;">
 
     <div class="rowOverlayMenu">
-      <button pButton pRipple type="button" label="My profile"
+      <button [routerLink]="'myprofile'" pButton pRipple type="button" label="My profile"
               class="p-button-secondary p-button-text button-user-dropdown"><i style="margin-right: 5px"
                                                                                class="pi pi-user-edit"></i>
       </button>
     </div>
     <div class="rowOverlayMenu">
-      <button style="width: 100%" pButton pRipple type="button" label="   Logout"
+      <button (click)="logOut()" style="width: 100%" pButton pRipple type="button" label="   Logout"
               class="p-button-secondary p-button-text button-user-dropdown"><i style="margin-right: 5px"
                                                                                class="pi pi-sign-out"></i></button>
     </div>
@@ -122,3 +123,12 @@
 </p-overlayPanel>
 
 
+<p-overlayPanel #notifications>
+  <ng-template pTemplate>
+    <div class="notificationsContainer">
+      <p>Your notifications: </p>
+
+    </div>
+
+  </ng-template>
+</p-overlayPanel>

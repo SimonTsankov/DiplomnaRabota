@@ -4,13 +4,15 @@ import {LoginComponent} from "./login/login.component";
 import {RegisterComponent} from "./register/register.component";
 import {AddPostComponent} from "./add-post/add-post.component";
 import {PostsComponent} from "./posts/posts.component";
+import {MyprofileComponent} from "./myprofile/myprofile.component";
 
 const routes: Routes = [
   { path: '', redirectTo: '/posts', pathMatch: 'full' },
   {path: 'login', component: LoginComponent},
   {path: 'register', component: RegisterComponent},
   {path: 'addpost', component: AddPostComponent},
-  {path: 'posts', component: PostsComponent}
+  {path: 'posts', component: PostsComponent},
+  {path: 'myprofile', component: MyprofileComponent}
 ];
 
 @NgModule({

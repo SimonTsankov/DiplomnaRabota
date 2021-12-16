@@ -126,4 +126,11 @@ export class AppComponent implements OnInit {
     })
   }
 
+  logOut() {
+  //  TODO
+  }
+
+  goToMyProfile() {
+    //TODO
+  }
 }

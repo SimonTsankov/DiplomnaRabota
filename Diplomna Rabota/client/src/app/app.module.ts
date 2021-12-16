@@ -32,6 +32,7 @@ import {MessagesModule} from "primeng/messages";
 import {MessageService} from "primeng/api";
 import {OverlayPanelModule} from "primeng/overlaypanel";
 import {DragDropModule} from "@angular/cdk/drag-drop";
+import { MyprofileComponent } from './myprofile/myprofile.component';
 
 @NgModule({
   exports: [RouterModule],
@@ -41,7 +42,8 @@ import {DragDropModule} from "@angular/cdk/drag-drop";
     RegisterComponent,
     AddPostComponent,
     PostsComponent,
-    SafeHtmlPipe
+    SafeHtmlPipe,
+    MyprofileComponent
   ],
   imports: [
     HttpClientModule,

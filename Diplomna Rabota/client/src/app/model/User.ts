@@ -6,7 +6,3 @@ export interface User {
   emailVerification: boolean;
   dateCreated: Date;
 }
-enum AccountType{
-  AGENT,
-  VENDOR
-}

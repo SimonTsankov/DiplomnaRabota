@@ -182,10 +182,13 @@ mat-sidenav-container {
   justify-content: center;
   align-items: center;
   position: relative;
-  bottom: 83%;
+  bottom: 99%;
   right: 0em;
   left: auto;
   z-index: 1;
 }
 
 
+.notificationsContainer {
+padding: 1em;
+}
