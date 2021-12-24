@@ -1,0 +1,49 @@
+:host {
+  width: 100vw;
+  height: auto;
+  margin-left: 1em;
+}
+
+div {
+  margin-bottom: 1rem;
+}
+
+label {
+  color: #939292;
+  margin-left: 0.5vw;
+}
+
+section {
+  display: flex;
+  flex-grow: 1;
+  flex-wrap: wrap;
+}
+
+section > * {
+  flex: 1 1
+}
+
+.p-button-rounded {
+  margin-bottom: 2em;
+}
+
+.read-only-field {
+  color: #607D8B;
+}
+
+button {
+  margin-top: 1em;
+  color: white;
+  background-color: var(--main-color-two);
+  margin-right: 15px;
+  margin-left: auto;
+}
+
+.posts {
+  flex: 2 1 40% !important;
+}
+
+.row {
+  background-color: var(--bckg-menu);
+  border-radius: 25px
+}

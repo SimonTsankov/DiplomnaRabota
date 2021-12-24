@@ -3,7 +3,8 @@ import {FormControl, FormGroup, FormGroupDirective, NgForm, Validators} from '@a
 import {ErrorStateMatcher} from '@angular/material/core';
 import {User} from "../model/User";
 import {LoginService} from "./login.service";
-
+import {Router} from "@angular/router";
+import {AppComponent} from "../app.component";
 
 
 @Component({
@@ -19,12 +20,13 @@ export class LoginComponent implements OnInit {
 
 
   signin: FormGroup = new FormGroup({
-    email:this.email,
+    email: this.email,
     password: this.password
   });
 
   hide = true;
-  constructor(private loginService: LoginService) {
+
+  constructor(private appComponent:AppComponent, private router: Router, private loginService: LoginService) {
 
     // @ts-ignore
     this.email.setValue("");
@@ -38,14 +40,19 @@ export class LoginComponent implements OnInit {
   get emailInput() {
     return this.signin.get('email');
   }
+
   get passwordInput() {
     return this.signin.get('password');
   }
 
-  login() {
-    console.log("dwdw")
-    this.loginService.login(this.email.value, this.password.value)
-    console.log("dwdw")
+  async login() {
+    try {
+      await this.loginService.login(this.email.value, this.password.value)
+      this.router.navigate(['posts'])
+      this.appComponent.logged=true
+    } catch (Exception) {
+      console.log(Exception)
+    }
   }
 }
 

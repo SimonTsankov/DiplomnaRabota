@@ -26,21 +26,22 @@ export class InterceptorInterceptor implements HttpInterceptor {
     this.refresh_token = this.tokenService.getRefreshToken();
 
     if (environment.urlsToSkip.includes(request.url.replace(environment.apiUrl, "")) || request.url == environment.loginUrl) {
-      console.log("skiped interceptor")
+      console.log("skiped interceptor: "+request.url)
       return next.handle(request);
     }
 
     if (this.accessTokenInvalid()) {
       if (this.refreshTokenInvalid()) {
         // both access and refresh token are expired hance we need to redirect to login
-        // this.router.navigate(['/login']).catch(console.error)
-        console.log("login")
+        this.router.navigate(['/login']).catch(console.error)
         return EMPTY;
       } else {
         //check if request isnt to refresh the token or we will end up with cycle
         if (request.url != this.refreshUrl) {
+          console.log(request.url+ ":     :"+this.refreshUrl)
           return from(this.handleRefresh(request, next));
-        } else {
+        } else {console.log("Naaaaaaaaa")
+
           request = this.modifyRequest(request, this.refresh_token)
           return next.handle(request);
         }
@@ -53,9 +54,11 @@ export class InterceptorInterceptor implements HttpInterceptor {
 
   private async handleRefresh(req: HttpRequest<any>, next: HttpHandler): Promise<HttpEvent<any>> {
     //get new access token from refresh token, since its expired but refresh isn't
+    console.log("dw")
     var tokens = JSON.parse(await this.http.get(this.refreshUrl, {responseType: "text"}).toPromise());
     this.tokenService.saveAccessToken(tokens.access_token);
     this.access_token = this.tokenService.getAccessToken();
+    console.log(this.access_token)
     //after getting the new token from the refresh token we continue with the initial request but with the new token
     req = this.modifyRequest(req, this.access_token)
 

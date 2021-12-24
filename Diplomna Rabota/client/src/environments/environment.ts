@@ -6,7 +6,6 @@ export const environment = {
   apiUrl:"http://localhost:4713/sl/api/",
   loginUrl:"http://localhost:4713/sl/login",
   urlsToSkip: [
-    "user/token/refresh",
     "user/verify",
     "user/register",
     "user/send-password-reset",

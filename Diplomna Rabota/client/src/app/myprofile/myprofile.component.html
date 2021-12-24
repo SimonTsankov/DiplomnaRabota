@@ -1,2 +1,36 @@
-<p>myprofile works!</p>
+<section>
+  <div style="flex:1">
+    <h1>Account: {{user.username}} </h1>
+    <div class="p-field">
+      <label>Username</label> <br>
+      <input type="text" pInputText id="firstName" [(ngModel)]="user.username"/>
+    </div>
+    <div>
+      <label>Email</label> <br>
+      <input [disabled]="true" class="read-only-field" type="text" pInputText id="email" [(ngModel)]="user.email"/>
+    </div>
 
+    <button mat-raised-button (click)="sendPasswordReset()">Request new password</button>
+    <button mat-raised-button (click)="updateInfo()">Update username</button>
+  </div>
+  <div class="posts">
+    <h1 style="text-align: center">Your posts:</h1>
+    <div *ngIf="userPosts.length>0">
+      <div   class="card row" *ngFor="let post of userPosts">
+        <h1 >{{post.name}} </h1>
+
+        <p-splitter [style]="{'border-width':'0px'}" [panelSizes]="[0,100]">
+          <ng-template  pTemplate>
+            <div style="padding: 5em">
+              <img  style="width: 100%;min-width: 10em;max-width: 40em" src="{{'data:image/jpg;base64,' + post.picByte.toString()}}"/>
+            </div>
+          </ng-template>
+          <ng-template  pTemplate>
+            <div  [innerHTML]="post.content | safeHtml"></div>
+          </ng-template>
+        </p-splitter>
+      </div>
+    </div>
+  </div>
+
+</section>

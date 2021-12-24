@@ -2,9 +2,11 @@ import {Component, ElementRef, OnInit, ViewChild} from '@angular/core';
 import {MatSidenav} from "@angular/material/sidenav";
 import {BreakpointObserver} from "@angular/cdk/layout";
 import {delay} from "rxjs/operators";
-import {Router} from "@angular/router";
+import {NavigationEnd, Router} from "@angular/router";
 import {environment} from "../environments/environment";
 import {MessageService} from "primeng/api";
+import {TokensService} from "./authentication/tokens.service";
+import {AuthenticationService} from "./authentication/authentication.service";
 declare let $: any;
 @Component({
   selector: 'app-root',
@@ -32,9 +34,10 @@ export class AppComponent implements OnInit {
   hideThemePicker = false;
   savedTheme = window.localStorage.getItem("theme");
   host = document.querySelector(':host');
-  logged =  true;
+  // @ts-ignore
+  logged: boolean;//TODO
 
-  constructor( private messageService: MessageService, private elementRef: ElementRef, private router: Router, private observer: BreakpointObserver) {
+  constructor(private authenticationService: AuthenticationService, private tokenService: TokensService, private messageService: MessageService, private elementRef: ElementRef, private router: Router, private observer: BreakpointObserver) {
     if(this.savedTheme){
         this.clickTest(this.savedTheme)
     }
@@ -42,6 +45,8 @@ export class AppComponent implements OnInit {
 
 
   ngOnInit(): void {
+    this.logged = this.authenticationService.checkLogin();
+
     let themePicker = document.getElementById("red");
     if (themePicker != null) {
       themePicker.style.setProperty("background-color", "#8dbcee")
@@ -99,7 +104,6 @@ export class AppComponent implements OnInit {
         environment.greenTheme.forEach(element => this.elementRef.nativeElement.style.setProperty(element.attribute, element.value))
         break;
     }
-    environment.redTheme.forEach(element => console.log(element.attribute + "  " + element.value))
   }
 
   resetButton(btnName: any) {
@@ -127,10 +131,14 @@ export class AppComponent implements OnInit {
   }
 
   logOut() {
-  //  TODO
+    this.tokenService.removeTokens();
+    this.logged=false;
+    window.location.reload();
+    window.location.replace('/login')
+
   }
 
   goToMyProfile() {
-    //TODO
+    this.router.navigate(['myprofile'])
   }
 }

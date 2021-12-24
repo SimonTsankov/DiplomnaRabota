@@ -11,7 +11,7 @@
     <a id="neon-btn" href="#top" class="neon-button">Song Link!
     </a>
   </h1>
-  <button (click)="notifications.toggle($event)" pButton pRipple type="button" icon="pi pi-bell"
+  <button *ngIf="logged" (click)="notifications.toggle($event)" pButton pRipple type="button" icon="pi pi-bell"
           class="loginBtn p-button-rounded p-button-lg"></button>
   <button *ngIf="logged" (click)="op.toggle($event)" pButton pRipple type="button" icon="pi pi-user"
           class="p-button-rounded registerBtn p-button-lg"></button>
@@ -74,6 +74,8 @@
       style="background: var(--content-bckg-color);height: auto; min-height: 100%" class="content mat-elevation-z8">
 
       <router-outlet></router-outlet>
+
+
     </div>
     <div class="example-box" cdkDrag cdkDragBoundary="mat-sidenav-content">
       <button pButton pRipple class="themes-show-hide-btn p-button-rounded" (click)="opThemes.toggle($event)">

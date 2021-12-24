@@ -24,7 +24,7 @@ public class Post {
     private byte[] picByte;
 
     @OneToOne
-    @JoinColumn(name = "user_id")
+    @JoinColumn(name = "user_id", referencedColumnName = "id")
     private User user;
 
     public long getId() {

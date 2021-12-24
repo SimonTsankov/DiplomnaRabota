@@ -19,7 +19,6 @@ export class PostsComponent implements OnInit {
 
   ngOnInit(): void {
     this.refreshPosts()
-    this.postsService.getAllPosts().subscribe(data => this.allPosts = data)
   }
 
   async refreshPosts() {

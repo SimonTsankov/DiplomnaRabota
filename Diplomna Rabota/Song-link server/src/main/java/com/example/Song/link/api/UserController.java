@@ -6,6 +6,7 @@ import com.example.Song.link.model.User;
 import com.example.Song.link.model.UserRole;
 import com.example.Song.link.repository.*;
 import com.example.Song.link.security.JwtProvider;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import freemarker.template.TemplateException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -15,7 +16,14 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 
 import javax.mail.MessagingException;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.util.HashMap;
+import java.util.Map;
+
+import static org.springframework.http.HttpHeaders.AUTHORIZATION;
+import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
 
 @CrossOrigin(origins = "*", maxAge = 3600)
 @RestController
@@ -100,6 +108,30 @@ public class UserController {
             return ResponseEntity.ok("user has been created");
         } else {
             return ResponseEntity.ok("user has been updated");
+        }
+    }
+    @GetMapping(value = "/token/refresh")
+    public void refreshToken(HttpServletRequest request, HttpServletResponse response) throws IOException {
+
+        String authorizationHeader = request.getHeader(AUTHORIZATION);
+        if (authorizationHeader != null && authorizationHeader.startsWith("Bearer ")) {
+            try {
+                Map<String, String> tokens = jwtProvider.generateFromRefreshToken(authorizationHeader, request.getRequestURI().toString(), userRepository);
+                response.setContentType(APPLICATION_JSON_VALUE);
+
+                new ObjectMapper().writeValue(response.getOutputStream(), tokens);
+
+            } catch (Exception exception) {
+
+                response.setHeader("ERROR", exception.getMessage());
+                //response.sendError(FORBIDDEN.value());
+                Map<String, String> error = new HashMap<>();
+                error.put("error_message", exception.getMessage());
+                response.setContentType(APPLICATION_JSON_VALUE);
+                new ObjectMapper().writeValue(response.getOutputStream(), error);
+            }
+        } else {
+            throw new RuntimeException("Refresh token is missing");
         }
     }
 }
