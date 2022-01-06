@@ -1,9 +1,6 @@
 package com.example.Song.link.api;
 
-import com.example.Song.link.model.ImageModel;
-import com.example.Song.link.model.Post;
-import com.example.Song.link.model.TestModel;
-import com.example.Song.link.model.User;
+import com.example.Song.link.model.*;
 import com.example.Song.link.repository.PostRepository;
 import com.example.Song.link.repository.UserRepository;
 import com.example.Song.link.repository.UserRoleRepository;
@@ -17,6 +14,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import java.awt.print.PrinterIOException;
 import java.io.IOException;
+import java.nio.file.Files;
 import java.security.Principal;
 import java.util.List;
 
@@ -31,12 +29,12 @@ public class PostController {
     UserRepository userRepository;
 
     @RequestMapping(value = "/save", method = {RequestMethod.POST, RequestMethod.PUT})
-    public ResponseEntity<?> save(Principal principal, @RequestParam MultipartFile file, @RequestParam String name, @RequestParam String content) throws IOException {
+    public ResponseEntity<?> save(Principal principal, @RequestBody  PostTransportModel postTransportModel) throws IOException {
         Post post= new Post();
         post.setUser(userRepository.findByEmail(principal.getName()));
-        post.setPicByte(file.getBytes());
-        post.setName(name);
-        post.setContent(content);
+        post.setPicByte(Files.readAllBytes(postTransportModel.file.toPath()));
+        post.setName(postTransportModel.getName());
+        post.setContent(postTransportModel.getContent());
 
         if (post.getId() == 0) {
             postRepository.save(post);

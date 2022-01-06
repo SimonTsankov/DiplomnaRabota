@@ -2,6 +2,10 @@ import {Component, OnInit} from '@angular/core';
 import {HttpClient, HttpClientModule} from "@angular/common/http";
 import {AngularEditorConfig} from '@kolkov/angular-editor';
 import {AppComponent} from "../app.component";
+import * as imageConversion from 'image-conversion';
+// @ts-ignore
+import {PostTransportModel} from "../model/PostTransportModel";
+
 
 @Component({
   selector: 'app-add-post',
@@ -9,12 +13,13 @@ import {AppComponent} from "../app.component";
   styleUrls: ['./add-post.component.css']
 })
 export class AddPostComponent implements OnInit {
-  selectedFile: File | undefined
+  post: PostTransportModel = {} as PostTransportModel
+  selectedFile: Blob | undefined
   postSaveUrl = "http://localhost:4713/sl/api/post/save"
   name = ""
   content = ""
   imagepath = ""
-  url = 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAOEAAADhCAMAAAAJbSJIAAAAb1BMVEUAAAD///9bWVrm5uaqqqqgoKBPT0/z8/ORkZHg4OB1dXWzs7PU1NTr6+vv7+86OjqAfn/MzMxsbGyXl5fAwMCHh4djY2PHx8dfX1+dnZ1ISEguLi66urpVVVV3d3evr69BQUElJSUvLy8MDAwXFxes5b5hAAADzUlEQVR4nO3b23LaMBSFYQljsDEQGxtIiM2hzfs/Y6UtnEna5EITSbDo+i8am4LQF587U1UPk0duqNWgHrtBTW49hchNKISPQvwoxI9C/CjEj0L8KMSPQvwoxI9C/CjEj0L8KMSPQvwoxI9C/CjEj0L8KMSPQvwoxI9C/CjEj0L8KMSPQvwoxI9C/CjEj0L8KMSPQvyCCk/TUJ3CTSqoUIcr3KQo9MrMrHzJf9pLedfCuxpHotArClOPI1HoFYWpx5Eo9IrC1ONIFHpFYepxJAq9ojD1OBKFXlGYehyJQq8oTD2ORKFXFKYeR6LQKwpTjyNR6BWFqceRKPSKwtTjSBR6RWHqcSQKvaIw9TgShV5RmHociUKvKEw9jkShVxSmHkei0CsKU48jUegVhanHkSj0isLU40gUekVh6nEkCr0yM5seZj/tML1rYajCTYpCr7JgrcJNiv9bHT8K8aMQv9sLL23c8W8uzPUy7hfcWljrRxcutG7ifkMUYd3vq4VdeO2rWg39shvMcrVstua1Q1Ud1bYpm41Zafdar6YnVVTuA3ZhF3YyEYSvc7l3Xl+UOmtd5bJWb+SH2SPNQlXKSqfU+nqfvTVQ+bBZ+RV2OhGEBrjuM63nIpzr8iSO+Wlp/lyonV1ZCfJFlfa3sV6L7EkJvww8nfDCqTt39Fq3VqinSuZvvGpp13Zu6yn3nLu5Hofm7bn50Wm9DTyf8MK52xrKbo3z9UlvZbn2yqB7EY5v3NkzjZxLZ243Dfpk6AovtLvi8Xi0x516cttOZXb3NKcRu/WMMJM3NloX70L7Szjbvwt+Zg0uvHx8UB+F5qB7Vlfh82jq7IH4LmztHmz21U3Y6UQQ/jaybSG13wndafPzNjSfW8fYSePspW/j8gehvcqNQveGT8ehgM01owo8mxjCvZvmptn33wobt6LlnuZ6eXAXzFng2cQQ2vNnt2ntzvqlcCK3A5W9OLZyDtXLprBvktcDT0ZFueLX1/NM9dVeurfCLBvvaWRfdddMuUDmoScT5770qc/m68aSLvtODqy86+zut+u6wgpLVSyzxp01L325ymq7dHZ3bMdt2Gt++meLYbwe/l0rh+SszRdB773vRziRI1dN2vw56DXxXoRyYMoxu62LoN93E+EXZ0wBnmN8X3rh2+xw/vfVTVEEfvIdu/W/YsSPQvwoxI9C/CjEj0L8KMSPQvwoxI9C/CjEj0L8KMSPQvwoxI9C/CjEj0L8KMSPQvwoxI9C/CjEj0L8KMSPQvwoxI9C/CjE738QDreeQuQGVQ+TR26o/wC/TiXuOSy+6AAAAABJRU5ErkJggg==';
+  url: string | ArrayBuffer | null = 'https://lh3.googleusercontent.com/proxy/56yAxYAY4xpP8ljDCrwSJDqpEYpMdYQ7fxb09EmUHF3sbnI5-PXrPNCKrGKPpcnCjEnHVgH_Qqf-4tV6QH6k6fKz9Os_54WhtTkZB-QXjw';
   text: string = "";
 
 
@@ -38,7 +43,7 @@ export class AddPostComponent implements OnInit {
   };
   values2: string[] | undefined;
 
-  constructor(private appCmp: AppComponent,private http: HttpClient) {
+  constructor(private appCmp: AppComponent, private http: HttpClient) {
 
   }
 
@@ -46,9 +51,27 @@ export class AddPostComponent implements OnInit {
     console.log(this.url)
   }
 
-  onFileSelected(event: Event) {
+  async onFileSelected(event: Event) {
     // @ts-ignore
-    this.selectedFile = <File>event.target.files[0];
+    let file = <File>event.target.files[0]
+    if (!file.type.includes("image/")) {
+      this.appCmp.showToast("Not an image type", "Please select png/jpeg/gif", true)
+      return
+    }
+    console.log(file.size)
+    this.selectedFile = file;
+    if (file.size > 1048576) {
+      const res = await imageConversion.compressAccurately(file, 900)
+      this.selectedFile = res;
+      // var reader = new FileReader();
+      // reader.readAsDataURL(res);
+      // reader.onload = (event) => {
+      //   // @ts-ignore
+      //   this.url = event.target.result;
+      // }
+      // return;
+    }
+
     var reader = new FileReader();
     reader.readAsDataURL(this.selectedFile);
 
@@ -56,23 +79,24 @@ export class AddPostComponent implements OnInit {
       // @ts-ignore
       this.url = event.target.result;
     }
-
   }
-
 
   onUpload() {
     const uploadImageData = new FormData();
 
-    if(this.selectedFile!=null) {
-      // @ts-ignore
-      uploadImageData.append('file', this.selectedFile, this.selectedFile?.name)
-    } else { // @ts-ignore
-      //TODO add toast to say image required
+    if (this.selectedFile == null) {
+      this.appCmp.showToast("Image is required", "", true)
       return
     }
-    uploadImageData.append('name', this.name);
-    uploadImageData.append('content', this.text);
-    this.http.post(this.postSaveUrl, uploadImageData,{responseType: "text"}).toPromise()
+
+    // @ts-ignore
+    uploadImageData.append('file', this.selectedFile, "")
+
+
+    this.post.file = this.selectedFile
+    this.post.name = this.name
+    this.post.content = this.text;
+    this.http.post(this.postSaveUrl, this.post, {responseType: "text"}).toPromise()
   }
 
   filterCountry($event: any) {

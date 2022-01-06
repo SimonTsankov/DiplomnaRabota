@@ -1,5 +1,5 @@
 <h3>Create a post</h3>
-<input style="display: none" type="file" (change)="onFileSelected($event)" #fileInput>
+<input style="display: none" accept="image/png, image/gif, image/jpeg" type="file" (change)="onFileSelected($event)" #fileInput>
 
 <div class="content flow" >
   <div class="grid-ish">
@@ -28,7 +28,6 @@
     <div  style="background-color: var(--background-EditField); padding-top: 3%" >
       <angular-editor [placeholder]="'Enter text here...'" [config]="editorConfig" [(ngModel)]="text"
                       style="background-color: white; font-size:small"></angular-editor>
-
     </div>
   </div>
 </div>

@@ -35,7 +35,7 @@ export class AppComponent implements OnInit {
   savedTheme = window.localStorage.getItem("theme");
   host = document.querySelector(':host');
   // @ts-ignore
-  logged: boolean;//TODO
+  logged: boolean= this.authenticationService.checkLogin();//TODO
 
   constructor(private authenticationService: AuthenticationService, private tokenService: TokensService, private messageService: MessageService, private elementRef: ElementRef, private router: Router, private observer: BreakpointObserver) {
     if(this.savedTheme){
@@ -61,7 +61,10 @@ export class AppComponent implements OnInit {
     }
 
   }
-
+  checkLogin(){
+    this.logged = this.authenticationService.checkLogin();
+    return this.logged;
+  }
   async startAnimation() {
     let element = document.getElementById("neon-btn");
 

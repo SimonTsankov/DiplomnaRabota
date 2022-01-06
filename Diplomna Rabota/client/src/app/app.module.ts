@@ -33,6 +33,7 @@ import {MessageService} from "primeng/api";
 import {OverlayPanelModule} from "primeng/overlaypanel";
 import {DragDropModule} from "@angular/cdk/drag-drop";
 import { MyprofileComponent } from './myprofile/myprofile.component';
+import {ToastModule} from "primeng/toast";
 
 @NgModule({
   exports: [RouterModule],
@@ -45,31 +46,31 @@ import { MyprofileComponent } from './myprofile/myprofile.component';
     SafeHtmlPipe,
     MyprofileComponent
   ],
-  imports: [
-    HttpClientModule,
-    FormsModule,
-    BrowserModule,
-    ButtonModule,
-    TableModule,
-    AngularEditorModule,
-    HttpClientModule,
-    BrowserModule,
-    RouterModule,
-    BrowserAnimationsModule,
-    MatToolbarModule,
-    MatSidenavModule,
-    MatButtonModule,
-    MatIconModule,
-    MatDividerModule,
-    AppRoutingModule,
-    ReactiveFormsModule,
-    MatFormFieldModule,
-    MatInputModule,
-    MessagesModule,
-    FormsModule,
-    EditorModule,
-    AutoCompleteModule, ChipsModule, SelectButtonModule, MatButtonToggleModule, SplitterModule, OverlayPanelModule, DragDropModule,
-  ],
+    imports: [
+        HttpClientModule,
+        FormsModule,
+        BrowserModule,
+        ButtonModule,
+        TableModule,
+        AngularEditorModule,
+        HttpClientModule,
+        BrowserModule,
+        RouterModule,
+        BrowserAnimationsModule,
+        MatToolbarModule,
+        MatSidenavModule,
+        MatButtonModule,
+        MatIconModule,
+        MatDividerModule,
+        AppRoutingModule,
+        ReactiveFormsModule,
+        MatFormFieldModule,
+        MatInputModule,
+        MessagesModule,
+        FormsModule,
+        EditorModule,
+        AutoCompleteModule, ChipsModule, SelectButtonModule, MatButtonToggleModule, SplitterModule, OverlayPanelModule, DragDropModule, ToastModule,
+    ],
   providers: [
     MessageService,
     {provide: HTTP_INTERCEPTORS, useClass: InterceptorInterceptor, multi: true}

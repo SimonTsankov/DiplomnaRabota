@@ -1,3 +1,4 @@
+<p-toast></p-toast>
 <mat-toolbar class="mat-elevation-z8 toolbar">
   <button mat-icon-button *ngIf="sidenav.mode === 'over'" (click)="sidenav.toggle()">
     <mat-icon *ngIf="!sidenav.opened">
@@ -11,12 +12,12 @@
     <a id="neon-btn" href="#top" class="neon-button">Song Link!
     </a>
   </h1>
-  <button *ngIf="logged" (click)="notifications.toggle($event)" pButton pRipple type="button" icon="pi pi-bell"
+  <button *ngIf="checkLogin()" (click)="notifications.toggle($event)" pButton pRipple type="button" icon="pi pi-bell"
           class="loginBtn p-button-rounded p-button-lg"></button>
-  <button *ngIf="logged" (click)="op.toggle($event)" pButton pRipple type="button" icon="pi pi-user"
+  <button *ngIf="checkLogin()" (click)="op.toggle($event)" pButton pRipple type="button" icon="pi pi-user"
           class="p-button-rounded registerBtn p-button-lg"></button>
-  <button *ngIf="!logged" [routerLink]="'login'" class="loginBtn" mat-raised-button>Login!</button>
-  <button *ngIf="!logged" [routerLink]="'register'" class="registerBtn" mat-raised-button>Register</button>
+  <button *ngIf="!checkLogin()" [routerLink]="'login'" class="loginBtn" mat-raised-button>Login!</button>
+  <button *ngIf="!checkLogin()" [routerLink]="'register'" class="registerBtn" mat-raised-button>Register</button>
 </mat-toolbar>
 
 

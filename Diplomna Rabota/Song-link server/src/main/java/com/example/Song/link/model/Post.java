@@ -19,7 +19,7 @@ public class Post {
     @Column
     private String content;
 
-    @Column(name = "picByte", length = 100000)
+    @Column(name = "picByte", length = 10000000)
     @Type(type = "org.hibernate.type.BinaryType")
     private byte[] picByte;
 

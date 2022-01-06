@@ -18,6 +18,10 @@ dependencies {
 	implementation 'com.github.tsohr:json:0.0.2'
 	implementation 'io.jsonwebtoken:jjwt:0.9.1'
 
+	//spotify wrapper
+	implementation 'se.michaelthelin.spotify:spotify-web-api-java:7.0.0'
+
+
 	implementation 'org.springframework.boot:spring-boot-starter-data-jdbc'
 	implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
 	implementation 'org.springframework.boot:spring-boot-starter-mail'
