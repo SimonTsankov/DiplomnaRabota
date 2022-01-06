@@ -75,7 +75,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         http.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
         http.authorizeRequests().antMatchers("/exception/*", "/api/login/**", "/api/user/token/refresh/**",
                 "/api/user/register/**", "/api/user/verify/**", "/api/user/send-password-reset/**",
-                "/api/user/reset-password-request/**","/api/post/findAll").permitAll();
+                "/api/user/reset-password-request/**","/api/post/findAll","/api/spotify/searchTracks/**").permitAll();
         http.authorizeRequests().anyRequest().hasAnyAuthority("Admin","User");
         http.addFilter(new CustomAuthenticationFilter(authenticationManagerBean(), getApplicationContext()));
         http.addFilterBefore(customAuthorizationFilter(), CustomAuthenticationFilter.class);
