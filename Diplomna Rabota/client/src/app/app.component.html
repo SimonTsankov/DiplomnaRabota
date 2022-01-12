@@ -67,25 +67,26 @@
 
   </mat-sidenav>
 
-  <mat-sidenav-content style="background-color: var(--content-bckg-color-Back); scroll-behavior: smooth;">
+  <mat-sidenav-content id="content" style="background-color: var(--content-bckg-color-Back); scroll-behavior: smooth;">
 
 
     <div id="top"></div>
     <div
       style="background: var(--content-bckg-color);height: auto; min-height: 100%" class="content mat-elevation-z8">
 
-      <router-outlet></router-outlet>
+      <router-outlet ></router-outlet>
 
 
     </div>
-    <div class="example-box" cdkDrag cdkDragBoundary="mat-sidenav-content">
-      <button pButton pRipple class="themes-show-hide-btn p-button-rounded" (click)="opThemes.toggle($event)">
-        <mat-icon>color_lens</mat-icon>
-      </button>
-    </div>
+
   </mat-sidenav-content>
 
 </mat-sidenav-container>
+<div class="example-box" cdkDrag cdkDragBoundary="mat-sidenav-content">
+  <button pButton pRipple class="themes-show-hide-btn p-button-rounded" (click)="opThemes.toggle($event)">
+    <mat-icon>color_lens</mat-icon>
+  </button>
+</div>
 
 
 <p-overlayPanel [style]="{'padding':0, 'background-color':'transparent', 'shadow': 'none'}" #opThemes>
@@ -112,7 +113,7 @@
   <ng-template pTemplate style="padding: 0 !important;">
 
     <div class="rowOverlayMenu">
-      <button [routerLink]="'myprofile'" pButton pRipple type="button" label="My profile"
+      <button (click)="goToMyProfile()" pButton pRipple type="button" label="My profile"
               class="p-button-secondary p-button-text button-user-dropdown"><i style="margin-right: 5px"
                                                                                class="pi pi-user-edit"></i>
       </button>

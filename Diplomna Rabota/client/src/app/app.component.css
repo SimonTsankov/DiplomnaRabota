@@ -175,14 +175,13 @@ mat-sidenav-container {
   border:none;
 }
 .example-box {
-  width: 3em;
-  height: 3em;
+  width: 0em;
+  height: 0em;
   cursor: move;
-  display: flex;
   justify-content: center;
   align-items: center;
   position: relative;
-  bottom: 99%;
+  bottom: 80vh;
   right: 0em;
   left: auto;
   z-index: 1;

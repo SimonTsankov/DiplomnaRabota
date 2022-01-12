@@ -47,6 +47,7 @@ export class AppComponent implements OnInit {
 
 
   ngOnInit(): void {
+
     this.logged = this.authenticationService.checkLogin();
 
     let themePicker = document.getElementById("red");
@@ -147,6 +148,12 @@ export class AppComponent implements OnInit {
   }
 
   goToMyProfile() {
+    const elementContent = document.getElementById("content");
+    // @ts-ignore
+    elementContent.scroll(0,0)
+    console.log("Scrolled")
     this.router.navigate(['myprofile'])
   }
+
+
 }
