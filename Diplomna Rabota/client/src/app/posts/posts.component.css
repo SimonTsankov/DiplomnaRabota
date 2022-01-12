@@ -1,0 +1,18 @@
+.main-containerPosts {
+  background-color: var(--bckg-menu);
+  border-radius: 25px
+}
+
+mat-card-title {
+  color: var(--main-color-two)
+}
+
+mat-card {
+  margin-bottom: 2em;
+}
+
+.action-item{
+  color: var(--main-color-two);
+  margin-inline: auto;
+}
+

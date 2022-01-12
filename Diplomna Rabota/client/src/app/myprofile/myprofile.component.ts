@@ -35,6 +35,6 @@ export class MyprofileComponent implements OnInit {
 
   updateInfo() {
     window.scroll(0,0)
-    // this.userService.updateUserInfo(this.user)
+    this.userService.updateUserInfo(this.user)
   }
 }

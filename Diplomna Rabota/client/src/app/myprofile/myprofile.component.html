@@ -17,19 +17,25 @@
     <h1 style="text-align: center">Your posts:</h1>
     <div *ngIf="userPosts.length>0">
       <div   class="card row" *ngFor="let post of userPosts">
-        <h1 >{{post.name}} </h1>
 
-        <p-splitter [style]="{'border-width':'0px'}" [panelSizes]="[0,100]">
-          <ng-template  pTemplate>
-            <div style="padding: 5em">
-              <img  style="width: 100%;min-width: 10em;max-width: 40em" src="{{'data:image/jpg;base64,' + post.picByte.toString()}}"/>
-            </div>
-          </ng-template>
-          <ng-template  pTemplate>
-            <div  [innerHTML]="post.content | safeHtml"></div>
-          </ng-template>
-        </p-splitter>
-      </div>
+          <mat-card>
+            <mat-card-header>
+              <mat-card-title>{{post.name}}</mat-card-title>
+              <mat-card-subtitle><div style=" width: 100%" [innerHTML]="post.content | safeHtml"></div></mat-card-subtitle>
+            </mat-card-header>
+            <img mat-card-image src="{{'data:image/jpg;base64,' + post.picByte.toString()}}">
+            <mat-card-content>
+              Posted by: add name later
+            </mat-card-content>
+            <mat-card-actions style="display: flex; flex-grow: 3">
+              <!--      TODO: Make buttons work also hover animations-->
+              <mat-icon class="action-item">share</mat-icon>
+              <mat-icon class="action-item" >favorite_border</mat-icon>
+              <mat-icon class="action-item" > save</mat-icon>
+            </mat-card-actions>
+          </mat-card>
+
+        </div>
     </div>
   </div>
 

@@ -1,19 +1,24 @@
 <h1 *ngIf="allPosts.length==0">No posts were retrieved. Strange...</h1>
 <br>
 <div *ngIf="allPosts.length>0">
-<div  style="background-color: var(--bckg-menu);border-radius: 25px" class="card row" *ngFor="let post of allPosts">
-  <h1 >{{post.name}} </h1>
+  <h1>Latest posts and news for you!</h1>
+<div  class="main-containerPosts card row" *ngFor="let post of allPosts">
+  <mat-card>
+    <mat-card-header>
+      <mat-card-title>{{post.name}}</mat-card-title>
+      <mat-card-subtitle><div style=" width: 100%" [innerHTML]="post.content | safeHtml"></div></mat-card-subtitle>
+    </mat-card-header>
+    <img mat-card-image src="{{'data:image/jpg;base64,' + post.picByte.toString()}}">
+    <mat-card-content>
+      Posted by: add name later
+    </mat-card-content>
+    <mat-card-actions style="display: flex; flex-grow: 3">
+<!--      TODO: Make buttons work also hover animations-->
+      <mat-icon class="action-item">share</mat-icon>
+      <mat-icon class="action-item" >favorite_border</mat-icon>
+      <mat-icon class="action-item" > save</mat-icon>
+    </mat-card-actions>
+  </mat-card>
 
-
-  <p-splitter [style]="{'border-width':'0px'}" [panelSizes]="[0,10000]">
-    <ng-template  pTemplate>
-      <div style="padding: 5em">
-      <img  style="width: 100%;min-width: 30em;max-width: 40em" src="{{'data:image/jpg;base64,' + post.picByte.toString()}}"/>
-    </div>
-    </ng-template>
-    <ng-template style="width: auto" pTemplate>
-      <div style=" width: 100%" [innerHTML]="post.content | safeHtml"></div>
-    </ng-template>
-  </p-splitter>
 </div>
 </div>

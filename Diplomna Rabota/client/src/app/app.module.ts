@@ -34,6 +34,7 @@ import {OverlayPanelModule} from "primeng/overlaypanel";
 import {DragDropModule} from "@angular/cdk/drag-drop";
 import { MyprofileComponent } from './myprofile/myprofile.component';
 import {ToastModule} from "primeng/toast";
+import {MatCardModule} from "@angular/material/card";
 
 @NgModule({
   exports: [RouterModule],
@@ -69,7 +70,7 @@ import {ToastModule} from "primeng/toast";
         MessagesModule,
         FormsModule,
         EditorModule,
-        AutoCompleteModule, ChipsModule, SelectButtonModule, MatButtonToggleModule, SplitterModule, OverlayPanelModule, DragDropModule, ToastModule,
+        AutoCompleteModule, ChipsModule, SelectButtonModule, MatButtonToggleModule, SplitterModule, OverlayPanelModule, DragDropModule, ToastModule, MatCardModule,
     ],
   providers: [
     MessageService,
