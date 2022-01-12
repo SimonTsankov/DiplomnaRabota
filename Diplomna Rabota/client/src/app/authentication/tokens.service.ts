@@ -18,13 +18,13 @@ export class TokensService {
 
   getAccessToken() {
 
-      return window.localStorage.getItem("access_token") + "";
+      return window.localStorage.getItem("access_token");
 
   }
 
   getRefreshToken() {
 
-      return window.localStorage.getItem("refresh_token") + "";
+      return window.localStorage.getItem("refresh_token");
 
   }
 

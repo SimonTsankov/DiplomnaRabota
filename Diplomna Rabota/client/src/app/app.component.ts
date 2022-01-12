@@ -7,7 +7,9 @@ import {environment} from "../environments/environment";
 import {MessageService} from "primeng/api";
 import {TokensService} from "./authentication/tokens.service";
 import {AuthenticationService} from "./authentication/authentication.service";
+
 declare let $: any;
+
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
@@ -35,11 +37,11 @@ export class AppComponent implements OnInit {
   savedTheme = window.localStorage.getItem("theme");
   host = document.querySelector(':host');
   // @ts-ignore
-  logged: boolean= this.authenticationService.checkLogin();//TODO
+  logged: boolean = this.checkLogin()
 
   constructor(private authenticationService: AuthenticationService, private tokenService: TokensService, private messageService: MessageService, private elementRef: ElementRef, private router: Router, private observer: BreakpointObserver) {
-    if(this.savedTheme){
-        this.clickTest(this.savedTheme)
+    if (this.savedTheme) {
+      this.clickTest(this.savedTheme)
     }
   }
 
@@ -61,10 +63,12 @@ export class AppComponent implements OnInit {
     }
 
   }
-  checkLogin(){
-    this.logged = this.authenticationService.checkLogin();
+
+  checkLogin() {
+    this.logged = !this.authenticationService.isTokenExpired(this.tokenService.getAccessToken());
     return this.logged;
   }
+
   async startAnimation() {
     let element = document.getElementById("neon-btn");
 
@@ -95,7 +99,7 @@ export class AppComponent implements OnInit {
   clickTest(item: any) {
     this.themeButtons.forEach(element => this.resetButton(element));
     window.localStorage.setItem("theme", item);
-    this.savedTheme= item
+    this.savedTheme = item
     switch (item) {
       case 'red':
         environment.redTheme.forEach(element => this.elementRef.nativeElement.style.setProperty(element.attribute, element.value))
@@ -125,6 +129,7 @@ export class AppComponent implements OnInit {
   toggleThemesPicker() {
     this.hideThemePicker = !this.hideThemePicker
   }
+
   public showToast(title: string, message: string, isError: boolean) {
     this.messageService.add({
       severity: isError ? 'error' : 'success',
@@ -135,7 +140,7 @@ export class AppComponent implements OnInit {
 
   logOut() {
     this.tokenService.removeTokens();
-    this.logged=false;
+    this.logged = false;
     window.location.reload();
     window.location.replace('/login')
 

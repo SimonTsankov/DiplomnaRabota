@@ -1,6 +1,6 @@
 import {Injectable} from '@angular/core';
 import {UserModel} from "../model/UserModel";
-import {EMPTY} from "rxjs";
+
 import {TokensService} from "./tokens.service";
 
 @Injectable({
@@ -43,6 +43,18 @@ export class AuthenticationService {
     } catch (error) {
       console.log(error)
       return null
+    }
+  }
+
+  isTokenExpired(token: string | null): boolean {
+    if (!token || token === "undefined") return true;
+      return false
+    try {
+   // @ts-ignore
+    return this.tokenService.tokenExpired(token)
+    } catch (exception) {
+      // this.notificationService.notification$.next({severity: 'error', summary: "error", detail: exception});
+      return true;
     }
   }
 }
