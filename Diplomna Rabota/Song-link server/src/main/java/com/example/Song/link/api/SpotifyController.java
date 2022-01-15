@@ -3,6 +3,8 @@ package com.example.Song.link.api;
 import com.example.Song.link.model.Post;
 import com.example.Song.link.model.Song;
 import org.apache.hc.core5.http.ParseException;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import se.michaelthelin.spotify.SpotifyApi;
@@ -13,6 +15,7 @@ import se.michaelthelin.spotify.model_objects.specification.Track;
 import se.michaelthelin.spotify.requests.authorization.client_credentials.ClientCredentialsRequest;
 import se.michaelthelin.spotify.requests.data.search.simplified.SearchTracksRequest;
 
+import javax.annotation.PostConstruct;
 import java.io.IOException;
 import java.util.Arrays;
 import java.util.LinkedList;
@@ -24,7 +27,7 @@ import java.util.List;
 public class SpotifyController {
 
     private static SpotifyApi spotifyApi = new SpotifyApi.Builder().setClientId("7f6acf63bdf84024b45401b30df8baeb")
-            .setClientSecret("a018e95c7160488197b3eb3df63904ff").build();
+            .setClientSecret("8c393690bea3451f991253452658213c").build();
     private static final ClientCredentialsRequest clientCredentialsRequest = spotifyApi.clientCredentials()
             .build();
     final ClientCredentials clientCredentials = clientCredentialsRequest.execute();

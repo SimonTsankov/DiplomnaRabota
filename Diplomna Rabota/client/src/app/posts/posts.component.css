@@ -1,6 +1,8 @@
 .main-containerPosts {
   background-color: var(--bckg-menu);
-  border-radius: 25px
+  border-radius: 25px;
+  margin:auto;
+  max-width: 20em;
 }
 
 mat-card-title {

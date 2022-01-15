@@ -5,7 +5,16 @@ import org.springframework.web.multipart.MultipartFile;
 import java.io.File;
 
 public class PostTransportModel {
-    public File file;
+    byte[] picByte;
+
+    public byte[] getPicByte() {
+        return picByte;
+    }
+
+    public void setPicByte(byte[] picByte) {
+        this.picByte = picByte;
+    }
+
     private String name;
     private String content;
 

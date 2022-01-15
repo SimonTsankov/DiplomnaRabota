@@ -8,6 +8,7 @@ import {User} from "../model/User";
   providedIn: 'root'
 })
 export class PostsServiceService {
+  postSaveUrl = environment.apiUrl+"post/save"
   findAllUrl = environment.apiUrl+"post/findAll"
   findByUser = environment.apiUrl+"post/findByUser"
   constructor(private http: HttpClient) { }
@@ -15,7 +16,9 @@ export class PostsServiceService {
   getAllPosts() {
     return this.http.get<Post[]>(this.findAllUrl);
   }
-
+  async savePost(uploadImageData:any){
+    return this.http.post(this.postSaveUrl, uploadImageData, {responseType: "text"}).toPromise()
+  }
   getUsersPosts(user: User) {
     return this.http.get<Post[]>(this.findByUser);
   }
