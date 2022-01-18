@@ -106,6 +106,7 @@ public class UserController {
     }
 
 //endregion
+
     @RequestMapping(value = "/save", method = {RequestMethod.POST, RequestMethod.PUT})
     @PreAuthorize("hasAnyAuthority('Admin')")
     public ResponseEntity<?> save(@RequestBody User user) {

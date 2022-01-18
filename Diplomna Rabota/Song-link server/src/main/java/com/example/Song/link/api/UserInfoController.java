@@ -11,6 +11,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.security.Principal;
+import java.util.LinkedList;
+import java.util.List;
 
 @CrossOrigin(origins = "*", maxAge = 3600)
 @RestController
@@ -37,6 +39,17 @@ public class UserInfoController {
         User user = userRepository.findByEmail(principal.getName());
         user.setPassword("");
         return ResponseEntity.ok().body(user);
+    }
+
+    @GetMapping(value = "getUsers")
+    public ResponseEntity<?> getSearchedUsers(Principal principal) {
+        List<User> users = userRepository.findByUsername(principal.getName());
+        for (User user : users) {
+            user.setPassword("");
+            user.setEmail("");
+        }
+
+        return ResponseEntity.ok().body(users);
     }
 
     @RequestMapping(value = "/updateUserInfo", method = {RequestMethod.POST, RequestMethod.PUT})
