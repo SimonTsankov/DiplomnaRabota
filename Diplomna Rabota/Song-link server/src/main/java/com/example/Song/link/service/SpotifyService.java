@@ -16,9 +16,7 @@ import java.util.LinkedList;
 
 @Service
 public class SpotifyService {
-
-    public LinkedList<Song> searchforTracks(String searchWord) throws IOException, ParseException, SpotifyWebApiException {
-
+    public SpotifyApi setUpSpotApi() throws IOException, ParseException, SpotifyWebApiException {
         SpotifyApi spotifyApi = new SpotifyApi.Builder().setClientId("7f6acf63bdf84024b45401b30df8baeb")
                 .setClientSecret("8c393690bea3451f991253452658213c").build();
 
@@ -28,6 +26,11 @@ public class SpotifyService {
         ClientCredentials clientCredentials = clientCredentialsRequest.execute();
 
         spotifyApi.setAccessToken(clientCredentials.getAccessToken());
+        return spotifyApi;
+    }
+    public LinkedList<Song> searchforTracks(String searchWord) throws IOException, ParseException, SpotifyWebApiException {
+
+        SpotifyApi spotifyApi = setUpSpotApi();
 
         SearchTracksRequest searchTracksRequest = spotifyApi.searchTracks(searchWord).limit(10).build();
         try {
