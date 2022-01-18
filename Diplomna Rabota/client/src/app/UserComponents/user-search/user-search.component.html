@@ -1,0 +1,24 @@
+<div class="searchBar">
+  <span class="p-input-icon-left">
+  <i class="pi pi-search"></i>
+  <input (keydown.enter)="refreshUsers()" type="text" pInputText placeholder="Search" [(ngModel)]="searchWord"/>
+  </span>
+  <p-toggleButton [disabled]="users.length==0" [(ngModel)]="checked" onLabel="Include followed user" offLabel="Don't include followed users" onIcon="pi pi-check"
+                  offIcon="pi pi-times" [style]="{'width': 'auto'}"></p-toggleButton>
+</div>
+
+<div class="container">
+  <div *ngIf="users.length==0">
+    <p style="text-align: center">No users found</p>
+  </div>
+
+  <div  *ngFor="let user of users">
+    <ul>
+      <li class="item item__divider">
+        <p class="username">{{user.username}}</p>
+        <span class="item__hr-line"></span>
+        <button class="item__button" type="button" (click)="onUserSelect(user)">Follow</button>
+      </li>
+    </ul>
+  </div>
+</div>

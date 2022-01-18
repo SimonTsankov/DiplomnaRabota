@@ -162,4 +162,10 @@ export class AppComponent implements OnInit {
   }
 
 
+  goToUserSearch() {
+    const elementContent = document.getElementById("content")
+    // @ts-ignore
+    elementContent.scroll(0, 0)
+    this.router.navigate(['user-search'])
+  }
 }

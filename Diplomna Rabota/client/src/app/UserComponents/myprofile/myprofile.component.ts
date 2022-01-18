@@ -1,10 +1,10 @@
 import {Component, OnInit} from '@angular/core';
-import {User} from "../model/User";
-import {AppComponent} from "../app.component";
+import {User} from "../../model/User";
+import {AppComponent} from "../../app.component";
 import {Router} from "@angular/router";
-import {UserService} from "./user.service";
-import {PostsServiceService} from "../PostsComponents/posts/posts-service.service";
-import {UPost} from "../model/UPost";
+import {UserService} from "../UserService/user.service";
+import {PostsServiceService} from "../../PostsComponents/posts/posts-service.service";
+import {UPost} from "../../model/UPost";
 
 
 @Component({

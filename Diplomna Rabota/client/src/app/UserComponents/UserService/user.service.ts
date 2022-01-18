@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
-import {User} from "../model/User";
+import {User} from "../../model/User";
 import {HttpClient} from "@angular/common/http";
-import {environment} from "../../environments/environment";
+import {environment} from "../../../environments/environment";
 
 @Injectable({
   providedIn: 'root'
@@ -9,12 +9,16 @@ import {environment} from "../../environments/environment";
 export class UserService {
   // getCurrentUserUrl = "http://localhost:4713/sl/api/user-info/get";
   getCurrentUserUrl =environment.apiUrl+"user-info/get";
+  searchUsersUrl =environment.apiUrl+"user-info/getUsers";
   updateCurrentUserInfoUrl = environment.apiUrl+"user-info/updateUserInfo";
   constructor(private http: HttpClient) {
   }
 
   getCurrentUser() {
     return this.http.get<User>(this.getCurrentUserUrl);
+  }
+  getSearchedUsers(searchedWord: string){
+    return this.http.get<User[]>(this.searchUsersUrl+"?searchWord="+searchedWord);
   }
   async updateUserInfo(user: User) {
     return await this.http.post(this.updateCurrentUserInfoUrl, user, {responseType: "text"}).toPromise();

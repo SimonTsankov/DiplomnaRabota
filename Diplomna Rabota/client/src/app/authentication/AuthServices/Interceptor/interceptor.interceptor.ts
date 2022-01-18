@@ -39,7 +39,7 @@ export class InterceptorInterceptor implements HttpInterceptor {
         if (request.url != this.refreshUrl) {
           console.log(request.url+ ":     :"+this.refreshUrl)
           return from(this.handleRefresh(request, next));
-        } else {console.log("Naaaaaaaaa")
+        } else {
 
           request = this.modifyRequest(request, this.refresh_token)
           return next.handle(request);

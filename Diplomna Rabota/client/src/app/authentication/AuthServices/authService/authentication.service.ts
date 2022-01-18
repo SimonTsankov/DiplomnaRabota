@@ -27,15 +27,13 @@ export class AuthenticationService {
       let payload = JSON.parse(payloadDecoded);
       let expDate = new Date(payload.exp * 1000);
       let accessIsExpired = !(expDate > new Date());
-      console.log(this.isTokenExpired(this.tokenService.getRefreshToken()))
+
       if (accessIsExpired && this.isTokenExpired(this.tokenService.getRefreshToken())) {
-        console.log(this.isTokenExpired(this.tokenService.getRefreshToken() + "        :"));
         return false;
       } else {
         return true;
       }
     } catch (e) {
-      console.log("error")
       return false;
     }
 

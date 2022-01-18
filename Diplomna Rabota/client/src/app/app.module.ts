@@ -30,12 +30,15 @@ import {MessagesModule} from "primeng/messages";
 import {MessageService} from "primeng/api";
 import {OverlayPanelModule} from "primeng/overlaypanel";
 import {DragDropModule} from "@angular/cdk/drag-drop";
-import { MyprofileComponent } from './myprofile/myprofile.component';
+import { MyprofileComponent } from './UserComponents/myprofile/myprofile.component';
 import {ToastModule} from "primeng/toast";
 import {MatCardModule} from "@angular/material/card";
 import {AddPostComponent} from "./PostsComponents/add-post/add-post.component";
 import {RegisterComponent} from "./authentication/register/register.component";
 import {RippleModule} from "primeng/ripple";
+import {UserSearchComponent} from "./UserComponents/user-search/user-search.component";
+import {ToggleButtonModule} from "primeng/togglebutton";
+
 
 @NgModule({
   exports: [RouterModule],
@@ -46,33 +49,34 @@ import {RippleModule} from "primeng/ripple";
     AddPostComponent,
     PostsComponent,
     SafeHtmlPipe,
-    MyprofileComponent
+    MyprofileComponent,
+    UserSearchComponent
   ],
-  imports: [
-    HttpClientModule,
-    FormsModule,
-    BrowserModule,
-    ButtonModule,
-    TableModule,
-    AngularEditorModule,
-    HttpClientModule,
-    BrowserModule,
-    RouterModule,
-    BrowserAnimationsModule,
-    MatToolbarModule,
-    MatSidenavModule,
-    MatButtonModule,
-    MatIconModule,
-    MatDividerModule,
-    AppRoutingModule,
-    ReactiveFormsModule,
-    MatFormFieldModule,
-    MatInputModule,
-    MessagesModule,
-    FormsModule,
-    EditorModule,
-    AutoCompleteModule, ChipsModule, SelectButtonModule, MatButtonToggleModule, SplitterModule, OverlayPanelModule, DragDropModule, ToastModule, MatCardModule, RippleModule,
-  ],
+    imports: [
+        HttpClientModule,
+        FormsModule,
+        BrowserModule,
+        ButtonModule,
+        TableModule,
+        AngularEditorModule,
+        HttpClientModule,
+        BrowserModule,
+        RouterModule,
+        BrowserAnimationsModule,
+        MatToolbarModule,
+        MatSidenavModule,
+        MatButtonModule,
+        MatIconModule,
+        MatDividerModule,
+        AppRoutingModule,
+        ReactiveFormsModule,
+        MatFormFieldModule,
+        MatInputModule,
+        MessagesModule,
+        FormsModule,
+        EditorModule,
+        AutoCompleteModule, ChipsModule, SelectButtonModule, MatButtonToggleModule, SplitterModule, OverlayPanelModule, DragDropModule, ToastModule, MatCardModule, RippleModule, ToggleButtonModule,
+    ],
   providers: [
     MessageService,
     {provide: HTTP_INTERCEPTORS, useClass: InterceptorInterceptor, multi: true}

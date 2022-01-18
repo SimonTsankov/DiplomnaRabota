@@ -4,7 +4,8 @@ import {LoginComponent} from "./authentication/login/login.component";
 import {RegisterComponent} from "./authentication/register/register.component";
 import {AddPostComponent} from "./PostsComponents/add-post/add-post.component";
 import {PostsComponent} from "./PostsComponents/posts/posts.component";
-import {MyprofileComponent} from "./myprofile/myprofile.component";
+import {MyprofileComponent} from "./UserComponents/myprofile/myprofile.component";
+import {UserSearchComponent} from "./UserComponents/user-search/user-search.component";
 
 const routes: Routes = [
   { path: '', redirectTo: '/posts', pathMatch: 'full' },
@@ -12,6 +13,7 @@ const routes: Routes = [
   {path: 'register', component: RegisterComponent},
   {path: 'addpost', component: AddPostComponent},
   {path: 'posts', component: PostsComponent},
+  {path: 'user-search', component: UserSearchComponent},
   {path: 'myprofile', component: MyprofileComponent}
 ];
 
