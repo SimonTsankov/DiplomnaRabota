@@ -4,6 +4,7 @@ import com.example.Song.link.mailModel.EmailConfirmationModel;
 import com.example.Song.link.mailModel.RecipientConfirmation;
 import com.example.Song.link.model.EmailVerification;
 import com.example.Song.link.model.User;
+import com.example.Song.link.model.UserFollow;
 import com.example.Song.link.model.UserRole;
 import com.example.Song.link.repository.*;
 import com.example.Song.link.security.JwtProvider;
@@ -22,6 +23,7 @@ import javax.mail.MessagingException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.security.Principal;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.concurrent.CompletableFuture;
@@ -53,10 +55,13 @@ public class UserController {
     private PasswordResetRepository passwordResetRepository;
 
     @Autowired
+    private UserFollowRepository userFollowRepository;
+
+    @Autowired
     private JwtProvider jwtProvider;
-//TODO
-        @Autowired
-        private EmailService emailService;
+    //TODO
+    @Autowired
+    private EmailService emailService;
 
     @Value("${vwp.email.template.confirmation}")
     private String emailVerificationTemplate;
@@ -81,9 +86,10 @@ public class UserController {
             return ResponseEntity.ok("user has been created");
         } else {
             throw new Exception("User exists");
-          //  throw new UserAlreadyExists("User with this email already exists!");
+            //  throw new UserAlreadyExists("User with this email already exists!");
         }
     }
+
     private RecipientConfirmation getRecipient(String hash, String email, String subject, String bonusText) {
         RecipientConfirmation recipient = new RecipientConfirmation();
         recipient.setEmail(email);
@@ -92,12 +98,14 @@ public class UserController {
         recipient.setText(bonusText);
         return recipient;
     }
+
     private void saveEmailVerification(String hash, User user) {
         EmailVerification emailVerification = new EmailVerification();
         emailVerification.setHash(hash);
         emailVerification.setUser(user);
         emailVerificationRepository.save(emailVerification);
     }
+
     private void setDefUserRole(User user) {
         UserRole userRole = new UserRole();
         userRole.setUser(user.getId());
@@ -119,6 +127,17 @@ public class UserController {
             return ResponseEntity.ok("user has been updated");
         }
     }
+
+    @PostMapping(value = "/saveFollow")
+    public ResponseEntity<?> saveFollow(@RequestParam Long id, Principal principal) {
+        UserFollow userFollow = new UserFollow();
+        userFollow.setUserFollowed(id);
+        userFollow.setUserFollowing(userRepository.findByEmail(principal.getName()).getId());
+        userFollowRepository.save(userFollow);
+
+        return ResponseEntity.ok("Followed user succesfully");
+    }
+
     @GetMapping(value = "/token/refresh")
     public void refreshToken(HttpServletRequest request, HttpServletResponse response) throws IOException {
 
@@ -143,4 +162,6 @@ public class UserController {
             throw new RuntimeException("Refresh token is missing");
         }
     }
+
+
 }
