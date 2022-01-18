@@ -1,11 +1,15 @@
 import {Injectable} from '@angular/core';
+import {HttpClient} from "@angular/common/http";
+import {environment} from "../../../../environments/environment";
 
 @Injectable({
   providedIn: 'root'
 })
 export class TokensService {
 
-  constructor() {
+  private refreshUrl = environment.apiUrl + "user/token/refresh";
+
+  constructor(private http: HttpClient) {
   }
 
   saveAccessToken(access_token: any) {
@@ -18,13 +22,13 @@ export class TokensService {
 
   getAccessToken() {
 
-      return window.localStorage.getItem("access_token");
+    return window.localStorage.getItem("access_token");
 
   }
 
   getRefreshToken() {
 
-      return window.localStorage.getItem("refresh_token");
+    return window.localStorage.getItem("refresh_token");
 
   }
 
@@ -38,14 +42,22 @@ export class TokensService {
     window.localStorage.removeItem("refresh_token");
   }
 
-  tokenExpired(token: string) {
+  async refreshToken() {
+    let tokens = JSON.parse(await this.http.get(this.refreshUrl, {
+      responseType: "text",
+      headers: {'skipRefreshTokenUrl': "true"}
+    }).toPromise());
+    this.saveAccessToken(tokens.access_token);
+    console.log("REFRESHED")
+  }
 
+  tokenExpired(token: string) {
     if (token == null) {
       return null;
     }
     try {
       const expiry = (JSON.parse(atob(token.split('.')[1]))).exp;
-      return (Math.floor((new Date).getTime() / 1000)) >= expiry;
+      return (Date.now() >= expiry * 1000);
     } catch (exception) {
       return (exception.status)
     }

@@ -14,18 +14,31 @@ export class AuthenticationService {
   }
 
 
-  checkLogin() {
+   checkLogin() {
     let token = this.tokenService.getAccessToken();
 
     if (!token) return false;
-    let payloadEncoded = token.split('.')[1];
-    let payloadDecoded = atob(payloadEncoded);
+    try {
 
-    if (!payloadDecoded) return false;
-    let payload = JSON.parse(payloadDecoded);
-    let expDate = new Date(payload.exp * 1000);
+      let payloadEncoded = token.split('.')[1];
+      let payloadDecoded = atob(payloadEncoded);
 
-    return  expDate > new Date();
+      if (!payloadDecoded) return false;
+      let payload = JSON.parse(payloadDecoded);
+      let expDate = new Date(payload.exp * 1000);
+      let accessIsExpired = !(expDate > new Date());
+      console.log(this.isTokenExpired(this.tokenService.getRefreshToken()))
+      if (accessIsExpired && this.isTokenExpired(this.tokenService.getRefreshToken())) {
+        console.log(this.isTokenExpired(this.tokenService.getRefreshToken() + "        :"));
+        return false;
+      } else {
+        return true;
+      }
+    } catch (e) {
+      console.log("error")
+      return false;
+    }
+
   }
 
   public getUser(token: string): UserModel | null {
@@ -48,12 +61,10 @@ export class AuthenticationService {
 
   isTokenExpired(token: string | null): boolean {
     if (!token || token === "undefined") return true;
-      return false
     try {
-   // @ts-ignore
-    return this.tokenService.tokenExpired(token)
+      // @ts-ignore
+      return this.tokenService.tokenExpired(token)
     } catch (exception) {
-      // this.notificationService.notification$.next({severity: 'error', summary: "error", detail: exception});
       return true;
     }
   }

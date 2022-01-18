@@ -48,6 +48,7 @@ export class AppComponent implements OnInit {
   }
 
 
+
   ngOnInit(): void {
 
     this.logged = this.authenticationService.checkLogin();
@@ -58,6 +59,8 @@ export class AppComponent implements OnInit {
       themePicker.style.setProperty("color", "black")
       themePicker.style.setProperty("font-size", "medium")
     }
+
+
     this.startAnimation()
     let element = document.getElementById("neon-btn")
     if (this.bMobile) {
@@ -67,8 +70,9 @@ export class AppComponent implements OnInit {
 
   }
 
-  checkLogin() {
-    this.logged = !this.authenticationService.isTokenExpired(this.tokenService.getAccessToken());
+   checkLogin() {
+    this.logged =  this.authenticationService.checkLogin();
+    // console.log(this.logged)
     return this.logged;
   }
 

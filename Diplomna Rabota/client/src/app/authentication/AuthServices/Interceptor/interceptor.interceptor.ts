@@ -53,11 +53,9 @@ export class InterceptorInterceptor implements HttpInterceptor {
 
   private async handleRefresh(req: HttpRequest<any>, next: HttpHandler): Promise<HttpEvent<any>> {
     //get new access token from refresh token, since its expired but refresh isn't
-    console.log("dw")
-    var tokens = JSON.parse(await this.http.get(this.refreshUrl, {responseType: "text"}).toPromise());
-    this.tokenService.saveAccessToken(tokens.access_token);
+    this.tokenService.refreshToken();
     this.access_token = this.tokenService.getAccessToken();
-    console.log(this.access_token)
+
     //after getting the new token from the refresh token we continue with the initial request but with the new token
     req = this.modifyRequest(req, this.access_token)
 
@@ -72,6 +70,7 @@ export class InterceptorInterceptor implements HttpInterceptor {
     });
     return req
   }
+
 
   accessTokenInvalid(): Boolean {
     return this.access_token == null || this.tokenService.tokenExpired(this.access_token)
