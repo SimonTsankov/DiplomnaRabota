@@ -1,14 +1,11 @@
 import {Component, ElementRef, OnInit, ViewChild} from '@angular/core';
 import {MatSidenav} from "@angular/material/sidenav";
 import {BreakpointObserver} from "@angular/cdk/layout";
-import {delay} from "rxjs/operators";
-import {NavigationEnd, Router} from "@angular/router";
+import {Router} from "@angular/router";
 import {environment} from "../environments/environment";
 import {MessageService} from "primeng/api";
-import {TokensService} from "./authentication/tokens.service";
-import {AuthenticationService} from "./authentication/authentication.service";
-
-declare let $: any;
+import {AuthenticationService} from "./authentication/AuthServices/authService/authentication.service";
+import {TokensService} from "./authentication/AuthServices/TokenService/tokens.service";
 
 @Component({
   selector: 'app-root',
@@ -39,7 +36,12 @@ export class AppComponent implements OnInit {
   // @ts-ignore
   logged: boolean = this.checkLogin()
 
-  constructor(private authenticationService: AuthenticationService, private tokenService: TokensService, private messageService: MessageService, private elementRef: ElementRef, private router: Router, private observer: BreakpointObserver) {
+  constructor(private authenticationService: AuthenticationService
+    , private tokenService: TokensService
+    , private messageService: MessageService
+    , private elementRef: ElementRef
+    , private router: Router) {
+
     if (this.savedTheme) {
       this.clickTest(this.savedTheme)
     }
@@ -150,7 +152,7 @@ export class AppComponent implements OnInit {
   goToMyProfile() {
     const elementContent = document.getElementById("content");
     // @ts-ignore
-    elementContent.scroll(0,0)
+    elementContent.scroll(0, 0)
     console.log("Scrolled")
     this.router.navigate(['myprofile'])
   }

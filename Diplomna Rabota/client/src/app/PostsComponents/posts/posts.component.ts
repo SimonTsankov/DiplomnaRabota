@@ -1,7 +1,7 @@
 import {Component, OnInit, ViewEncapsulation} from '@angular/core';
-import {Post} from "../models/Post";
+import {Post} from "../../model/Post";
 import {PostsServiceService} from "./posts-service.service";
-import {UPost} from "../models/UPost";
+import {UPost} from "../../model/UPost";
 import {DomSanitizer} from "@angular/platform-browser";
 
 @Component({

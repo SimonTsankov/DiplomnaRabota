@@ -1,9 +1,9 @@
 import {Component, OnInit} from '@angular/core';
 import {FormControl, FormGroup, FormGroupDirective, NgForm, Validators} from '@angular/forms';
 import {ErrorStateMatcher} from '@angular/material/core';
-import {Router, RouterModule} from "@angular/router";
+import {Router} from "@angular/router";
 import {RegisterService} from "./register.service";
-import {User} from "../model/User";
+import {User} from "../../model/User";
 
 
 @Component({

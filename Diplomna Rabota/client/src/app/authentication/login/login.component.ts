@@ -1,10 +1,9 @@
 import {Component, OnInit} from '@angular/core';
 import {FormControl, FormGroup, FormGroupDirective, NgForm, Validators} from '@angular/forms';
 import {ErrorStateMatcher} from '@angular/material/core';
-import {User} from "../model/User";
 import {LoginService} from "./login.service";
 import {Router} from "@angular/router";
-import {AppComponent} from "../app.component";
+import {AppComponent} from "../../app.component";
 
 
 @Component({

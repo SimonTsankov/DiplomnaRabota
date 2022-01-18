@@ -6,14 +6,13 @@ import {
   HttpInterceptor, HttpClient
 } from '@angular/common/http';
 import {EMPTY, from, Observable} from 'rxjs';
-import {environment} from "../../environments/environment";
-import {TokensService} from "./tokens.service";
+import {environment} from "../../../../environments/environment";
+import {TokensService} from "../TokenService/tokens.service";
 import {Router} from "@angular/router";
 
 @Injectable()
 export class InterceptorInterceptor implements HttpInterceptor {
   private refreshUrl = environment.apiUrl + "user/token/refresh";
-  private loginUrl: string = environment.loginUrl;
 
   private access_token: string | null = "";
   private refresh_token: string | null = "";

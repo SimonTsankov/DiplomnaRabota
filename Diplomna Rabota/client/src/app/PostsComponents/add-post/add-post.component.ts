@@ -1,12 +1,12 @@
 import {Component, OnInit} from '@angular/core';
 import {HttpClient} from "@angular/common/http";
 import {AngularEditorConfig} from '@kolkov/angular-editor';
-import {AppComponent} from "../app.component";
+import {AppComponent} from "../../app.component";
 import * as imageConversion from 'image-conversion';
-// @ts-ignore
-import {PostTransportModel} from "../model/PostTransportModel";
 import {Router} from "@angular/router";
 import {PostsServiceService} from "../posts/posts-service.service";
+// @ts-ignore
+import {PostTransportModel} from "../../model/PostTransportModel";
 
 
 @Component({
@@ -43,7 +43,10 @@ export class AddPostComponent implements OnInit {
   };
   values2: string[] | undefined;
 
-  constructor(private appCmp: AppComponent, private http: HttpClient, private router: Router,private postService: PostsServiceService) {
+  constructor(private appCmp: AppComponent
+    , private http: HttpClient
+    , private router: Router
+    , private postService: PostsServiceService) {
 
   }
 
