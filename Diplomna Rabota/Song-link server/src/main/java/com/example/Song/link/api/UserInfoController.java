@@ -42,8 +42,8 @@ public class UserInfoController {
     }
 
     @GetMapping(value = "getUsers")
-    public ResponseEntity<?> getSearchedUsers(Principal principal) {
-        List<User> users = userRepository.findByUsername(principal.getName());
+    public ResponseEntity<?> getSearchedUsers(@RequestParam String searchWord) {
+        List<User> users = userRepository.findByUsernameContains(searchWord);
         for (User user : users) {
             user.setPassword("");
             user.setEmail("");
