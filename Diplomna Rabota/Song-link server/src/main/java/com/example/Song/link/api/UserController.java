@@ -1,14 +1,17 @@
 package com.example.Song.link.api;
 
 import com.example.Song.link.mailModel.EmailConfirmationModel;
+import com.example.Song.link.mailModel.RecipientConfirmation;
 import com.example.Song.link.model.EmailVerification;
 import com.example.Song.link.model.User;
 import com.example.Song.link.model.UserRole;
 import com.example.Song.link.repository.*;
 import com.example.Song.link.security.JwtProvider;
+import com.example.Song.link.service.EmailService;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import freemarker.template.TemplateException;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -21,6 +24,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.concurrent.CompletableFuture;
 
 import static org.springframework.http.HttpHeaders.AUTHORIZATION;
 import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
@@ -51,9 +55,11 @@ public class UserController {
     @Autowired
     private JwtProvider jwtProvider;
 //TODO
-    //    @Autowired
-    //    private EmailService emailService;
+        @Autowired
+        private EmailService emailService;
 
+    @Value("${vwp.email.template.confirmation}")
+    private String emailVerificationTemplate;
 //region Register
 
     @PostMapping(value = "/register")
@@ -67,8 +73,10 @@ public class UserController {
             String hash = jwtProvider.generateEmailVerificationHash();
             saveEmailVerification(hash, user);
 
-            EmailConfirmationModel recepient = getRecipient(hash, user.getEmail(), "Confirm your email at VWP", "bonus text!");
-           //TODO  emailService.sendConfirmationMail(recepient, emailVerificationTemplate);
+            RecipientConfirmation recepient = getRecipient(hash, user.getEmail(), "Confirm your email at Sl", "bonus text!");
+
+            emailService.sendConfirmationMail(recepient, emailVerificationTemplate);
+
 
             return ResponseEntity.ok("user has been created");
         } else {
@@ -76,8 +84,8 @@ public class UserController {
           //  throw new UserAlreadyExists("User with this email already exists!");
         }
     }
-    private EmailConfirmationModel getRecipient(String hash, String email, String subject, String bonusText) {
-        EmailConfirmationModel recipient = new EmailConfirmationModel();
+    private RecipientConfirmation getRecipient(String hash, String email, String subject, String bonusText) {
+        RecipientConfirmation recipient = new RecipientConfirmation();
         recipient.setEmail(email);
         recipient.setHash(hash);
         recipient.setSubject(subject);

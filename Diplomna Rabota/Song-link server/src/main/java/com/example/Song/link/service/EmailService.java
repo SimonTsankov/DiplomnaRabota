@@ -68,8 +68,10 @@ public class EmailService {
     public void sendEmail(Recipient recipient, String template) throws MessagingException, IOException, TemplateException {
         MimeMessage mimeMessage = javaMailSender.createMimeMessage();
         MimeMessageHelper helper = new MimeMessageHelper(mimeMessage);
+
         helper.setSubject(recipient.getSubject());
         helper.setTo(recipient.getEmail());
+
         String emailContent = getEmailContent(recipient, template);
         helper.setText(emailContent, true);
         javaMailSender.send(mimeMessage);
