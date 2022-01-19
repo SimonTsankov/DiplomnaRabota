@@ -17,7 +17,7 @@
       <li class="item item__divider">
         <p class="username">{{user.username}}</p>
         <span class="item__hr-line"></span>
-        <button class="item__button" type="button" (click)="onUserSelect(user)">Follow</button>
+        <button id="{{user.id}}" class="item__button" type="button" (click)="onUserSelect(user)">Follow</button>
       </li>
     </ul>
   </div>

@@ -22,6 +22,7 @@ import org.springframework.web.bind.annotation.*;
 import javax.mail.MessagingException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.transaction.Transactional;
 import java.io.IOException;
 import java.security.Principal;
 import java.util.HashMap;
@@ -136,6 +137,12 @@ public class UserController {
         userFollowRepository.save(userFollow);
 
         return ResponseEntity.ok("Followed user succesfully");
+    }
+    @Transactional
+    @DeleteMapping(value = "/unfollow")
+    public ResponseEntity<?> unfollow(@RequestParam Long id, Principal principal) {
+        userFollowRepository.deleteAllByUserFollowedAndAndUserFollowing(id, userRepository.findByEmail(principal.getName()).getId());
+        return  ResponseEntity.ok("OK");
     }
 
     @GetMapping(value = "/token/refresh")
