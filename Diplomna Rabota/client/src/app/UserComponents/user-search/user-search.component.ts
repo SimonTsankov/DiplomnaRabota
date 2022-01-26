@@ -13,7 +13,7 @@ export class UserSearchComponent implements OnInit {
   users: User[] = [];
   searchWord: any;
   // @ts-ignore
-  checked: true;
+  checked: false;
 
   constructor(private userService: UserService, private appCmp: AppComponent) {
   }
@@ -24,23 +24,27 @@ export class UserSearchComponent implements OnInit {
   }
 
 
-
   refreshUsers() {
-    this.userService.getSearchedUsers(this.searchWord)
-      .subscribe(data => this.users = data)
+    if (!this.checked) {
+      this.userService.getSearchedUsers(this.searchWord)
+        .subscribe(data => this.users = data)
+      console.log("DAA")
+    }else {
+      this.userService.getFollowed(this.searchWord).subscribe(data=>this.users=data)
+    }
   }
 
   async onUserSelect(user: User) {
     const element = document.getElementById(String(user.id))
     if (element) {
-      if (element.textContent=="Follow") {
+      if (element.textContent == "Follow") {
         await this.userService.followUser(user.id);
         this.appCmp.showToast(user.username, "followed", false)
-        element.textContent="Unfollow"
-      }else{
+        element.textContent = "Unfollow"
+      } else {
         await this.userService.unfollow(user.id);
-        element.textContent="Follow"
-        this.appCmp.showToast("Unfollowed "+user.username, "", true)
+        element.textContent = "Follow"
+        this.appCmp.showToast("Unfollowed " + user.username, "", true)
       }
       // await this.userService.followUser(user.id);
       // this.appCmp.showToast(user.username, "followed", false)

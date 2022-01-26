@@ -1,6 +1,5 @@
 package com.example.Song.link.api;
 
-import com.example.Song.link.mailModel.EmailConfirmationModel;
 import com.example.Song.link.mailModel.RecipientConfirmation;
 import com.example.Song.link.model.EmailVerification;
 import com.example.Song.link.model.User;
@@ -10,24 +9,19 @@ import com.example.Song.link.repository.*;
 import com.example.Song.link.security.JwtProvider;
 import com.example.Song.link.service.EmailService;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import freemarker.template.TemplateException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 
-import javax.mail.MessagingException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.transaction.Transactional;
 import java.io.IOException;
 import java.security.Principal;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.concurrent.CompletableFuture;
+import java.util.*;
 
 import static org.springframework.http.HttpHeaders.AUTHORIZATION;
 import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
@@ -138,11 +132,22 @@ public class UserController {
 
         return ResponseEntity.ok("Followed user succesfully");
     }
+
     @Transactional
     @DeleteMapping(value = "/unfollow")
     public ResponseEntity<?> unfollow(@RequestParam Long id, Principal principal) {
         userFollowRepository.deleteAllByUserFollowedAndAndUserFollowing(id, userRepository.findByEmail(principal.getName()).getId());
-        return  ResponseEntity.ok("OK");
+        return ResponseEntity.ok("OK");
+    }
+
+    @GetMapping(value = "/getFollowed")
+    public ResponseEntity<?> getFollowed(Principal principal) {
+        List<UserFollow> follows= userFollowRepository.findByUserFollowing(userRepository.findByEmail(principal.getName()).getId());
+        List<Optional<User>> users = new LinkedList<>();
+        for (UserFollow userFollow : follows) {
+            users.add(userRepository.findById(userFollow.getUserFollowed()));
+        }
+        return ResponseEntity.ok().body(users);
     }
 
     @GetMapping(value = "/token/refresh")

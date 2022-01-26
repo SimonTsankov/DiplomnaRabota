@@ -52,6 +52,16 @@ public class UserInfoController {
         return ResponseEntity.ok().body(users);
     }
 
+    @GetMapping(value = "getUsersForFollow")
+    public ResponseEntity<?> getSearchedUsersForFollow(Principal principal, @RequestParam String searchWord) {
+        List<User> users = userRepository.findByUsernameContains(searchWord);
+        for (User user : users) {
+            user.setPassword("");
+            user.setEmail("");
+        }
+        users.remove(userRepository.findByEmail(principal.getName()));
+        return ResponseEntity.ok().body(users);
+    }
     @RequestMapping(value = "/updateUserInfo", method = {RequestMethod.POST, RequestMethod.PUT})
     public ResponseEntity<?> updateUserInfo(Principal principal, @RequestBody User user) throws CustomException {
         User userTosave = userRepository.findByEmail(principal.getName());
