@@ -59,14 +59,18 @@
 }
 
 .searchBar {
-  margin: auto;
+  margin: 0 auto !important;
   width: 50%;
 }
 
 input {
-  width: 18em;
+  width: 100%;
 }
-
+mat-tab-group{
+  border-radius: 25px;
+  height: 100vh;
+  background-color: var(--content-bckg-color-Back);
+}
 .username {
   max-width: 25%;
   overflow-wrap: break-word;
