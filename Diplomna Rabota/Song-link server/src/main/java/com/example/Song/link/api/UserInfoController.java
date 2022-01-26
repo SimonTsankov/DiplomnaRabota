@@ -2,6 +2,7 @@ package com.example.Song.link.api;
 
 import com.example.Song.link.exception.CustomException;
 import com.example.Song.link.model.User;
+import com.example.Song.link.model.UsernameAndId;
 import com.example.Song.link.repository.PasswordResetRepository;
 import com.example.Song.link.repository.UserRepository;
 import com.example.Song.link.security.JwtProvider;
@@ -54,12 +55,7 @@ public class UserInfoController {
 
     @GetMapping(value = "getUsersForFollow")
     public ResponseEntity<?> getSearchedUsersForFollow(Principal principal, @RequestParam String searchWord) {
-        List<User> users = userRepository.findByUsernameContains(searchWord);
-        for (User user : users) {
-            user.setPassword("");
-            user.setEmail("");
-        }
-        users.remove(userRepository.findByEmail(principal.getName()));
+        List<UsernameAndId> users = userRepository.findNonFollowedUsersSearch(userRepository.findByEmail(principal.getName()).getId(),searchWord);
         return ResponseEntity.ok().body(users);
     }
     @RequestMapping(value = "/updateUserInfo", method = {RequestMethod.POST, RequestMethod.PUT})

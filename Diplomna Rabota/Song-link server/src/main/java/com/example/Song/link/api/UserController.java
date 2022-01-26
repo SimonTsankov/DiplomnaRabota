@@ -1,10 +1,7 @@
 package com.example.Song.link.api;
 
 import com.example.Song.link.mailModel.RecipientConfirmation;
-import com.example.Song.link.model.EmailVerification;
-import com.example.Song.link.model.User;
-import com.example.Song.link.model.UserFollow;
-import com.example.Song.link.model.UserRole;
+import com.example.Song.link.model.*;
 import com.example.Song.link.repository.*;
 import com.example.Song.link.security.JwtProvider;
 import com.example.Song.link.service.EmailService;
@@ -142,11 +139,7 @@ public class UserController {
 
     @GetMapping(value = "/getFollowed")
     public ResponseEntity<?> getFollowed(Principal principal) {
-        List<UserFollow> follows= userFollowRepository.findByUserFollowing(userRepository.findByEmail(principal.getName()).getId());
-        List<Optional<User>> users = new LinkedList<>();
-        for (UserFollow userFollow : follows) {
-            users.add(userRepository.findById(userFollow.getUserFollowed()));
-        }
+        List<UsernameAndId> users= userRepository.findFollowedUsers(userRepository.findByEmail(principal.getName()).getId());
         return ResponseEntity.ok().body(users);
     }
 

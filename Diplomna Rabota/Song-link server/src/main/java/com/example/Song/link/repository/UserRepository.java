@@ -1,6 +1,7 @@
 package com.example.Song.link.repository;
 
 import com.example.Song.link.model.User;
+import com.example.Song.link.model.UsernameAndId;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
@@ -12,7 +13,12 @@ import java.util.List;
 public interface UserRepository extends JpaRepository<User, Long> {
     User findByEmail(String email);
     List<User> findByUsernameContains(String username);
-    @Query(value = "select * from users u where id in(select u2.user_followed from userfollow u2 where u2.user_following = :userId);",
+    @Query(value = "select  u.username, u.id from users u where id in(select u2.user_followed from userfollow u2 where u2.user_following = :userId);",
     nativeQuery = true)
-    List<User> findFollowedUsers(@Param("userId")Long userId);
+    List<UsernameAndId> findFollowedUsers(@Param("userId")Long userId);
+
+    @Query(value = "select u.username, u.id from users u where id not in(select u2.user_followed from userfollow u2 where u2.user_following = :userId )" +
+            " and u.username like CONCAT('%',:search,'%');",
+    nativeQuery = true)
+    List<UsernameAndId> findNonFollowedUsersSearch(@Param("userId")Long userId, @Param("search")String search);
 }
