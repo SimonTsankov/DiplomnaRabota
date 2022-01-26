@@ -11,6 +11,7 @@ import {AppComponent} from "../../app.component";
 })
 export class UserSearchComponent implements OnInit {
   users: User[] = [];
+  followedUsers: User[] = [];
   searchWord: any;
   // @ts-ignore
   checked: false;
@@ -20,18 +21,16 @@ export class UserSearchComponent implements OnInit {
 
   ngOnInit(): void {
     this.refreshUsers()
-    console.log(this.users.length)
   }
 
 
   refreshUsers() {
-    if (!this.checked) {
       this.userService.getSearchedUsers(this.searchWord)
         .subscribe(data => this.users = data)
-      console.log("DAA")
-    }else {
-      this.userService.getFollowed(this.searchWord).subscribe(data=>this.users=data)
-    }
+
+      this.userService.getFollowed(this.searchWord).subscribe(
+          data=>this.followedUsers=data)
+
   }
 
   async onUserSelect(user: User) {

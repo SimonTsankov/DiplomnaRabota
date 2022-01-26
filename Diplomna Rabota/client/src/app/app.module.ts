@@ -38,6 +38,8 @@ import {RegisterComponent} from "./authentication/register/register.component";
 import {RippleModule} from "primeng/ripple";
 import {UserSearchComponent} from "./UserComponents/user-search/user-search.component";
 import {ToggleButtonModule} from "primeng/togglebutton";
+import {TabViewModule} from "primeng/tabview";
+import {MatTabsModule} from "@angular/material/tabs";
 
 
 @NgModule({
@@ -52,31 +54,31 @@ import {ToggleButtonModule} from "primeng/togglebutton";
     MyprofileComponent,
     UserSearchComponent
   ],
-    imports: [
-        HttpClientModule,
-        FormsModule,
-        BrowserModule,
-        ButtonModule,
-        TableModule,
-        AngularEditorModule,
-        HttpClientModule,
-        BrowserModule,
-        RouterModule,
-        BrowserAnimationsModule,
-        MatToolbarModule,
-        MatSidenavModule,
-        MatButtonModule,
-        MatIconModule,
-        MatDividerModule,
-        AppRoutingModule,
-        ReactiveFormsModule,
-        MatFormFieldModule,
-        MatInputModule,
-        MessagesModule,
-        FormsModule,
-        EditorModule,
-        AutoCompleteModule, ChipsModule, SelectButtonModule, MatButtonToggleModule, SplitterModule, OverlayPanelModule, DragDropModule, ToastModule, MatCardModule, RippleModule, ToggleButtonModule,
-    ],
+  imports: [
+    HttpClientModule,
+    FormsModule,
+    BrowserModule,
+    ButtonModule,
+    TableModule,
+    AngularEditorModule,
+    HttpClientModule,
+    BrowserModule,
+    RouterModule,
+    BrowserAnimationsModule,
+    MatToolbarModule,
+    MatSidenavModule,
+    MatButtonModule,
+    MatIconModule,
+    MatDividerModule,
+    AppRoutingModule,
+    ReactiveFormsModule,
+    MatFormFieldModule,
+    MatInputModule,
+    MessagesModule,
+    FormsModule,
+    EditorModule,
+    AutoCompleteModule, ChipsModule, SelectButtonModule, MatButtonToggleModule, SplitterModule, OverlayPanelModule, DragDropModule, ToastModule, MatCardModule, RippleModule, ToggleButtonModule, TabViewModule, MatTabsModule,
+  ],
   providers: [
     MessageService,
     {provide: HTTP_INTERCEPTORS, useClass: InterceptorInterceptor, multi: true}
