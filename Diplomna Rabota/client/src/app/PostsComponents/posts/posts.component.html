@@ -8,7 +8,7 @@
         <mat-card-title>
 
           {{post.name}}
-          <button *ngIf="isAdmin" style="position: absolute; right: 1em" pButton pRipple type="button" icon="pi pi-trash"
+          <button (click)="delPost(post.id)" *ngIf="isAdmin" style="position: absolute; right: 1em" pButton pRipple type="button" icon="pi pi-trash"
                   class="p-button-rounded p-button-danger deleteBtn"></button>
 
         </mat-card-title>

@@ -9,6 +9,7 @@ import {User} from "../../model/User";
 })
 export class PostsServiceService {
   postSaveUrl = environment.apiUrl+"post/save"
+  deletePostUrl = environment.apiUrl+"post/delete"
   findAllUrl = environment.apiUrl+"post/findAll"
   findByUser = environment.apiUrl+"post/findByUser"
   constructor(private http: HttpClient) { }
@@ -21,5 +22,8 @@ export class PostsServiceService {
   }
   getUsersPosts(user: User) {
     return this.http.get<Post[]>(this.findByUser);
+  }
+ async deletePost(id: number){
+    return this.http.delete(this.deletePostUrl+"?id="+id,{responseType: "text"}).toPromise()
   }
 }

@@ -15,7 +15,7 @@ mat-card {
   margin-bottom: 2em;
 }
 .deleteBtn{
-  /*float:right;*/
+  position: absolute; right: 1em
 }
 .action-item{
   color: var(--main-color-two);

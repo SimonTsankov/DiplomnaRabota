@@ -4,6 +4,7 @@ import {PostsServiceService} from "./posts-service.service";
 import {UPost} from "../../model/UPost";
 import {DomSanitizer} from "@angular/platform-browser";
 import {AuthenticationService} from "../../authentication/AuthServices/authService/authentication.service";
+import {AppComponent} from "../../app.component";
 
 @Component({
   selector: 'app-posts',
@@ -15,7 +16,7 @@ export class PostsComponent implements OnInit {
   allposts: Post = {} as Post;
 
   allPosts: UPost[] = [];
-  constructor(private authService: AuthenticationService,private sanitizer: DomSanitizer,private _sanitizer: DomSanitizer, private postsService: PostsServiceService) {
+  constructor(private appComponent: AppComponent, private authService: AuthenticationService,private sanitizer: DomSanitizer,private _sanitizer: DomSanitizer, private postsService: PostsServiceService) {
   }
 
   ngOnInit(): void {
@@ -39,5 +40,12 @@ export class PostsComponent implements OnInit {
 
   getHtml(content: any){
     return this.sanitizer.bypassSecurityTrustHtml(content);
+  }
+
+  async delPost(id: any) {
+    console.log(id)
+    await this.postsService.deletePost(id).then(result => this.appComponent.showToast("Post was deleted succesfully", "", false));
+
+    this.refreshPosts()
   }
 }

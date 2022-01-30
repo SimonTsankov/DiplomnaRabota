@@ -23,18 +23,26 @@ export class MyprofileComponent implements OnInit {
 
   ngOnInit(): void {
     this.userService.getCurrentUser().subscribe(user => this.user = user);
-    window.scroll(0,0)
+    window.scroll(0, 0)
     console.log("dwddw")
   }
+
   async refreshPosts() {
     this.postsService.getUsersPosts(this.user).subscribe(data => this.userPosts = data)
   }
+
   sendPasswordReset() {
 
   }
 
   updateInfo() {
-    window.scroll(0,0)
+    window.scroll(0, 0)
     this.userService.updateUserInfo(this.user)
+  }
+
+  async delPost(id: any) {
+    console.log(id)
+    await this.postsService.deletePost(id).then(result => this.appComponent.showToast("Post was deleted succesfully", "", false));
+    this.refreshPosts()
   }
 }
