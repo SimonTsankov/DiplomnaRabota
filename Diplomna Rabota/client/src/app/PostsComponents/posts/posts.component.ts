@@ -3,6 +3,7 @@ import {Post} from "../../model/Post";
 import {PostsServiceService} from "./posts-service.service";
 import {UPost} from "../../model/UPost";
 import {DomSanitizer} from "@angular/platform-browser";
+import {AuthenticationService} from "../../authentication/AuthServices/authService/authentication.service";
 
 @Component({
   selector: 'app-posts',
@@ -14,7 +15,7 @@ export class PostsComponent implements OnInit {
   allposts: Post = {} as Post;
 
   allPosts: UPost[] = [];
-  constructor(private sanitizer: DomSanitizer,private _sanitizer: DomSanitizer, private postsService: PostsServiceService) {
+  constructor(private authService: AuthenticationService,private sanitizer: DomSanitizer,private _sanitizer: DomSanitizer, private postsService: PostsServiceService) {
   }
 
   ngOnInit(): void {
@@ -26,6 +27,8 @@ export class PostsComponent implements OnInit {
   }
 
   image: any
+  isAdmin=this.authService.isAdmin();
+  username = this.authService.getUsername();
 
   getImagePath(picByte:any) {
     console.log(this._sanitizer.bypassSecurityTrustResourceUrl('data:image/png;base64,'

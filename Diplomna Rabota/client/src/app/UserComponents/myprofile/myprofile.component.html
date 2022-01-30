@@ -20,7 +20,13 @@
 
           <mat-card>
             <mat-card-header>
-              <mat-card-title>{{post.name}}</mat-card-title>
+              <mat-card-title>
+
+                {{post.name}}
+                <button style="position: absolute; right: 1em" pButton pRipple type="button" icon="pi pi-trash"
+                        class="p-button-rounded p-button-danger deleteBtn"></button>
+
+              </mat-card-title>
               <mat-card-subtitle><div style=" width: 100%" [innerHTML]="post.content | safeHtml"></div></mat-card-subtitle>
             </mat-card-header>
             <img mat-card-image src="{{'data:image/jpg;base64,' + post.picByte.toString()}}">

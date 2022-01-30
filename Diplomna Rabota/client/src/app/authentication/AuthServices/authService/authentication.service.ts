@@ -56,6 +56,29 @@ export class AuthenticationService {
       return null
     }
   }
+  getUsername(){
+    let jwt= this.tokenService.getAccessToken();
+    if(jwt==null){
+      return "-"
+    }
+    let jwtData = jwt.split('.')[1]
+    let decodedJwtJsonData = window.atob(jwtData)
+    let decodedJwtData = JSON.parse(decodedJwtJsonData)
+    console.log(decodedJwtData.sub)
+    return decodedJwtData.sub.toString()
+  }
+  isAdmin(){
+    let jwt= this.tokenService.getAccessToken();
+    if(jwt==null){
+      return false
+    }
+    let jwtData = jwt.split('.')[1]
+    let decodedJwtJsonData = window.atob(jwtData)
+    let decodedJwtData = JSON.parse(decodedJwtJsonData)
+    let isAdmin = decodedJwtData.roles
+
+    return isAdmin.includes('Admin');
+  }
 
   isTokenExpired(token: string | null): boolean {
     if (!token || token === "undefined") return true;

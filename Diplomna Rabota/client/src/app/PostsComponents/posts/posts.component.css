@@ -8,11 +8,15 @@
 mat-card-title {
   color: var(--main-color-two)
 }
-
+.mat-card-header-text{
+  width: 100%;
+}
 mat-card {
   margin-bottom: 2em;
 }
-
+.deleteBtn{
+  /*float:right;*/
+}
 .action-item{
   color: var(--main-color-two);
   margin-inline: auto;

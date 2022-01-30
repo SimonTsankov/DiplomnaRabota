@@ -2,23 +2,31 @@
 <br>
 <div *ngIf="allPosts.length>0">
   <h1>Latest posts and news for you!</h1>
-<div  class="main-containerPosts card row" *ngFor="let post of allPosts">
-  <mat-card>
-    <mat-card-header>
-      <mat-card-title>{{post.name}}</mat-card-title>
-      <mat-card-subtitle><div style=" width: 100%" [innerHTML]="post.content | safeHtml"></div></mat-card-subtitle>
-    </mat-card-header>
-    <img  mat-card-image src="{{'data:image/jpg;base64,' + post.picByte.toString()}}" alt="Can't Display image">
-    <mat-card-content>
-      Posted by: add name later
-    </mat-card-content>
-    <mat-card-actions style="display: flex; flex-grow: 3">
-<!--      TODO: Make buttons work also hover animations-->
-      <mat-icon class="action-item">share</mat-icon>
-      <mat-icon class="action-item" >favorite_border</mat-icon>
-      <mat-icon class="action-item" > save</mat-icon>
-    </mat-card-actions>
-  </mat-card>
+  <div class="main-containerPosts card row" *ngFor="let post of allPosts">
+    <mat-card>
+      <mat-card-header style="width: 100%;">
+        <mat-card-title>
 
-</div>
+          {{post.name}}
+          <button *ngIf="isAdmin" style="position: absolute; right: 1em" pButton pRipple type="button" icon="pi pi-trash"
+                  class="p-button-rounded p-button-danger deleteBtn"></button>
+
+        </mat-card-title>
+        <mat-card-subtitle style="padding: 1em">
+          <div style=" width: 100%" [innerHTML]="post.content | safeHtml"></div>
+        </mat-card-subtitle>
+      </mat-card-header>
+      <img mat-card-image src="{{'data:image/jpg;base64,' + post.picByte.toString()}}" alt="Can't Display image">
+      <mat-card-content>
+        Posted by: {{username}}
+      </mat-card-content>
+      <mat-card-actions style="display: flex; flex-grow: 3">
+        <!--      TODO: Make buttons work also hover animations-->
+        <mat-icon class="action-item">share</mat-icon>
+        <mat-icon class="action-item">favorite_border</mat-icon>
+        <mat-icon class="action-item"> save</mat-icon>
+      </mat-card-actions>
+    </mat-card>
+
+  </div>
 </div>
