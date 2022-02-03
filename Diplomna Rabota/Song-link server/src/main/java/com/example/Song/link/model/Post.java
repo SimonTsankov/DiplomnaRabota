@@ -5,6 +5,8 @@ import org.hibernate.annotations.Type;
 import javax.persistence.*;
 import java.awt.*;
 import java.io.File;
+import java.time.LocalDateTime;
+
 @Entity
 @Table
 public class Post {
@@ -27,6 +29,8 @@ public class Post {
     @JoinColumn(name = "user_id", referencedColumnName = "id")
     private User user;
 
+    @Column(name="datecreated", columnDefinition = "TIMESTAMP DEFAULT CURRENT_TIMESTAMP", insertable = false)
+    private LocalDateTime dateCreated;
     public long getId() {
         return id;
     }

@@ -20,5 +20,6 @@ public interface UserRepository extends JpaRepository<User, Long> {
     @Query(value = "select u.username, u.id from users u where id not in(select u2.user_followed from userfollow u2 where u2.user_following = :userId )" +
             " and u.username like CONCAT('%',:search,'%');",
     nativeQuery = true)
+
     List<UsernameAndId> findNonFollowedUsersSearch(@Param("userId")Long userId, @Param("search")String search);
 }

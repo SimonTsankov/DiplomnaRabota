@@ -18,7 +18,7 @@
       </mat-card-header>
       <img mat-card-image src="{{'data:image/jpg;base64,' + post.picByte.toString()}}" alt="Can't Display image">
       <mat-card-content>
-        Posted by: {{username}}
+        Posted by: {{post.user.username}}
       </mat-card-content>
       <mat-card-actions style="display: flex; flex-grow: 3">
         <!--      TODO: Make buttons work also hover animations-->

@@ -40,6 +40,7 @@ import {UserSearchComponent} from "./UserComponents/user-search/user-search.comp
 import {ToggleButtonModule} from "primeng/togglebutton";
 import {TabViewModule} from "primeng/tabview";
 import {MatTabsModule} from "@angular/material/tabs";
+import { NotificationComponent } from './UserComponents/Notification/notification/notification.component';
 
 
 @NgModule({
@@ -52,7 +53,8 @@ import {MatTabsModule} from "@angular/material/tabs";
     PostsComponent,
     SafeHtmlPipe,
     MyprofileComponent,
-    UserSearchComponent
+    UserSearchComponent,
+    NotificationComponent
   ],
   imports: [
     HttpClientModule,
