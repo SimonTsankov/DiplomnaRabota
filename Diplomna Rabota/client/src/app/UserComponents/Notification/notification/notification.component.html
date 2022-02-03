@@ -1,1 +1,13 @@
-<p>notification works!</p>
+<div style="padding-bottom: 2em" *ngFor="let notification of notifications">
+  <div class="main-container" [ngStyle]="{'background-color':notification.seen? '#d1d0cd':'transparent'}">
+    <img align="left" [src]="notification.song.imgUrl">
+    <div class="grid-container">
+      <div>
+        <p><strong>{{notification.title}}</strong></p>
+        <label class="msgLabel">{{notification.message}}</label>
+      </div>
+      <button *ngIf="!notification.seen" (click)="read(notification.id)" class="readBtn">Mark as read</button>
+      <button mat-button class="colorFulButton">Add to playlist</button>
+    </div>
+  </div>
+</div>

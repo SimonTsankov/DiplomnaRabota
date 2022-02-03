@@ -19,6 +19,8 @@ public class Song {
     @Column
     private String imgUrl;
 
+    @Column
+
     public long getId() {
         return id;
     }

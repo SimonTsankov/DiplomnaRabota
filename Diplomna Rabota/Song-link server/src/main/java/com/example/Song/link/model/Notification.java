@@ -1,5 +1,7 @@
 package com.example.Song.link.model;
 
+import org.hibernate.annotations.CreationTimestamp;
+
 import javax.persistence.*;
 import java.time.LocalDateTime;
 
@@ -24,9 +26,10 @@ public class Notification {
     @OneToOne
     @JoinColumn(name="user_id")
     private User user;
-    @Column
+    @Column(nullable = false)
     private boolean seen;
 
+    @CreationTimestamp
     @Column(name="datecreated", columnDefinition = "TIMESTAMP DEFAULT CURRENT_TIMESTAMP", insertable = false)
     private LocalDateTime dateCreated;
 

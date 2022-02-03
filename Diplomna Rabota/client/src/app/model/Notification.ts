@@ -1,11 +1,10 @@
 import {User} from "./User";
+import {Song} from "./Song";
 
 export interface Notification {
   id: number;
-  userFrom: User;
-  userTo: User
-  content: string;
   title: string;
-  link: string;
+  message: string;
   seen:boolean
+  song: Song;
 }

@@ -1,0 +1,53 @@
+:host {
+  width: 100%;
+}
+
+img {
+  max-height: 6em;
+  border-radius: 25px 0px 25px 0px;
+}
+
+.main-container {
+  position: relative;
+  height: 6em;
+  border-radius: 25px;
+}
+
+p {
+
+}
+
+.main-container:hover,
+.main-container:focus {
+  background-color: #c9eaea !important;
+}
+
+
+.msgLabel{
+  word-wrap:break-word;
+}
+
+.grid-container {
+  display: grid;
+  grid-template-columns: 1.5fr 1fr;
+  grid-gap: 0px;
+}
+.readBtn{
+  position: absolute;
+  right: 5px;
+  top:5px;
+  background: transparent;
+  border: none;
+}
+.readBtn:hover{
+  background: #c8cacd;
+  border-radius: 15px;
+}
+.colorFulButton {
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  font-size: small;
+  border-radius: 20px;
+  background-color: rgb(98, 243, 105);
+}

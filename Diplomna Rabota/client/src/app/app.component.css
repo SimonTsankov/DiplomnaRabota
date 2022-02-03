@@ -13,6 +13,7 @@
   --content-bckg-color: #f1fffc;
   --content-bckg-color-Back: #ccfff9;
 }
+
 .toolbar {
   color: white;
   height: 13%;
@@ -22,6 +23,7 @@
     var(--main-color-two) 130%
   );
 }
+
 mat-sidenav {
   margin: 16px;
   width: 225px;
@@ -117,7 +119,6 @@ mat-sidenav-container {
 }
 
 
-
 .loginBtn {
   background-color: var(--LogRegColor);
   color: white;
@@ -154,7 +155,7 @@ mat-sidenav-container {
   margin-top: 5px
 }
 
-.fixedThemeMenu {
+.fixedTheme- {
 }
 
 .mat-button-toggle-checked {
@@ -171,9 +172,11 @@ mat-sidenav-container {
   background-color: var(--main-color-two);
 
 }
-::ng-deep.p-button-rounded{
-  border:none;
+
+::ng-deep.p-button-rounded {
+  border: none;
 }
+
 .example-box {
   width: 0em;
   height: 0em;
@@ -189,5 +192,6 @@ mat-sidenav-container {
 
 
 .notificationsContainer {
-padding: 1em;
+  padding: 1em;
+  width: 25em;
 }

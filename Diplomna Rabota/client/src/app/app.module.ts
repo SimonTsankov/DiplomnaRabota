@@ -41,6 +41,10 @@ import {ToggleButtonModule} from "primeng/togglebutton";
 import {TabViewModule} from "primeng/tabview";
 import {MatTabsModule} from "@angular/material/tabs";
 import { NotificationComponent } from './UserComponents/Notification/notification/notification.component';
+import {MatMenuModule} from "@angular/material/menu";
+import {MenubarModule} from "primeng/menubar";
+import {MenuModule} from "primeng/menu";
+import {DropdownModule} from "primeng/dropdown";
 
 
 @NgModule({
@@ -79,7 +83,7 @@ import { NotificationComponent } from './UserComponents/Notification/notificatio
     MessagesModule,
     FormsModule,
     EditorModule,
-    AutoCompleteModule, ChipsModule, SelectButtonModule, MatButtonToggleModule, SplitterModule, OverlayPanelModule, DragDropModule, ToastModule, MatCardModule, RippleModule, ToggleButtonModule, TabViewModule, MatTabsModule,
+    AutoCompleteModule, ChipsModule, SelectButtonModule, MatButtonToggleModule, SplitterModule, OverlayPanelModule, DragDropModule, ToastModule, MatCardModule, RippleModule, ToggleButtonModule, TabViewModule, MatTabsModule, MatMenuModule, MenubarModule, MenuModule, DropdownModule,
   ],
   providers: [
     MessageService,
