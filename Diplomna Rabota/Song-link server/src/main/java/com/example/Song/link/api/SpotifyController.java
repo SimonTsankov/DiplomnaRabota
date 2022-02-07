@@ -2,6 +2,8 @@ package com.example.Song.link.api;
 
 import com.example.Song.link.model.Post;
 import com.example.Song.link.model.Song;
+import com.example.Song.link.model.User;
+import com.example.Song.link.repository.UserRepository;
 import com.example.Song.link.service.SpotifyService;
 import org.apache.hc.core5.http.ParseException;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,6 +20,7 @@ import se.michaelthelin.spotify.requests.data.search.simplified.SearchTracksRequ
 
 import javax.annotation.PostConstruct;
 import java.io.IOException;
+import java.security.Principal;
 import java.util.Arrays;
 import java.util.LinkedList;
 import java.util.List;
@@ -26,6 +29,8 @@ import java.util.List;
 @RestController
 @RequestMapping("/api/spotify")
 public class SpotifyController {
+    @Autowired
+    UserRepository userRepository;
 
     @Autowired
     SpotifyService spotifyService;
@@ -38,6 +43,13 @@ public class SpotifyController {
     @GetMapping("/getReddirectUrl")
     public ResponseEntity<?> getReddirectUrl() throws IOException, ParseException, SpotifyWebApiException {
         return  ResponseEntity.ok().body(spotifyService.getRedirectUrl());
+    }
+
+    @PostMapping("/saveRefreshToken")
+    public ResponseEntity<?> saveRefreshToken(@RequestParam String code, Principal principal) throws IOException, ParseException, SpotifyWebApiException {
+        User user = userRepository.findByEmail(principal.getName());
+        spotifyService.saveTokens(code, user);
+        return ResponseEntity.ok("Logged in to spotify successfully!");
     }
 
 }

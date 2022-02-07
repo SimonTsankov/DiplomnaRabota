@@ -1,14 +1,19 @@
 package com.example.Song.link.service;
 
 import com.example.Song.link.model.Song;
+import com.example.Song.link.model.User;
+import com.example.Song.link.repository.UserRepository;
 import org.apache.hc.core5.http.ParseException;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import se.michaelthelin.spotify.SpotifyApi;
 import se.michaelthelin.spotify.SpotifyHttpManager;
 import se.michaelthelin.spotify.exceptions.SpotifyWebApiException;
+import se.michaelthelin.spotify.model_objects.credentials.AuthorizationCodeCredentials;
 import se.michaelthelin.spotify.model_objects.credentials.ClientCredentials;
 import se.michaelthelin.spotify.model_objects.specification.Paging;
 import se.michaelthelin.spotify.model_objects.specification.Track;
+import se.michaelthelin.spotify.requests.authorization.authorization_code.AuthorizationCodeRequest;
 import se.michaelthelin.spotify.requests.authorization.authorization_code.AuthorizationCodeUriRequest;
 import se.michaelthelin.spotify.requests.authorization.client_credentials.ClientCredentialsRequest;
 import se.michaelthelin.spotify.requests.data.search.simplified.SearchTracksRequest;
@@ -19,6 +24,9 @@ import java.util.LinkedList;
 
 @Service
 public class SpotifyService {
+    @Autowired
+    UserRepository userRepository;
+
     private static final URI redirectUri = SpotifyHttpManager.makeUri("http://localhost:4200/spotify-redirect");
 
     public SpotifyApi setUpSpotApi() throws IOException, ParseException, SpotifyWebApiException {
@@ -34,6 +42,18 @@ public class SpotifyService {
 
         return spotifyApi;
     }
+
+    public void saveTokens(String code, User user) throws IOException, ParseException, SpotifyWebApiException {
+        SpotifyApi spotifyApi = setUpSpotApi();
+        AuthorizationCodeRequest authorizationCodeRequest = spotifyApi.authorizationCode(code)
+                .build();
+        final AuthorizationCodeCredentials authorizationCodeCredentials = authorizationCodeRequest.execute();
+        user.setSpotifyAccessToken(authorizationCodeCredentials.getAccessToken());
+        user.setSpotifyRefreshToken(authorizationCodeCredentials.getRefreshToken());
+
+        userRepository.save(user);
+    }
+
     public String getRedirectUrl() throws IOException, ParseException, SpotifyWebApiException {
         SpotifyApi spotifyApi = setUpSpotApi();
         AuthorizationCodeUriRequest authorizationCodeUriRequest = spotifyApi.authorizationCodeUri()
@@ -42,6 +62,7 @@ public class SpotifyService {
 
         return authorizationCodeUriRequest.execute().toString();
     }
+
     public LinkedList<Song> searchforTracks(String searchWord) throws IOException, ParseException, SpotifyWebApiException {
 
         SpotifyApi spotifyApi = setUpSpotApi();
@@ -63,6 +84,6 @@ public class SpotifyService {
             System.out.println("Error: " + e.getMessage());
             throw e;
         }
-        }
     }
+}
 
