@@ -22,3 +22,17 @@ mat-card {
   margin-inline: auto;
 }
 
+
+.fixedbutton {
+  position: fixed;
+  bottom: 25px;
+  right: 25px;
+  width: 10em;
+  height: 3em;
+}
+
+.publish_button {
+  background-color: #06ff12;
+  color: black;
+  border: none
+}

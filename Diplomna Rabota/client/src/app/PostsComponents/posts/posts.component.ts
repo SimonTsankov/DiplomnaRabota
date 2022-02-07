@@ -5,6 +5,7 @@ import {UPost} from "../../model/UPost";
 import {DomSanitizer} from "@angular/platform-browser";
 import {AuthenticationService} from "../../authentication/AuthServices/authService/authentication.service";
 import {AppComponent} from "../../app.component";
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-posts',
@@ -16,7 +17,13 @@ export class PostsComponent implements OnInit {
   allposts: Post = {} as Post;
 
   allPosts: UPost[] = [];
-  constructor(private appComponent: AppComponent, private authService: AuthenticationService,private sanitizer: DomSanitizer,private _sanitizer: DomSanitizer, private postsService: PostsServiceService) {
+
+  constructor(private appComponent: AppComponent
+    , private authService: AuthenticationService
+    , private sanitizer: DomSanitizer
+    , private _sanitizer: DomSanitizer
+    , private postsService: PostsServiceService
+    , private router: Router) {
   }
 
   ngOnInit(): void {
@@ -28,17 +35,17 @@ export class PostsComponent implements OnInit {
   }
 
   image: any
-  isAdmin=this.authService.isAdmin();
+  isAdmin = this.authService.isAdmin();
   username = this.authService.getUsername();
 
-  getImagePath(picByte:any) {
+  getImagePath(picByte: any) {
     console.log(this._sanitizer.bypassSecurityTrustResourceUrl('data:image/png;base64,'
       + picByte.base64string))
-    return  this._sanitizer.bypassSecurityTrustResourceUrl('data:image/png;base64,'
+    return this._sanitizer.bypassSecurityTrustResourceUrl('data:image/png;base64,'
       + picByte.base64string);
   }
 
-  getHtml(content: any){
+  getHtml(content: any) {
     return this.sanitizer.bypassSecurityTrustHtml(content);
   }
 
@@ -47,5 +54,9 @@ export class PostsComponent implements OnInit {
     await this.postsService.deletePost(id).then(result => this.appComponent.showToast("Post was deleted succesfully", "", false));
 
     this.refreshPosts()
+  }
+
+  goToCreatePost() {
+    this.router.navigate(['addpost'])
   }
 }

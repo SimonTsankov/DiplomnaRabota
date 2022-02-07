@@ -45,6 +45,7 @@ import {MatMenuModule} from "@angular/material/menu";
 import {MenubarModule} from "primeng/menubar";
 import {MenuModule} from "primeng/menu";
 import {DropdownModule} from "primeng/dropdown";
+import { SpotifyRedirectComponent } from './Spotify/spotify-redirect/spotify-redirect.component';
 
 
 @NgModule({
@@ -58,7 +59,8 @@ import {DropdownModule} from "primeng/dropdown";
     SafeHtmlPipe,
     MyprofileComponent,
     UserSearchComponent,
-    NotificationComponent
+    NotificationComponent,
+    SpotifyRedirectComponent
   ],
   imports: [
     HttpClientModule,

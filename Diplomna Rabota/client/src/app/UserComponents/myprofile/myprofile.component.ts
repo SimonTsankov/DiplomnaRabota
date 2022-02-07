@@ -5,6 +5,7 @@ import {Router} from "@angular/router";
 import {UserService} from "../UserService/user.service";
 import {PostsServiceService} from "../../PostsComponents/posts/posts-service.service";
 import {UPost} from "../../model/UPost";
+import {SpotifyService} from "../../Spotify/SpotifyService/spotify.service";
 
 
 @Component({
@@ -16,7 +17,10 @@ export class MyprofileComponent implements OnInit {
   user: User = {} as User;
   userPosts: UPost[] = [];
 
-  constructor(private postsService: PostsServiceService, private router: Router, private userService: UserService, private appComponent: AppComponent) {
+  constructor(private postsService: PostsServiceService,
+              private router: Router, private userService: UserService,
+              private appComponent: AppComponent,
+              private spotifyService: SpotifyService) {
     this.refreshPosts()
 
   }
@@ -44,5 +48,9 @@ export class MyprofileComponent implements OnInit {
     console.log(id)
     await this.postsService.deletePost(id).then(result => this.appComponent.showToast("Post was deleted succesfully", "", false));
     this.refreshPosts()
+  }
+
+  async reddirectToSpotifyLogin() {
+    window.open(await this.spotifyService.getReddirectUrl(), "_blank")
   }
 }

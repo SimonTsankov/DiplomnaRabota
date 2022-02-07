@@ -25,6 +25,28 @@ public class User {
     @Column(name="datecreated", columnDefinition = "TIMESTAMP DEFAULT CURRENT_TIMESTAMP", insertable = false)
     private LocalDateTime dateCreated;
 
+    @Column(name="spotifyaccesstoken")
+    private String spotifyAccessToken;
+
+    @Column(name="spotifyrefreshtoken")
+    private String spotifyRefreshToken;
+
+    public String getSpotifyAccessToken() {
+        return spotifyAccessToken;
+    }
+
+    public void setSpotifyAccessToken(String spotifyAccessToken) {
+        this.spotifyAccessToken = spotifyAccessToken;
+    }
+
+    public String getSpotifyRefreshToken() {
+        return spotifyRefreshToken;
+    }
+
+    public void setSpotifyRefreshToken(String spotifyRefreshToken) {
+        this.spotifyRefreshToken = spotifyRefreshToken;
+    }
+
     public long getId() {
         return id;
     }

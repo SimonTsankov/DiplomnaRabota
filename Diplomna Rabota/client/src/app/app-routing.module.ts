@@ -6,6 +6,7 @@ import {AddPostComponent} from "./PostsComponents/add-post/add-post.component";
 import {PostsComponent} from "./PostsComponents/posts/posts.component";
 import {MyprofileComponent} from "./UserComponents/myprofile/myprofile.component";
 import {UserSearchComponent} from "./UserComponents/user-search/user-search.component";
+import {SpotifyRedirectComponent} from "./Spotify/spotify-redirect/spotify-redirect.component";
 
 const routes: Routes = [
   { path: '', redirectTo: '/posts', pathMatch: 'full' },
@@ -14,7 +15,8 @@ const routes: Routes = [
   {path: 'addpost', component: AddPostComponent},
   {path: 'posts', component: PostsComponent},
   {path: 'user-search', component: UserSearchComponent},
-  {path: 'myprofile', component: MyprofileComponent}
+  {path: 'myprofile', component: MyprofileComponent},
+  {path: 'spotify-redirect', component: SpotifyRedirectComponent},
 ];
 
 @NgModule({
