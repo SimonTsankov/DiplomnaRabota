@@ -34,6 +34,7 @@ export class UserSearchComponent implements OnInit {
   }
 
   async onUserSelect(user: User) {
+
     const element = document.getElementById(String(user.id))
     if (element) {
       if (element.textContent == "Follow") {
@@ -45,6 +46,8 @@ export class UserSearchComponent implements OnInit {
         element.textContent = "Follow"
         this.appCmp.showToast("Unfollowed " + user.username, "", true)
       }
+      this.userService.getFollowed(this.searchWord).subscribe(
+        data=>this.followedUsers=data)
       // await this.userService.followUser(user.id);
       // this.appCmp.showToast(user.username, "followed", false)
       // this.users.splice(this.users.indexOf(user),1);

@@ -10,7 +10,8 @@ export const environment = {
     "user/register",
     "user/send-password-reset",
     "user/reset-password-request",
-    "post/findAll"
+    "post/findAll",
+    "spotify/getReddirectUrl"
   ],
   production: false,
   redTheme: [
@@ -49,8 +50,8 @@ export const environment = {
     { attribute: "--main-color-two", value: "#7BFF00FF"},
     { attribute: "--button-color-one", value: "#191414"},
     { attribute: "--button-color-two", value: "#1DB954"},
-    { attribute: "--content-bckg-color", value: "#c4c4c4"},
-    { attribute: "--content-bckg-color-Back", value: "#090000"},
+    { attribute: "--content-bckg-color", value: "#c7dbc0"},
+    { attribute: "--content-bckg-color-Back", value: "#e4f3df"},
   ]
 };
 

@@ -4,12 +4,16 @@ import {ErrorStateMatcher} from '@angular/material/core';
 import {Router} from "@angular/router";
 import {RegisterService} from "./register.service";
 import {User} from "../../model/User";
+import {AppComponent} from "../../app.component";
+import {ConfirmationService, ConfirmEventType, MessageService} from "primeng/api";
+import {SpotifyService} from "../../Spotify/SpotifyService/spotify.service";
 
 
 @Component({
   selector: 'app-register',
   templateUrl: './register.component.html',
-  styleUrls: ['./register.component.css']
+  styleUrls: ['./register.component.css'],
+  providers: [ConfirmationService,MessageService]
 })
 export class RegisterComponent implements OnInit {
   matcher = new MyErrorStateMatcher();
@@ -27,7 +31,12 @@ export class RegisterComponent implements OnInit {
   });
   hide = true;
 
-  constructor(private registerService: RegisterService,private router: Router) {
+  constructor(private confirmationService: ConfirmationService,
+              private messageService: MessageService,
+              private registerService: RegisterService,
+              private router: Router,
+              private appCmp: AppComponent,
+              private spotifyService: SpotifyService) {
 
     // @ts-ignore
     this.email.setValue("");
@@ -38,15 +47,46 @@ export class RegisterComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  register() {
-    this.user.password=this.password.value;
-    this.user.email=this.email.value;
-    this.registerService.register(this.user)
+  async register() {
+    try {
+      this.user.password = this.password.value;
+      this.user.email = this.email.value;
+      await this.registerService.register(this.user)
+    } catch (e) {
+      this.appCmp.showToast("Error", e.error, true)
+    }
   }
 
   changePath(path: string) {
     this.router.navigate([path])
   }
+
+  // confirm1() {
+  //   console.log("CONFIRM");
+  //   this.confirmationService.confirm({
+  //     message: 'Do you want to login to your Spotify account?' +
+  //       ' \n This will be used to create and update your playlists!' +
+  //       '\n You can always go into my profile and Sign in from there!',
+  //     header: 'Account succesfully created',
+  //     icon: 'pi pi-sign-in',
+  //     accept: async () => {
+  //       let url = await this.spotifyService.getReddirectUrl();
+  //       console.log(url)
+  //       window.open(url, "_blank")
+  //     },
+  //     // @ts-ignore
+  //     reject: (type) => {
+  //       switch (type) {
+  //         case ConfirmEventType.REJECT:
+  //           this.messageService.add({severity: 'error', summary: 'Rejected', detail: 'You have rejected'});
+  //           break;
+  //         case ConfirmEventType.CANCEL:
+  //           this.messageService.add({severity: 'warn', summary: 'Cancelled', detail: 'You have cancelled'});
+  //           break;
+  //       }
+  //     }
+  //   });
+  // }
 }
 
 export class MyErrorStateMatcher implements ErrorStateMatcher {
@@ -55,3 +95,4 @@ export class MyErrorStateMatcher implements ErrorStateMatcher {
     return !!(control && control.invalid && (control.dirty || control.touched || isSubmitted));
   }
 }
+

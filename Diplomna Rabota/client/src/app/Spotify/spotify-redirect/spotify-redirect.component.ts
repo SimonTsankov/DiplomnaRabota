@@ -25,11 +25,9 @@ export class SpotifyRedirectComponent implements OnInit {
   }
   async sendRequest() {
     try {
-      console.log("SENT")
       await this.spotifyService.saveRefreshToken(this.code);
     } catch (e) {
       let text = e.error
-      console.log(text.match("([^:]+$)"))
       this.appCmp.showToast("Error", text.match("([^:]+$)")[0].substring(0,text.match("([^:]+$)")[0].length-2 ), true)
     }
   }

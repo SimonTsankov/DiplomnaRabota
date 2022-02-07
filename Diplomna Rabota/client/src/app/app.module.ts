@@ -46,6 +46,7 @@ import {MenubarModule} from "primeng/menubar";
 import {MenuModule} from "primeng/menu";
 import {DropdownModule} from "primeng/dropdown";
 import { SpotifyRedirectComponent } from './Spotify/spotify-redirect/spotify-redirect.component';
+import {ConfirmDialogModule} from "primeng/confirmdialog";
 
 
 @NgModule({
@@ -62,31 +63,31 @@ import { SpotifyRedirectComponent } from './Spotify/spotify-redirect/spotify-red
     NotificationComponent,
     SpotifyRedirectComponent
   ],
-  imports: [
-    HttpClientModule,
-    FormsModule,
-    BrowserModule,
-    ButtonModule,
-    TableModule,
-    AngularEditorModule,
-    HttpClientModule,
-    BrowserModule,
-    RouterModule,
-    BrowserAnimationsModule,
-    MatToolbarModule,
-    MatSidenavModule,
-    MatButtonModule,
-    MatIconModule,
-    MatDividerModule,
-    AppRoutingModule,
-    ReactiveFormsModule,
-    MatFormFieldModule,
-    MatInputModule,
-    MessagesModule,
-    FormsModule,
-    EditorModule,
-    AutoCompleteModule, ChipsModule, SelectButtonModule, MatButtonToggleModule, SplitterModule, OverlayPanelModule, DragDropModule, ToastModule, MatCardModule, RippleModule, ToggleButtonModule, TabViewModule, MatTabsModule, MatMenuModule, MenubarModule, MenuModule, DropdownModule,
-  ],
+    imports: [
+        HttpClientModule,
+        FormsModule,
+        BrowserModule,
+        ButtonModule,
+        TableModule,
+        AngularEditorModule,
+        HttpClientModule,
+        BrowserModule,
+        RouterModule,
+        BrowserAnimationsModule,
+        MatToolbarModule,
+        MatSidenavModule,
+        MatButtonModule,
+        MatIconModule,
+        MatDividerModule,
+        AppRoutingModule,
+        ReactiveFormsModule,
+        MatFormFieldModule,
+        MatInputModule,
+        MessagesModule,
+        FormsModule,
+        EditorModule,
+        AutoCompleteModule, ChipsModule, SelectButtonModule, MatButtonToggleModule, SplitterModule, OverlayPanelModule, DragDropModule, ToastModule, MatCardModule, RippleModule, ToggleButtonModule, TabViewModule, MatTabsModule, MatMenuModule, MenubarModule, MenuModule, DropdownModule, ConfirmDialogModule,
+    ],
   providers: [
     MessageService,
     {provide: HTTP_INTERCEPTORS, useClass: InterceptorInterceptor, multi: true}
