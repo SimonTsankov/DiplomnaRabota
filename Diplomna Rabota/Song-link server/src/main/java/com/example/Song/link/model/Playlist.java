@@ -14,6 +14,17 @@ public class Playlist {
     @JoinColumn(name="user_id", unique = true, nullable = false)
     private User user;
 
+    @Column
+    private String idSpotify;
+
+    public String getIdSpotify() {
+        return idSpotify;
+    }
+
+    public void setIdSpotify(String idSpotify) {
+        this.idSpotify = idSpotify;
+    }
+
     @Column(length = 50)
     private  String name;
 

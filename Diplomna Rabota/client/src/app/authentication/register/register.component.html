@@ -1,7 +1,7 @@
-<div>
+<div *ngIf="!hideRegFields">
   <label class="title"><b>Register : </b></label>
 </div>
-<div class="registerFields">
+<div *ngIf="!hideRegFields" class="registerFields">
   <form [formGroup]="signin" class="form">
     <mat-form-field class="full-width content" appearance="fill">
 <!--      EMAIL-->
@@ -51,3 +51,13 @@
 
 </div>
 <p-confirmDialog [style]="{width: '50vw'}" [baseZIndex]="10000" rejectButtonStyleClass="p-button-text"></p-confirmDialog>
+
+<div *ngIf="hideRegFields" class="post-regi-component">
+  <h1 class="created-text">Your account has been created, confirmation email has been sent to  <strong style="font-size: 1.2em">{{email.value}}</strong></h1>
+  <div class="bar-text">
+    Redirecting to login in : {{counter}}
+    <div class="bar">
+      <div class="in"></div>
+    </div>
+  </div>
+</div>

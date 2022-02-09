@@ -23,6 +23,9 @@ export class RegisterComponent implements OnInit {
   passwordConfirm = new FormControl('', [Validators.required, Validators.minLength(3)])
   username = new FormControl('', [Validators.minLength(4), Validators.required]);
 
+  hideRegFields= false;
+  counter = 8;
+
   signin: FormGroup = new FormGroup({
     email: this.email,
     password: this.password,
@@ -52,9 +55,20 @@ export class RegisterComponent implements OnInit {
       this.user.password = this.password.value;
       this.user.email = this.email.value;
       await this.registerService.register(this.user)
+      this.hideRegFields = true;
+      this.startCounter()
     } catch (e) {
       this.appCmp.showToast("Error", e.error, true)
     }
+  }
+
+  startCounter() {
+    setInterval(() => {
+      this.counter -= 1
+      if(this.counter == 0) {
+        this.changePath('login');
+      }
+    }, 1000);
   }
 
   changePath(path: string) {
@@ -87,6 +101,8 @@ export class RegisterComponent implements OnInit {
   //     }
   //   });
   // }
+
+
 }
 
 export class MyErrorStateMatcher implements ErrorStateMatcher {

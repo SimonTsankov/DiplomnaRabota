@@ -51,5 +51,14 @@ public class SpotifyController {
         spotifyService.saveTokens(code, user);
         return ResponseEntity.ok("Logged in to spotify successfully!");
     }
+    @PostMapping("/createPlaylist")
+    public ResponseEntity<?> createPlaylist(@RequestParam String name, @RequestParam Boolean isPublic, Principal principal) throws IOException, ParseException, SpotifyWebApiException {
+        try {
+            spotifyService.createPlaylist(principal,name, isPublic);
+            return ResponseEntity.ok("Created");
+        }catch (Exception e){
+            return  ResponseEntity.badRequest().body("Error");
+        }
+    }
 
 }
