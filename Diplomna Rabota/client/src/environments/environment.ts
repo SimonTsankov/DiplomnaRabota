@@ -52,7 +52,8 @@ export const environment = {
     { attribute: "--button-color-two", value: "#1DB954"},
     { attribute: "--content-bckg-color", value: "#c7dbc0"},
     { attribute: "--content-bckg-color-Back", value: "#e4f3df"},
-  ]
+  ],
+  url: "http://localhost:4200/"
 };
 
 /*

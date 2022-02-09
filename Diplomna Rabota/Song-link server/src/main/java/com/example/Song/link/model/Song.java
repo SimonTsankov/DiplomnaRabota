@@ -14,6 +14,17 @@ public class Song {
     private String name;
 
     @Column
+    private String track_id;
+
+    public String getTrack_id() {
+        return track_id;
+    }
+
+    public void setTrack_id(String track_id) {
+        this.track_id = track_id;
+    }
+
+    @Column
     private String artist;
 
     @Column

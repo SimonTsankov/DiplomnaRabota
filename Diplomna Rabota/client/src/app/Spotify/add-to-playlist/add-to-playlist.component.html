@@ -1,0 +1,13 @@
+<div class="container">
+  <div class="insideContainer">
+    <div *ngIf="playlists.length>0">
+      <div class="playlist" *ngFor="let playlist of playlists">
+        <img style="max-height: 5em"
+          src="https://icons-for-free.com/iconfiles/png/512/media+music+playlist+radio+social+songs+spotify+icon-1320137109725506614.png">
+      </div>
+    </div>
+    <div *ngIf="playlists.length==0">
+      No playlists found, please create one
+    </div>
+  </div>
+</div>

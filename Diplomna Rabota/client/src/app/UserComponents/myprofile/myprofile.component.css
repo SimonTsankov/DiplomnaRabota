@@ -34,7 +34,7 @@ section > * {
 button {
   margin-top: 1em;
   color: white;
-  background-color: var(--main-color-two);
+  background-color: var(--button-color-two);
   margin-right: 15px;
   margin-left: auto;
 }

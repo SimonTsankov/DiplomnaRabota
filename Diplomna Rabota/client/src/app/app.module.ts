@@ -47,6 +47,8 @@ import {MenuModule} from "primeng/menu";
 import {DropdownModule} from "primeng/dropdown";
 import { SpotifyRedirectComponent } from './Spotify/spotify-redirect/spotify-redirect.component';
 import {ConfirmDialogModule} from "primeng/confirmdialog";
+import {DialogModule} from "primeng/dialog";
+import { AddToPlaylistComponent } from './Spotify/add-to-playlist/add-to-playlist.component';
 
 
 @NgModule({
@@ -61,7 +63,8 @@ import {ConfirmDialogModule} from "primeng/confirmdialog";
     MyprofileComponent,
     UserSearchComponent,
     NotificationComponent,
-    SpotifyRedirectComponent
+    SpotifyRedirectComponent,
+    AddToPlaylistComponent
   ],
     imports: [
         HttpClientModule,
@@ -86,7 +89,7 @@ import {ConfirmDialogModule} from "primeng/confirmdialog";
         MessagesModule,
         FormsModule,
         EditorModule,
-        AutoCompleteModule, ChipsModule, SelectButtonModule, MatButtonToggleModule, SplitterModule, OverlayPanelModule, DragDropModule, ToastModule, MatCardModule, RippleModule, ToggleButtonModule, TabViewModule, MatTabsModule, MatMenuModule, MenubarModule, MenuModule, DropdownModule, ConfirmDialogModule,
+        AutoCompleteModule, ChipsModule, SelectButtonModule, MatButtonToggleModule, SplitterModule, OverlayPanelModule, DragDropModule, ToastModule, MatCardModule, RippleModule, ToggleButtonModule, TabViewModule, MatTabsModule, MatMenuModule, MenubarModule, MenuModule, DropdownModule, ConfirmDialogModule, DialogModule,
     ],
   providers: [
     MessageService,

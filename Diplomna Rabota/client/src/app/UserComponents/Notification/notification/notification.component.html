@@ -7,7 +7,11 @@
         <label class="msgLabel">{{notification.message}}</label>
       </div>
       <button *ngIf="!notification.seen" (click)="read(notification.id)" class="readBtn">Mark as read</button>
-      <button mat-button class="colorFulButton">Add to playlist</button>
+      <button (click)="openAddDialog(notification)" mat-button class="colorFulButton">Add to playlist</button>
     </div>
   </div>
 </div>
+
+<p-dialog header="Title" [(visible)]="display">
+  Content
+</p-dialog>
