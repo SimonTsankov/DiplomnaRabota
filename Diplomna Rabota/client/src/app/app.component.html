@@ -84,7 +84,7 @@
 </mat-sidenav-container>
 <div class="example-box" cdkDrag cdkDragBoundary="mat-sidenav-content">
   <button pButton pRipple class="themes-show-hide-btn p-button-rounded" (click)="opThemes.toggle($event)">
-    <mat-icon>color_lens</mat-icon>
+    <mat-icon style="color: black">color_lens</mat-icon>
   </button>
 </div>
 
@@ -95,13 +95,13 @@
       <mat-button-toggle-group value="{{savedTheme}}" style="font-size: small;" name="favoriteColor"
                                aria-label="Favorite Color">
         <mat-button-toggle id="red" class="mat-button-toggle" style="color: #c76a80" (click)="clickTest('red')"
-                           value="red">Red
+                           value="red">Silver
         </mat-button-toggle>
         <mat-button-toggle id="green" class="mat-button-toggle" style="color: #a3c76a" (click)="clickTest('green')"
-                           value="green">Green
+                           value="green">Emerald
         </mat-button-toggle>
         <mat-button-toggle id="purple" class="mat-button-toggle" style="color: #a66ac7" (click)="clickTest('purple')"
-                           value="purple">Purple
+                           value="purple">Majestic
         </mat-button-toggle>
       </mat-button-toggle-group>
     </section>
