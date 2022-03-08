@@ -12,6 +12,7 @@ import se.michaelthelin.spotify.SpotifyHttpManager;
 import se.michaelthelin.spotify.exceptions.SpotifyWebApiException;
 import se.michaelthelin.spotify.model_objects.credentials.AuthorizationCodeCredentials;
 import se.michaelthelin.spotify.model_objects.credentials.ClientCredentials;
+import se.michaelthelin.spotify.model_objects.special.SnapshotResult;
 import se.michaelthelin.spotify.model_objects.specification.Paging;
 import se.michaelthelin.spotify.model_objects.specification.Playlist;
 import se.michaelthelin.spotify.model_objects.specification.Track;
@@ -19,6 +20,8 @@ import se.michaelthelin.spotify.requests.authorization.authorization_code.Author
 import se.michaelthelin.spotify.requests.authorization.authorization_code.AuthorizationCodeRequest;
 import se.michaelthelin.spotify.requests.authorization.authorization_code.AuthorizationCodeUriRequest;
 import se.michaelthelin.spotify.requests.authorization.client_credentials.ClientCredentialsRequest;
+import se.michaelthelin.spotify.requests.data.player.AddItemToUsersPlaybackQueueRequest;
+import se.michaelthelin.spotify.requests.data.playlists.AddItemsToPlaylistRequest;
 import se.michaelthelin.spotify.requests.data.playlists.CreatePlaylistRequest;
 import se.michaelthelin.spotify.requests.data.search.simplified.SearchTracksRequest;
 import se.michaelthelin.spotify.requests.data.users_profile.GetCurrentUsersProfileRequest;
@@ -97,6 +100,24 @@ public class SpotifyService {
 
         playlistRepository.save(playlist1);
     }
+
+    public void addToPlaylist(String playlistId, Song song, User user, Principal principal){
+        refreshToken(principal);
+
+        SpotifyApi spotifyApi = new SpotifyApi.Builder().setAccessToken(user.getSpotifyAccessToken()).build();
+        AddItemsToPlaylistRequest addItemsToPlaylistRequest = spotifyApi.addItemsToPlaylist(
+                playlistId,
+                new String[]{"spotify:track:"+song.getTrack_id()}
+        ).build();
+        try {
+            final SnapshotResult snapshotResult = addItemsToPlaylistRequest.execute();
+
+            System.out.println("Snapshot ID: " + snapshotResult.getSnapshotId());
+        } catch (IOException | SpotifyWebApiException | ParseException e) {
+            System.out.println("Error: " + e.getMessage());
+        }
+    }
+
 
     public static String getCurrentUsersProfile_Sync(SpotifyApi spotifyApi) {
 

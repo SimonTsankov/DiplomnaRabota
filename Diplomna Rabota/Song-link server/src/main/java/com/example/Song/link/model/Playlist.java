@@ -11,7 +11,7 @@ public class Playlist {
     private long id;
 
     @OneToOne
-    @JoinColumn(name="user_id", unique = true, nullable = false)
+    @JoinColumn(name = "user_id", referencedColumnName = "id")
     private User user;
 
     @Column

@@ -8,9 +8,11 @@ import {Playlist} from "../../../model/Playlist";
 })
 export class PlaylistService {
   findAllUrl = environment.apiUrl+"playlist/findAll"
+  private addSongToPlaylistURL = environment.apiUrl+"spotify/addSong";
   constructor(private http: HttpClient) {}
 
   findAllPlaylists(){
     return this.http.get<Playlist[]>(this.findAllUrl);
   }
+
 }

@@ -24,7 +24,7 @@ export const environment = {
     { attribute: "--main-color-two", value: "rgba(255,255,255,0.32)"},
     { attribute: "--button-color-one", value: "rgba(255,243,51,0.41)"},
     { attribute: "--button-color-two", value: "#cdcdcd"},
-    { attribute: "--content-bckg-color", value: "#CCCCCC"},
+    { attribute: "--content-bckg-color", value: "#eeeeee"},
     { attribute: "--content-bckg-color-Back", value: "#ffffff"},
   ],
   purpleTheme: [

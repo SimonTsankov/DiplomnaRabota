@@ -1,8 +1,11 @@
 package com.example.Song.link.api;
 
+import com.example.Song.link.model.Playlist;
 import com.example.Song.link.model.Post;
 import com.example.Song.link.model.Song;
 import com.example.Song.link.model.User;
+import com.example.Song.link.repository.PlaylistRepository;
+import com.example.Song.link.repository.SongRepository;
 import com.example.Song.link.repository.UserRepository;
 import com.example.Song.link.service.SpotifyService;
 import org.apache.hc.core5.http.ParseException;
@@ -33,6 +36,12 @@ public class SpotifyController {
     UserRepository userRepository;
 
     @Autowired
+    SongRepository songRepository;
+
+    @Autowired
+    PlaylistRepository playlistRepository;
+
+    @Autowired
     SpotifyService spotifyService;
 
     @GetMapping("/searchTracks")
@@ -56,6 +65,21 @@ public class SpotifyController {
         try {
             spotifyService.createPlaylist(principal,name, isPublic);
             return ResponseEntity.ok("Created");
+        }catch (Exception e){
+            return  ResponseEntity.badRequest().body("Error");
+        }
+    }
+    @PostMapping("/addSong")
+    public ResponseEntity<?> addToPlaylist(@RequestParam String playlistId, String songId, Principal principal){
+        try{
+            User user = userRepository.findByEmail(principal.getName());
+
+                Song song = new Song();
+                song.setTrack_id(songId);
+//                Song song = songRepository.findByTrack_id(songId);
+                spotifyService.addToPlaylist(playlistId, song, user, principal);
+
+            return ResponseEntity.ok("Added to playlist");
         }catch (Exception e){
             return  ResponseEntity.badRequest().body("Error");
         }

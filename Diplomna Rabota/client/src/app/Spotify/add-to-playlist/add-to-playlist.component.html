@@ -1,13 +1,20 @@
 <div class="container">
   <div class="insideContainer">
     <div *ngIf="playlists.length>0">
-      <div class="playlist" *ngFor="let playlist of playlists">
         <img style="max-height: 5em"
           src="https://icons-for-free.com/iconfiles/png/512/media+music+playlist+radio+social+songs+spotify+icon-1320137109725506614.png">
-      </div>
     </div>
     <div *ngIf="playlists.length==0">
       No playlists found, please create one
+    </div>
+    <div *ngFor="let playlist of playlists">
+      <ul>
+        <li class="item item__divider">
+          <p class="username">{{playlist.name}}</p>
+          <span class="item__hr-line"></span>
+          <button id="{{playlist.idSpotify}}" class="item__button" type="button" (click)="onPlaylistSelected(playlist)">Add to</button>
+        </li>
+      </ul>
     </div>
   </div>
 </div>

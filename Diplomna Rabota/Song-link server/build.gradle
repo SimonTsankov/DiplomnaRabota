@@ -11,6 +11,9 @@ sourceCompatibility = '11'
 repositories {
 	mavenCentral()
 }
+bootJar {
+	launchScript()
+}
 
 dependencies {
 	//json, webtoken

@@ -6,7 +6,7 @@ import {environment} from "../../../environments/environment";
   providedIn: 'root'
 })
 export class SpotifyService {
-
+  addSongToPlaylistURL = environment.apiUrl+"spotify/addSong";
   getReddirectUrlEndpint = environment.apiUrl + "spotify/getReddirectUrl"
   saveRefreshTokenUrl = environment.apiUrl + "spotify/saveRefreshToken"
 
@@ -22,5 +22,7 @@ export class SpotifyService {
       return this.http.post(this.saveRefreshTokenUrl + "?code=" + code, "", {responseType: "text"}).toPromise()
 
   }
-
+  addSongToPlaylist(playlistId: string, songId: string){
+    return this.http.post(this.addSongToPlaylistURL + "?playlistId=" + playlistId+"&songId="+ songId, "", {responseType: "text"}).toPromise()
+  }
 }

@@ -195,3 +195,16 @@ mat-sidenav-container {
   padding: 1em;
   width: 25em;
 }
+
+@media only screen and (max-width: 1250px) {
+  .neon-button{
+    font-size: small;
+  }
+}
+
+.sendSongBtn {
+  background-color: var(--LogRegColor);
+  color: white;
+  margin-right: 1%;
+  margin-left: auto;
+}
