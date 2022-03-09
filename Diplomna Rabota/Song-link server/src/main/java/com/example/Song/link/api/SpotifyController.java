@@ -46,8 +46,11 @@ public class SpotifyController {
 
     @GetMapping("/searchTracks")
     public ResponseEntity<?> findAll(@RequestParam String searchWord) throws IOException, ParseException, SpotifyWebApiException {
-
             return ResponseEntity.ok().body(spotifyService.searchforTracks(searchWord));
+    }
+    @GetMapping("/findSongByTrackId")
+    public ResponseEntity<?> findSongByTrackId(@RequestParam String trackId) throws IOException, ParseException, SpotifyWebApiException {
+        return ResponseEntity.ok().body(spotifyService.findSongByTrackId(trackId));
     }
     @GetMapping("/getReddirectUrl")
     public ResponseEntity<?> getReddirectUrl() throws IOException, ParseException, SpotifyWebApiException {

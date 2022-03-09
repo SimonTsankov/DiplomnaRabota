@@ -1,6 +1,7 @@
 :host {
   min-height: 80vh;
   width: 100vw;
+  color: var(--font-color);
 }
 .container {
   width: 90%;
@@ -117,4 +118,9 @@ mat-tab-group{
     margin: auto;
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   }
+}
+
+.createPlaylist {
+  background-color: var(--LogRegColor);
+  color: white;
 }

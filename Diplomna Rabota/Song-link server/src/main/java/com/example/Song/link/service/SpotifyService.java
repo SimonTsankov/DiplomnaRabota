@@ -24,6 +24,7 @@ import se.michaelthelin.spotify.requests.data.player.AddItemToUsersPlaybackQueue
 import se.michaelthelin.spotify.requests.data.playlists.AddItemsToPlaylistRequest;
 import se.michaelthelin.spotify.requests.data.playlists.CreatePlaylistRequest;
 import se.michaelthelin.spotify.requests.data.search.simplified.SearchTracksRequest;
+import se.michaelthelin.spotify.requests.data.tracks.GetTrackRequest;
 import se.michaelthelin.spotify.requests.data.users_profile.GetCurrentUsersProfileRequest;
 
 import java.io.IOException;
@@ -174,6 +175,24 @@ public class SpotifyService {
             System.out.println("Error: " + e.getMessage());
             throw e;
         }
+    }
+
+    public Song findSongByTrackId(String trackId) throws IOException, ParseException, SpotifyWebApiException {
+        Song song = new Song();
+        SpotifyApi spotifyApi = setUpSpotApi();
+        GetTrackRequest getTrackRequest  = spotifyApi.getTrack("56iv5TqfvxVa4zLMs6SvmP").build();
+        try {
+            final Track track = getTrackRequest.execute();
+            song.setName(track.getName());
+            song.setTrack_id(trackId);
+            song.setArtist(track.getArtists()[0].getName());
+            song.setImgUrl(track.getAlbum().getImages()[0].getUrl());
+            System.out.println("Name: " + track.getName());
+        } catch (IOException | SpotifyWebApiException | ParseException e) {
+            throw new SpotifyWebApiException("Error");
+        }
+
+        return  song;
     }
 }
 

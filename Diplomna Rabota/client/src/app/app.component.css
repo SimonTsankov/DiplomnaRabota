@@ -12,8 +12,12 @@
   --button-color-two: #450068;
   --content-bckg-color: #f1fffc;
   --content-bckg-color-Back: #ccfff9;
-}
+  --font-color: black;
 
+}
+body{
+  color: white !important;
+}
 .toolbar {
   color: white;
   height: 13%;

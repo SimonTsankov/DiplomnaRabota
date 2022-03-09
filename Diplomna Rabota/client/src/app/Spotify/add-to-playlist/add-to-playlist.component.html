@@ -1,8 +1,14 @@
+
+<h1 align="center">Add song to one of your playlists!</h1>
 <div class="container">
   <div class="insideContainer">
-    <div *ngIf="playlists.length>0">
-        <img style="max-height: 5em"
-          src="https://icons-for-free.com/iconfiles/png/512/media+music+playlist+radio+social+songs+spotify+icon-1320137109725506614.png">
+    <button (click)="createPlaylist.toggle($event)" pButton pRipple type="button" icon="pi pi-plus"
+            class="createPlaylist p-button-rounded p-button-lg"></button>
+    <div *ngIf="playlists.length>0" style="min-height: 5em">
+        <img align="left" style="max-height: 5em"
+          [src]="songToAdd.imgUrl">
+        <h2>{{songToAdd.name}}</h2>
+        <label>{{songToAdd.artist}}</label>
     </div>
     <div *ngIf="playlists.length==0">
       No playlists found, please create one
@@ -18,3 +24,13 @@
     </div>
   </div>
 </div>
+
+<p-overlayPanel  #createPlaylist>
+  <ng-template  pTemplate>
+    <div class="notificationsContainer">
+      <p>Your notifications: </p>
+<!--      <app-notification></app-notification>-->
+    </div>
+
+  </ng-template>
+</p-overlayPanel>
