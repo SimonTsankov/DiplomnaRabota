@@ -15,8 +15,16 @@ export class AddToPlaylistComponent implements OnInit {
   private songId: string | undefined;
   // @ts-ignore
   songToAdd: Song;
+  name: any;
 
   constructor(private route: ActivatedRoute, private playlistService: PlaylistService, private spotifyService: SpotifyService) {
+    this.refreshData()
+    this.route.queryParams
+      .subscribe(params => {
+          this.songId = params.id;
+          this.spotifyService.getSongByTrackId(this.songId + "").subscribe(data => this.songToAdd = data )
+        }
+      );
   }
 
   ngOnInit(): void {

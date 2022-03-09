@@ -123,4 +123,17 @@ mat-tab-group{
 .createPlaylist {
   background-color: var(--LogRegColor);
   color: white;
+  float: right;
+ margin: 1em;
+}
+
+.createContainer {
+  padding: 2em;
+}
+.createBtn {
+  margin-bottom: 1em;
+  margin-right: 1em;
+  background-color: #1DB954;
+  color: white;
+  float: right;
 }

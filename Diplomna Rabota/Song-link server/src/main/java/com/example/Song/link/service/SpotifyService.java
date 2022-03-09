@@ -166,9 +166,11 @@ public class SpotifyService {
             for (Track track : trackPaging.getItems()) {
                 Song song = new Song();
                 song.setName(track.getName());
+                song.setTrack_id(track.getId());
                 song.setArtist(track.getArtists()[0].getName());
                 song.setImgUrl(track.getAlbum().getImages()[0].getUrl());
                 songs.add(song);
+
             }
             return songs;
         } catch (IOException | SpotifyWebApiException | ParseException e) {
@@ -180,14 +182,13 @@ public class SpotifyService {
     public Song findSongByTrackId(String trackId) throws IOException, ParseException, SpotifyWebApiException {
         Song song = new Song();
         SpotifyApi spotifyApi = setUpSpotApi();
-        GetTrackRequest getTrackRequest  = spotifyApi.getTrack("56iv5TqfvxVa4zLMs6SvmP").build();
+        GetTrackRequest getTrackRequest  = spotifyApi.getTrack(trackId).build();
         try {
             final Track track = getTrackRequest.execute();
             song.setName(track.getName());
             song.setTrack_id(trackId);
             song.setArtist(track.getArtists()[0].getName());
             song.setImgUrl(track.getAlbum().getImages()[0].getUrl());
-            System.out.println("Name: " + track.getName());
         } catch (IOException | SpotifyWebApiException | ParseException e) {
             throw new SpotifyWebApiException("Error");
         }

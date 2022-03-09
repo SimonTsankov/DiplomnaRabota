@@ -26,7 +26,6 @@ public class PlaylistController {
 
     @GetMapping("findAll")
     public ResponseEntity<?> findAll(Principal principal){
-        System.out.println("dwdw");
         User user = userRepository.findByEmail(principal.getName());
         List<Playlist> playlistList = playlistRepository.findByUser(user);
         return ResponseEntity.ok().body(playlistList);
