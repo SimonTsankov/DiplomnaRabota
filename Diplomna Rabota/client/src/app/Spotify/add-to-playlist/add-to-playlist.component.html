@@ -31,8 +31,12 @@
       <h1>Create playlist? </h1>
       <label>Name:</label>
       <input  style="height: 40% " type="text" pInputText [(ngModel)]="name">
-
+     <h1></h1>
+      <label>Public:</label><br>
+      <p-inputSwitch  [(ngModel)]="isPublic"></p-inputSwitch>
     </div>
+
+
     <button class="createBtn" mat-raised-button (click)="createPlaylist()">Create</button>
 
   </ng-template>

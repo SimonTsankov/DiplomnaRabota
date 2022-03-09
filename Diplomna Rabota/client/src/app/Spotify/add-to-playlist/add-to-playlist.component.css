@@ -3,6 +3,7 @@
   width: 100vw;
   color: var(--font-color);
 }
+
 .container {
   width: 90%;
   margin: auto;
@@ -10,11 +11,13 @@
   padding: 20px;
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
-.insideContainer{
+
+.insideContainer {
   border-radius: 25px;
   height: 700px;
   background-color: var(--content-bckg-color-Back);
 }
+
 :host {
   min-height: 80vh;
   width: 100vw;
@@ -83,11 +86,13 @@
 input {
   width: 100%;
 }
-mat-tab-group{
+
+mat-tab-group {
   border-radius: 25px;
   height: 700px;
   background-color: var(--content-bckg-color-Back);
 }
+
 .username {
   max-width: 25%;
   overflow-wrap: break-word;
@@ -101,9 +106,10 @@ mat-tab-group{
     /*margin: auto;*/
   }
 
-  .item__button{
+  .item__button {
     margin-left: auto;
   }
+
   .item__divider > * {
     flex-basis: 0;
   }
@@ -124,16 +130,22 @@ mat-tab-group{
   background-color: var(--LogRegColor);
   color: white;
   float: right;
- margin: 1em;
+  margin: 1em;
 }
 
 .createContainer {
   padding: 2em;
+  padding-block: 1em;
 }
+
 .createBtn {
   margin-bottom: 1em;
   margin-right: 1em;
   background-color: #1DB954;
   color: white;
   float: right;
+}
+
+::ng-deep .p-inputswitch-slider {
+  background:  #1DB954!important;
 }

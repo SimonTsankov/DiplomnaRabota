@@ -12,8 +12,10 @@ export class SpotifyService {
   getReddirectUrlEndpint = environment.apiUrl + "spotify/getReddirectUrl"
   saveRefreshTokenUrl = environment.apiUrl + "spotify/saveRefreshToken"
   getSongByTrackIdUrl = environment.apiUrl +"spotify/findSongByTrackId"
+
   constructor(private http: HttpClient) {
   }
+
 
   async getReddirectUrl() {
     return await this.http.get(this.getReddirectUrlEndpint, {responseType: "text"}).toPromise()
