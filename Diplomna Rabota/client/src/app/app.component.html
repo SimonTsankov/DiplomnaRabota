@@ -1,4 +1,12 @@
 <p-toast></p-toast>
+
+<p-dialog  *ngIf="sendSongDialog"  [(visible)]="sendSongDialog" [style]="{width: '550px', height: '100%'}" header="Send a song to someone!"
+          styleClass="p-fluid">
+<app-send-song></app-send-song>
+
+
+</p-dialog>
+
 <mat-toolbar class="mat-elevation-z8 toolbar">
   <button mat-icon-button *ngIf="sidenav.mode === 'over'" (click)="sidenav.toggle()">
     <mat-icon *ngIf="!sidenav.opened">
@@ -12,7 +20,7 @@
     <a id="neon-btn" href="#top" class="neon-button">Song Link!
     </a>
   </h1>
-  <button *ngIf="checkLogin()" (click)="sendSong.toggle($event)" pButton pRipple type="button" icon="pi pi-plus"
+  <button *ngIf="checkLogin()" (click)="sendSongDialog=!sendSongDialog" pButton pRipple type="button" icon="pi pi-send"
           class="sendSongBtn p-button-rounded p-button-lg"></button>
   <button *ngIf="checkLogin()" (click)="notifications.toggle($event)" pButton pRipple type="button" icon="pi pi-bell"
           class="registerBtn p-button-rounded p-button-lg"></button>
@@ -77,7 +85,7 @@
     <div
       style="background: var(--content-bckg-color);height: auto; min-height: 100%" class="content mat-elevation-z8">
 
-      <router-outlet ></router-outlet>
+      <router-outlet></router-outlet>
 
 
     </div>
@@ -136,8 +144,8 @@
 </p-overlayPanel>
 
 
-<p-overlayPanel  #notifications>
-  <ng-template  pTemplate>
+<p-overlayPanel #notifications>
+  <ng-template pTemplate>
     <div class="notificationsContainer">
       <p>Your notifications: </p>
       <app-notification></app-notification>
@@ -147,11 +155,11 @@
 </p-overlayPanel>
 
 
-<p-overlayPanel  #sendSong>
-  <ng-template  pTemplate>
+<p-overlayPanel #sendSong>
+  <ng-template pTemplate>
     <div class="notificationsContainer">
-<!--      <p>Your notifications: </p>-->
-<!--      <app-notification></app-notification>-->
+      <!--      <p>Your notifications: </p>-->
+      <!--      <app-notification></app-notification>-->
     </div>
 
   </ng-template>

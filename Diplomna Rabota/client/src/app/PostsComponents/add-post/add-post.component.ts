@@ -51,7 +51,7 @@ export class AddPostComponent implements OnInit {
   }
 
   ngOnInit(): void {
-
+      if(!this.appCmp.logged) this.router.navigate(["login"])
   }
 
   async onFileSelected(event: Event) {

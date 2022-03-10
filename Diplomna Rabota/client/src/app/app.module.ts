@@ -50,6 +50,8 @@ import {ConfirmDialogModule} from "primeng/confirmdialog";
 import {DialogModule} from "primeng/dialog";
 import { AddToPlaylistComponent } from './Spotify/add-to-playlist/add-to-playlist.component';
 import {InputSwitchModule} from "primeng/inputswitch";
+import {StepsModule} from "primeng/steps";
+import { SendSongComponent } from './Spotify/send-song/send-song.component';
 
 
 @NgModule({
@@ -65,7 +67,8 @@ import {InputSwitchModule} from "primeng/inputswitch";
     UserSearchComponent,
     NotificationComponent,
     SpotifyRedirectComponent,
-    AddToPlaylistComponent
+    AddToPlaylistComponent,
+    SendSongComponent
   ],
     imports: [
         HttpClientModule,
@@ -90,7 +93,7 @@ import {InputSwitchModule} from "primeng/inputswitch";
         MessagesModule,
         FormsModule,
         EditorModule,
-        AutoCompleteModule, ChipsModule, SelectButtonModule, MatButtonToggleModule, SplitterModule, OverlayPanelModule, DragDropModule, ToastModule, MatCardModule, RippleModule, ToggleButtonModule, TabViewModule, MatTabsModule, MatMenuModule, MenubarModule, MenuModule, DropdownModule, ConfirmDialogModule, DialogModule, InputSwitchModule,
+        AutoCompleteModule, ChipsModule, SelectButtonModule, MatButtonToggleModule, SplitterModule, OverlayPanelModule, DragDropModule, ToastModule, MatCardModule, RippleModule, ToggleButtonModule, TabViewModule, MatTabsModule, MatMenuModule, MenubarModule, MenuModule, DropdownModule, ConfirmDialogModule, DialogModule, InputSwitchModule, StepsModule,
     ],
   providers: [
     MessageService,

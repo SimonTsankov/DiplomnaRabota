@@ -3,7 +3,7 @@ import {MatSidenav} from "@angular/material/sidenav";
 import {BreakpointObserver} from "@angular/cdk/layout";
 import {Router} from "@angular/router";
 import {environment} from "../environments/environment";
-import {MessageService} from "primeng/api";
+import {MenuItem, MessageService} from "primeng/api";
 import {AuthenticationService} from "./authentication/AuthServices/authService/authentication.service";
 import {TokensService} from "./authentication/AuthServices/TokenService/tokens.service";
 
@@ -35,6 +35,9 @@ export class AppComponent implements OnInit {
   host = document.querySelector(':host');
   // @ts-ignore
   logged: boolean = this.checkLogin()
+  sendSongDialog: boolean = false;
+
+
 
   constructor(private authenticationService: AuthenticationService
     , private tokenService: TokensService

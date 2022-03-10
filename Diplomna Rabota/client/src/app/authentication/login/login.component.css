@@ -2,9 +2,10 @@
   margin-top: 10%;
   margin-inline: 5%;
   margin-bottom: auto;
+  color: var(--font-color)
 }
 .title {
-  color: #000000;
+  /*color: #000000;*/
 }
 
 .loginFields {

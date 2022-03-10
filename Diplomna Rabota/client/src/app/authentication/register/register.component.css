@@ -1,13 +1,14 @@
 :host {
   margin-inline: 5%;
-  --main-c-one: rgba(0, 0, 0, 0.69)
+  --main-c-one: rgba(0, 0, 0, 0.69);
+  color: var(--font-color)
 }
 ::ng-deep body {
   overflow: overlay;
 }
 
 .title {
-  color: #000000;
+  /*color: #000000;*/
 }
 
 .forgottenPasswordButton {

@@ -72,9 +72,10 @@ mat-tab-group{
   background-color: var(--content-bckg-color-Back);
 }
 .username {
-  max-width: 25%;
-  overflow-wrap: break-word;
+  /*max-width: 25%;*/
+  /*overflow-wrap: break-word;*/
   font-size: large;
+  white-space: nowrap;
   color: black;
 }
 

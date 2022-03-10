@@ -1,0 +1,38 @@
+<p-steps [model]="steps" [(activeIndex)]="index" [readonly]="true" ></p-steps>
+<div [ngSwitch]="index">
+<div *ngSwitchCase="PageNames.whoTo">
+  <h4 style="text-align: center">Follwed users:</h4>
+  <div *ngFor="let user of followedUsers" style="  white-space: nowrap;">
+    <ul>
+      <li class="item item__divider">
+        <p class="username">{{user.username}}</p>
+        <span class="item__hr-line"></span>
+        <button id="{{user.id}}" class="item__button" type="button"
+                (click)="onUserSelect(user)">Send to</button>
+      </li>
+    </ul>
+  </div>
+  </div>
+
+  <div *ngSwitchCase="PageNames.whatSong">
+  <h3 align="center" *ngIf="selectedUser">User selected: {{selectedUser.username}}</h3>
+<!--  <div *ngFor="let song of songs">-->
+    <div>
+  <div *ngIf="songs">
+    <img  style="max-height: 5em"
+         [src]="songs.imgUrl">
+    <h2>{{songs.name}}</h2>
+    <label>{{songs.artist}}</label>
+
+  </div>
+    </div>
+  </div>
+
+  <button pButton pRipple label="{{index != PageNames.whoTo ? 'Back' : 'Cancel'}}"
+          icon="pi {{index != PageNames.whoTo ? 'pi-angle-left' : 'pi-times'}}" class="p-button-text"
+          (click)="hideDialog()"></button>
+  <button *ngIf="index!=PageNames.whoTo" pButton pRipple label="{{index != PageNames.whatSong ? 'Next' : 'Send'}}"
+          icon="pi {{index != PageNames.whatSong ? 'pi-angle-right' : 'pi-check'}}" class="p-button-text"
+          (click)="save()"></button>
+</div>
+
