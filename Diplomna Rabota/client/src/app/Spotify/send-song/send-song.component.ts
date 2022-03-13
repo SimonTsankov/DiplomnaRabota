@@ -21,15 +21,16 @@ export class SendSongComponent implements OnInit {
   ];
   index: number = PageNames.whoTo;
   followedUsers: User[] = [];
-  // songs: Song[] = [];
-  songs: Song | undefined;
+  songs: Song[] = [];
+
+  searchWord: string="";
+  selectedSong: string="-1";
 
   constructor(private spotifyService: SpotifyService, private userService: UserService, private appCmp: AppComponent) {
   }
 
   ngOnInit(): void {
     this.refreshUsers();
-    this.searchForSongs();
   }
 
   hideDialog() {
@@ -45,7 +46,8 @@ export class SendSongComponent implements OnInit {
       data => this.followedUsers = data)
   }
   searchForSongs(){
-    this.spotifyService.getSongByTrackId("56iv5TqfvxVa4zLMs6SvmP").subscribe(data=> this.songs = data)
+    console.log("searching "+this.searchWord)
+    this.spotifyService.getAllSongsLike(this.searchWord).subscribe(data=> this.songs = data)
   }
   save() {
 
@@ -54,6 +56,10 @@ export class SendSongComponent implements OnInit {
   onUserSelect(user: any) {
     this.selectedUser = user;
     this.index++;
+  }
+
+  changeSelected(trackId: string) {
+    this.selectedSong= trackId;
   }
 }
 

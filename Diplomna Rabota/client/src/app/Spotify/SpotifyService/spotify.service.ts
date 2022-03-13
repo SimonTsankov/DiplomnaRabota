@@ -12,7 +12,7 @@ export class SpotifyService {
   getReddirectUrlEndpint = environment.apiUrl + "spotify/getReddirectUrl"
   saveRefreshTokenUrl = environment.apiUrl + "spotify/saveRefreshToken"
   getSongByTrackIdUrl = environment.apiUrl +"spotify/findSongByTrackId"
-
+  getAllSongsLikeUrl = environment.apiUrl +"spotify/searchTracks?searchWord="
   constructor(private http: HttpClient) {
   }
 
@@ -28,5 +28,9 @@ export class SpotifyService {
   }
    addSongToPlaylist(playlistId: string, songId: string){
     return this.http.post(this.addSongToPlaylistURL + "?playlistId=" + playlistId+"&songId="+ songId, "", {responseType: "text"}).toPromise()
+  }
+
+  getAllSongsLike(searchWord: string) {
+    return this.http.get<Song[]>(this.getAllSongsLikeUrl+searchWord)
   }
 }

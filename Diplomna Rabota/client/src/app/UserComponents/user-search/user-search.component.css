@@ -27,7 +27,7 @@
 
 .item__hr-line {
   min-width: 5em;
-  background-color: gray;
+  background-color: var(--main-color-two);
   margin-inline: 1em;
   height: 5px;
 }

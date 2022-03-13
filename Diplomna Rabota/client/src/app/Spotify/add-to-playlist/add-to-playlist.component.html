@@ -10,13 +10,15 @@
         <h2>{{songToAdd.name}}</h2>
         <label>{{songToAdd.artist}}</label>
     </div>
+
     <div *ngIf="playlists.length==0">
       No playlists found, please create one
     </div>
+
     <div *ngFor="let playlist of playlists">
       <ul>
         <li class="item item__divider">
-          <p class="username">{{playlist.name}}</p>
+          <p  class="username">{{playlist.name}}</p>
           <span class="item__hr-line"></span>
           <button id="{{playlist.idSpotify}}" class="item__button" type="button" (click)="onPlaylistSelected(playlist)">Add to</button>
         </li>

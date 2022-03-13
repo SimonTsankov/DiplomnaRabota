@@ -158,7 +158,7 @@ public class SpotifyService {
 
         SpotifyApi spotifyApi = setUpSpotApi();
 
-        SearchTracksRequest searchTracksRequest = spotifyApi.searchTracks(searchWord).limit(10).build();
+        SearchTracksRequest searchTracksRequest = spotifyApi.searchTracks(searchWord).limit(4).build();
         try {
             final Paging<Track> trackPaging = searchTracksRequest.execute();
             LinkedList<Song> songs = new LinkedList<>();
