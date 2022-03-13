@@ -1,18 +1,15 @@
 :host {
   margin-inline: 5%;
   --main-c-one: rgba(0, 0, 0, 0.69);
-  color: var(--font-color)
+  color: var(--font-color);
+  width: 600px;
 }
 ::ng-deep body {
   overflow: overlay;
 }
 
-.title {
-  /*color: #000000;*/
-}
-
 .forgottenPasswordButton {
-  margin-left: 10%;
+  /*margin-left: 8%;*/
   border: transparent;
   background-color: transparent;
   color: #1800f8
@@ -50,10 +47,6 @@
 
 .full-width {
   width: 100%;
-}
-
-mat {
-
 }
 
 form {
@@ -94,4 +87,16 @@ form {
   100% {
     width: 100%;
   }
+}
+.login-btn {
+  color: white;
+  background-color: var(--main-color-two);
+  margin-right: 10px;
+  float: right;
+}
+.login-btn:hover{
+  font-size: large;
+  border-radius: 25px;
+  animation-timing-function: linear;
+  /*padding: 10px;*/
 }

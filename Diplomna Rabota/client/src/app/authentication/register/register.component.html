@@ -44,7 +44,7 @@
       <mat-error *ngIf="password.value!=passwordConfirm">Passwords don't match!</mat-error>
     </mat-form-field>
   </form>
-  <button style="margin-left: 63%" mat-raised-button (click)="register()">Register</button>
+  <button class="login-btn" mat-raised-button (click)="register()">Register</button>
   <br>
 
   <button (click)="changePath('login')" class="forgottenPasswordButton">Already have an account?</button>

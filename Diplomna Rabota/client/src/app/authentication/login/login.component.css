@@ -1,8 +1,9 @@
 :host{
-  margin-top: 10%;
+  margin-top: 8%;
   margin-inline: 5%;
   margin-bottom: auto;
-  color: var(--font-color)
+  color: var(--font-color);
+  width: 600px;
 }
 .title {
   /*color: #000000;*/
@@ -10,7 +11,7 @@
 
 .loginFields {
   border-radius: 25px;
-  width: auto;
+  width: 100%;
   padding: 20%;
   background: linear-gradient(
     45deg,
@@ -28,7 +29,7 @@
 
 .form {
   min-width: 50px;
-  max-width: 500px;
+  max-width: 800px;
   width: 100%;
 
 }
@@ -39,4 +40,16 @@
 
 form {
   font-size: medium;
+}
+.login-btn {
+  color: white;
+  background-color: var(--main-color-two);
+  margin-right: 10px;
+  float: right;
+}
+.login-btn:hover{
+  font-size: large;
+  border-radius: 25px;
+  animation-timing-function: linear;
+  /*padding: 10px;*/
 }
