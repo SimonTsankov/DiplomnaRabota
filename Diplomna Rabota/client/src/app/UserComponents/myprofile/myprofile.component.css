@@ -37,8 +37,13 @@ button {
   background-color: var(--button-color-two);
   margin-right: 15px;
   margin-left: auto;
+  border-bottom: 2px solid;
+  border-right: 2px solid;
+  border-color: var(--main-color-two);
 }
-
+button:hover{
+  background-color: var(--main-color-two);
+}
 .posts {
   flex: 2 1 10% !important;
 }

@@ -4,6 +4,7 @@ import {PlaylistService} from "./PlaylistService/playlist.service";
 import {SpotifyService} from "../SpotifyService/spotify.service";
 import {ActivatedRoute} from "@angular/router";
 import {Song} from "../../model/Song";
+import {AppComponent} from "../../app.component";
 
 @Component({
   selector: 'app-add-to-playlist',
@@ -16,9 +17,12 @@ export class AddToPlaylistComponent implements OnInit {
   // @ts-ignore
   songToAdd: Song;
   name: any;
-  isPublic: boolean= false;
+  isPublic: boolean = false;
 
-  constructor(private route: ActivatedRoute, private playlistService: PlaylistService, private spotifyService: SpotifyService) {
+  constructor(private route: ActivatedRoute,
+              private playlistService: PlaylistService,
+              private spotifyService: SpotifyService,
+              private appCmp: AppComponent) {
 
   }
 
@@ -27,8 +31,8 @@ export class AddToPlaylistComponent implements OnInit {
     this.route.queryParams
       .subscribe(params => {
           this.songId = params.id;
-          this.spotifyService.getSongByTrackId(this.songId + "").subscribe(data => this.songToAdd = data )
-      }
+          this.spotifyService.getSongByTrackId(this.songId + "").subscribe(data => this.songToAdd = data)
+        }
       );
   }
 
@@ -36,12 +40,24 @@ export class AddToPlaylistComponent implements OnInit {
     this.playlistService.findAllPlaylists().subscribe(data => this.playlists = data)
   }
 
-  onPlaylistSelected(playlist: Playlist) {
-    this.spotifyService.addSongToPlaylist(playlist.idSpotify, this.songId + "")
+  async onPlaylistSelected(playlist: Playlist) {
+    try {
+      await this.spotifyService.addSongToPlaylist(playlist.idSpotify, this.songId + "")
+      this.appCmp.showToast("Song added!", "", false)
+      // @ts-ignore
+      const btn = document.getElementById(playlist.idSpotify).hidden= true
+    } catch (e) {
+      this.appCmp.showToast("Song could not be added!", "", true)
+    }
   }
 
   async createPlaylist() {
-    await this.playlistService.createPlaylist(this.name, this.isPublic)
-    this.refreshData()
+    try {
+      await this.playlistService.createPlaylist(this.name, this.isPublic)
+      this.appCmp.showToast("Playlist created!",this.name+" was created!", false)
+      this.refreshData()
+    } catch (e) {
+      this.appCmp.showToast("Playlist could not be created!","", true)
+    }
   }
 }

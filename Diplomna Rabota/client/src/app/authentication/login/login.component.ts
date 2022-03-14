@@ -50,7 +50,7 @@ export class LoginComponent implements OnInit {
       this.router.navigate(['posts'])
       this.appComponent.logged=true
     } catch (Exception) {
-      console.log(Exception)
+      this.appComponent.showToast("Could not log in","Wrong credentials or unconfirmed email", true)
     }
   }
 }

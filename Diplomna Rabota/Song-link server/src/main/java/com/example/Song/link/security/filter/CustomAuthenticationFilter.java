@@ -80,11 +80,13 @@ public class CustomAuthenticationFilter extends UsernamePasswordAuthenticationFi
         return sb.toString();
     }
 
+    @SneakyThrows
     @Override
     protected void successfulAuthentication(HttpServletRequest request, HttpServletResponse response, FilterChain chain, Authentication authentication) throws IOException, ServletException {
         User user = (User) authentication.getPrincipal();
         if (!userRepository.findByEmail(user.getUsername()).getEmailVerification()) {
-            new ObjectMapper().writeValue(response.getOutputStream(), "Email not confirmed");
+            throw new IOException("Email not confirmed");
+//            new ObjectMapper().writeValue(response.getOutputStream(), "Email not confirmed");
 
         } else {
             Map<String, String> tokens = jwtProvider.generateTokens(user, request.getRequestURI().toString());

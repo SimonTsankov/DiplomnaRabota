@@ -14,7 +14,7 @@ import {TokensService} from "./authentication/AuthServices/TokenService/tokens.s
 })
 export class AppComponent implements OnInit {
 
-  title = 'Rockmend me';
+  title = 'Reccomend me a song!';
   @ViewChild(MatSidenav)
   sidenav!: MatSidenav;
   component: string = "";
@@ -55,7 +55,7 @@ export class AppComponent implements OnInit {
   ngOnInit(): void {
 
     this.logged = this.authenticationService.checkLogin();
-
+    this.clickTest('red')
     let themePicker = document.getElementById("red");
     if (themePicker != null) {
       themePicker.style.setProperty("background-color", "#8dbcee")

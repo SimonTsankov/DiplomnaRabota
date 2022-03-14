@@ -12,7 +12,7 @@
 
     <button mat-raised-button (click)="sendPasswordReset()">Request new password</button>
     <button mat-raised-button (click)="updateInfo()">Update username</button>
-    <button mat-raised-button (click)="reddirectToSpotifyLogin()">Login with spotify</button>
+    <button mat-raised-button (click)="reddirectToSpotifyLogin()">Re/Login with spotify</button>
   </div>
   <div class="posts">
     <h1 style="text-align: center">Your posts:</h1>
@@ -32,13 +32,11 @@
             </mat-card-header>
             <img mat-card-image src="{{'data:image/jpg;base64,' + post.picByte.toString()}}">
             <mat-card-content>
-              Posted by: add name later
+<!--              Posted by: add name later-->
             </mat-card-content>
             <mat-card-actions style="display: flex; flex-grow: 3">
               <!--      TODO: Make buttons work also hover animations-->
-              <mat-icon class="action-item">share</mat-icon>
-              <mat-icon class="action-item" >favorite_border</mat-icon>
-              <mat-icon class="action-item" > save</mat-icon>
+
             </mat-card-actions>
           </mat-card>
 

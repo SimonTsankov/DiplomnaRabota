@@ -16,7 +16,7 @@ export const environment = {
   production: true,
   redTheme: [
     { attribute: "--neon-clr", value: "#1DB954"},
-    { attribute: "--neon-clr2", value: "#1DB954"},
+    { attribute: "--neon-clr2", value: "#00471b"},
     { attribute: "--bckg-menu", value: "#191414"},
     { attribute: "--LogRegColor", value: "#848484"},
     { attribute: "--LogRegColorTwo", value: "rgb(114,114,114)"},

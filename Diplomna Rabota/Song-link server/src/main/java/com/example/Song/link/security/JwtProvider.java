@@ -135,11 +135,6 @@ public class JwtProvider {
     public Map<String, String> generateTokens(User user, String requestURI) {
         Map<String, String> tokens = new HashMap<>();
 
-        //TODO FIX IT (put a debug point in isVerified() method to see it does not even go there)
-//        if(!userDetailsService.isVerified(user.getUsername())){
-//            return tokens;
-//        }
-
         String access_token = generateAccessToken(user, requestURI);
         String refresh_token = generateRefreshToken(user, requestURI);
         tokens.put("access_token", access_token);

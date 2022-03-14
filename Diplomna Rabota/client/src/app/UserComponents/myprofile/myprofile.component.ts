@@ -18,17 +18,16 @@ export class MyprofileComponent implements OnInit {
   userPosts: UPost[] = [];
 
   constructor(private postsService: PostsServiceService,
-              private router: Router, private userService: UserService,
+              private router: Router,
+              private userService: UserService,
               private appComponent: AppComponent,
               private spotifyService: SpotifyService) {
     this.refreshPosts()
-
   }
 
   ngOnInit(): void {
     this.userService.getCurrentUser().subscribe(user => this.user = user);
     window.scroll(0, 0)
-    console.log("dwddw")
   }
 
   async refreshPosts() {
@@ -36,18 +35,20 @@ export class MyprofileComponent implements OnInit {
   }
 
   sendPasswordReset() {
-
+      this.userService.doRequestPasswordReset(this.user.email)
+      this.appComponent.showToast("Email has been sent!","You will recieve further information in the email", false)
   }
 
   updateInfo() {
     window.scroll(0, 0)
     this.userService.updateUserInfo(this.user)
+    this.appComponent.showToast("Username updated","", false)
   }
 
   async delPost(id: any) {
-    console.log(id)
     await this.postsService.deletePost(id).then(result => this.appComponent.showToast("Post was deleted succesfully", "", false));
     this.refreshPosts()
+    this.appComponent.showToast("Post deleted!","Ops, you cant undo thaat", false)
   }
 
   async reddirectToSpotifyLogin() {
