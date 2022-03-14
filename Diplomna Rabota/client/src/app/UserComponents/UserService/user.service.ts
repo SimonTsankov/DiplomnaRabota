@@ -15,7 +15,8 @@ export class UserService {
   searchFollowedUrl = environment.apiUrl + "user/getFollowed"
   searchUsersUrl = environment.apiUrl + "user-info/getUsersForFollow";
   updateCurrentUserInfoUrl = environment.apiUrl + "user-info/updateUserInfo";
-
+  passResetUrl = environment.apiUrl + "user/reset-password-request"
+   sendPassResetUrl = environment.apiUrl + "user/send-password-reset"
   constructor(private http: HttpClient) {
   }
 
@@ -30,13 +31,26 @@ export class UserService {
   getFollowed(searchWord: string) {
     if (searchWord == "" || searchWord == null)
       return this.http.get<User[]>(this.getFollowedUrl);
-    else{
+    else {
       return this.http.get<User[]>(this.searchFollowedUrl);
     }
-      }
+  }
+
 
   getCurrentUser() {
     return this.http.get<User>(this.getCurrentUserUrl);
+  }
+  async doSendPasswordReset(hash: string, password: string) {
+    return await this.http.post(this.passResetUrl, {
+      hash: hash,
+      password: password
+    }, {responseType: "text", headers: {'skip': "true"}}).toPromise();
+  }
+
+  async doRequestPasswordReset(email: string) {
+    console.log(email)
+    return await this.http.post(this.sendPassResetUrl, email,
+      {responseType: "text", headers: {'skip': "true"}}).toPromise();
   }
 
   getSearchedUsers(searchedWord: string) {

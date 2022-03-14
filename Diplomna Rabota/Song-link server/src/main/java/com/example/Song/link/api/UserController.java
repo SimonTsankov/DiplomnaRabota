@@ -1,11 +1,14 @@
 package com.example.Song.link.api;
 
+import com.example.Song.link.exception.CustomException;
+import com.example.Song.link.mailModel.PasswordRequestModel;
 import com.example.Song.link.mailModel.RecipientConfirmation;
 import com.example.Song.link.model.*;
 import com.example.Song.link.repository.*;
 import com.example.Song.link.security.JwtProvider;
 import com.example.Song.link.service.EmailService;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import freemarker.template.TemplateException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.ResponseEntity;
@@ -13,11 +16,13 @@ import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 
+import javax.mail.MessagingException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.transaction.Transactional;
 import java.io.IOException;
 import java.security.Principal;
+import java.time.LocalDateTime;
 import java.util.*;
 
 import static org.springframework.http.HttpHeaders.AUTHORIZATION;
@@ -27,9 +32,11 @@ import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
 @RestController
 @RequestMapping("/api/user")
 public class UserController {
+    @Value("${vwp.email.template.password.reset}")
+    private String passwordResetTemplate;
+
     @Autowired
     private PasswordEncoder passwordEncoder;
-
 
     @Autowired
     private UserRepository userRepository;
@@ -104,7 +111,55 @@ public class UserController {
         userRole.setRole(roleRepository.findByName("User").getId());
         userRoleRepository.save(userRole);
     }
+    //send email for password reset
+    @PostMapping(value = "/send-password-reset")
+    public ResponseEntity<?> sendPasswordReset(@RequestBody String email) throws MessagingException, IOException, TemplateException, CustomException, CustomException {
+        User user = userRepository.findByEmail(email);
+        if (user != null) {
+            String hash = jwtProvider.generateHash();
 
+            savePasswordReset(hash, user);//saves password reset hash with the user's id in the db
+
+            RecipientConfirmation recipient = getRecipient(hash, user.getEmail(), "Reset your password at VWP", "bonus text");
+
+            emailService.sendConfirmationMail(recipient, passwordResetTemplate);
+
+            return ResponseEntity.ok("email send");
+        } else {
+            throw new CustomException("No such email is registered!");
+        }
+    }
+
+    public void savePasswordReset(String hash, User user) {
+        PasswordReset passwordReset = new PasswordReset();
+        passwordReset.setHash(hash);
+        passwordReset.setUser(user);
+        passwordResetRepository.save(passwordReset);
+    }
+
+    @PostMapping(value = "/reset-password-request")
+    public ResponseEntity<?> passwordReset(@RequestBody PasswordRequestModel passwordRequestModel) throws Exception {
+        String hash = passwordRequestModel.getHash();
+        PasswordReset passwordReset = passwordResetRepository.findByHash(hash);
+        if (passwordReset == null)
+            throw new Exception("Does not found request for reset password. Plesase request new password reset");
+
+        LocalDateTime date = passwordReset.getDateCreated();
+
+        if (date.plusMinutes(30L).isBefore(LocalDateTime.now())) {
+            passwordResetRepository.delete(passwordReset);
+            throw new Exception("Link has expired. Please request new password reset");
+        }
+        String password = passwordRequestModel.getPassword();
+
+        User user = passwordReset.getUser();
+        user.setPassword(passwordEncoder.encode(password));
+
+        passwordResetRepository.delete(passwordReset);
+
+        return ResponseEntity.ok("Password changed");
+
+    }
 //endregion
 
     @RequestMapping(value = "/save", method = {RequestMethod.POST, RequestMethod.PUT})

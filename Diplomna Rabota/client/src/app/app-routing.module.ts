@@ -8,6 +8,8 @@ import {MyprofileComponent} from "./UserComponents/myprofile/myprofile.component
 import {UserSearchComponent} from "./UserComponents/user-search/user-search.component";
 import {SpotifyRedirectComponent} from "./Spotify/spotify-redirect/spotify-redirect.component";
 import {AddToPlaylistComponent} from "./Spotify/add-to-playlist/add-to-playlist.component";
+import {ChangePasswordComponent} from "./UserComponents/change-password/change-password.component";
+import {RequestNewpasswordComponent} from "./UserComponents/request-newpassword/request-newpassword.component";
 
 const routes: Routes = [
   { path: '', redirectTo: '/posts', pathMatch: 'full' },
@@ -19,6 +21,8 @@ const routes: Routes = [
   {path: 'myprofile', component: MyprofileComponent},
   {path: 'spotify-redirect', component: SpotifyRedirectComponent},
   {path: 'add-to-playlist', component: AddToPlaylistComponent},
+  {path: 'password-reset', component: ChangePasswordComponent},
+  {path: 'request-new-password', component: RequestNewpasswordComponent},
 ];
 
 @NgModule({

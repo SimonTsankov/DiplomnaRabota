@@ -16,9 +16,8 @@
   </div>
 
   <div *ngSwitchCase="PageNames.whatSong">
-    <h3 style="color:var(--main-color-two);" align="center" *ngIf="selectedUser">User
-      selected: {{selectedUser.username}}</h3>
     <div>
+      <br>
       <div class="searchBar">
         <div style="width: 100%;" class="p-input-icon-left">
           <i class="pi pi-search"></i>
@@ -27,19 +26,18 @@
         </div>
       </div>
 
-        <div style="padding-bottom: 2em" *ngFor="let song of songs">
-          <div (click)="changeSelected(song.track_id)" class="main-container"
-               [ngStyle]="{'background-color':song.track_id==selectedSong? 'var(--main-color-two)':'transparent'}">
-            <img align="left" [src]="song.imgUrl">
-            <div class="grid-container">
-              <div>
-                <p><strong>{{song.name}}</strong></p>
-                <label class="msgLabel">{{song.artist}}</label>
-              </div>
-              <!--        <button (click)="changeSelected(song.id)" mat-button class="colorFulButton">Select</button>-->
+      <div style="padding-bottom: 2em" *ngFor="let song of songs">
+        <div (click)="changeSelected(song.track_id)" class="main-container"
+             [ngStyle]="{'background-color':song.track_id==selectedSong? 'var(--main-color-two)':'transparent'}">
+          <img align="left" [src]="song.imgUrl">
+          <div class="grid-container">
+            <div>
+              <p><strong>{{song.name}}</strong></p>
+              <label class="msgLabel">{{song.artist}}</label>
             </div>
           </div>
         </div>
+      </div>
 
       <button pButton pRipple label="{{index != PageNames.whoTo ? 'Back' : 'Cancel'}}"
               icon="pi {{index != PageNames.whoTo ? 'pi-angle-left' : 'pi-times'}}" class="p-button-text"

@@ -46,7 +46,9 @@ export class SendSongComponent implements OnInit {
       data => this.followedUsers = data)
   }
   searchForSongs(){
-    console.log("searching "+this.searchWord)
+    if(this.searchWord.trim()=="")
+      return
+
     this.spotifyService.getAllSongsLike(this.searchWord).subscribe(data=> this.songs = data)
   }
   save() {

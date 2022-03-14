@@ -71,6 +71,9 @@ public class JwtProvider {
 
     public JwtProvider() {
     }
+    public String generateHash() {
+        return UUID.randomUUID().toString();
+    }
 
     //TODO EXPIRATION DATE
     public String generateEmailVerificationHash() {

@@ -52,6 +52,8 @@ import { AddToPlaylistComponent } from './Spotify/add-to-playlist/add-to-playlis
 import {InputSwitchModule} from "primeng/inputswitch";
 import {StepsModule} from "primeng/steps";
 import { SendSongComponent } from './Spotify/send-song/send-song.component';
+import { ChangePasswordComponent } from './UserComponents/change-password/change-password.component';
+import { RequestNewpasswordComponent } from './UserComponents/request-newpassword/request-newpassword.component';
 
 
 @NgModule({
@@ -68,7 +70,9 @@ import { SendSongComponent } from './Spotify/send-song/send-song.component';
     NotificationComponent,
     SpotifyRedirectComponent,
     AddToPlaylistComponent,
-    SendSongComponent
+    SendSongComponent,
+    ChangePasswordComponent,
+    RequestNewpasswordComponent
   ],
     imports: [
         HttpClientModule,
