@@ -1,20 +1,28 @@
 <p-steps [model]="steps" [(activeIndex)]="index" [readonly]="true"></p-steps>
 <div [ngSwitch]="index">
   <div *ngSwitchCase="PageNames.whoTo">
-    <h4 style="text-align: center">Follwed users:</h4>
-    <div *ngFor="let user of followedUsers" style="  white-space: nowrap;">
-      <ul>
-        <li class="item item__divider">
-          <p class="username">{{user.username}}</p>
-          <span class="item__hr-line"></span>
-          <button id="{{user.id}}" class="item__button" type="button"
-                  (click)="onUserSelect(user)">Send to
-          </button>
-        </li>
-      </ul>
+    <div *ngIf="followedUsers.length==0">
+      <h1>You haven't followed any users</h1>
+      <button style="width: 90%" pButton pRipple
+              label="Follow users here"
+              icon="pi pi-user" class="p-button-text"
+              (click)="gotoUserFollow()"></button>
+    </div>
+    <div *ngIf="followedUsers.length>0">
+      <h4 style="text-align: center">Follwed users:</h4>
+      <div *ngFor="let user of followedUsers" style="  white-space: nowrap;">
+        <ul>
+          <li class="item item__divider">
+            <p class="username">{{user.username}}</p>
+            <span class="item__hr-line"></span>
+            <button id="{{user.id}}" class="item__button" type="button"
+                    (click)="onUserSelect(user)">Send to
+            </button>
+          </li>
+        </ul>
+      </div>
     </div>
   </div>
-
   <div *ngSwitchCase="PageNames.whatSong">
     <div>
       <br>
@@ -27,8 +35,9 @@
       </div>
 
       <div style="padding-bottom: 2em" *ngFor="let song of songs">
-        <div (click)="changeSelected(song.track_id)" class="main-container"
-             [ngStyle]="{'background-color':song.track_id==selectedSong? 'var(--main-color-two)':'transparent'}">
+        <div (click)="changeSelected(song.track_id)"
+             [ngClass]="selectedSong ==song.track_id? 'main-container-no-hover':'main-container' "
+        >
           <img align="left" [src]="song.imgUrl">
           <div class="grid-container">
             <div>

@@ -1,20 +1,23 @@
-button:hover{
-  background-color: var(--main-color-two)!important;
-  color:white!important;
+button:hover {
+  background-color: var(--main-color-two) !important;
+  color: white !important;
 }
-.p-button-text{
+
+.p-button-text {
   color: var(--font-color);
   background-color: var(--button-color-two);
-  width:40%;
+  width: 40%;
   margin: 5%;
-  margin-top:2%;
+  margin-top: 2%;
 }
+
 .username {
   max-width: 25%;
   overflow-wrap: break-word;
   font-size: large;
   color: black;
 }
+
 .item {
   display: flex;
   border: 1px solid #ccc;
@@ -47,17 +50,19 @@ button:hover{
   transition: all .2s;
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
+
 .searchBar {
   margin: 0 auto !important;
   width: 50%;
 }
-span > .pInputText:enabled:focus{
+
+span > .pInputText:enabled:focus {
   border-color: #4D80CA !important;
   box-shadow: 0 0 0 0.02rem green !important;
 }
 
 
-span > .pInputText:hover{
+span > .pInputText:hover {
   box-shadow: 0 0 0 0.02rem green !important;
 }
 
@@ -72,14 +77,21 @@ img {
   border-radius: 25px;
 }
 
+.main-container-no-hover {
+  position: relative;
+  height: 6em;
+  border-radius: 25px;
+  background-color: var(--main-color-two);
+}
+
 .main-container:hover,
 .main-container:focus {
   background-color: #c9eaea !important;
 }
 
 
-.msgLabel{
-  word-wrap:break-word;
+.msgLabel {
+  word-wrap: break-word;
 }
 
 .grid-container {

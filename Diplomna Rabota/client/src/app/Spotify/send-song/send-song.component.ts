@@ -6,6 +6,7 @@ import {UserService} from "../../UserComponents/UserService/user.service";
 import {AppComponent} from "../../app.component";
 import {Song} from "../../model/Song";
 import {SpotifyService} from "../SpotifyService/spotify.service";
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-send-song',
@@ -26,7 +27,10 @@ export class SendSongComponent implements OnInit {
   searchWord: string="";
   selectedSong: string="-1";
 
-  constructor(private spotifyService: SpotifyService, private userService: UserService, private appCmp: AppComponent) {
+  constructor(private spotifyService: SpotifyService,
+              private userService: UserService,
+              private appCmp: AppComponent,
+              private router: Router) {
   }
 
   ngOnInit(): void {
@@ -62,6 +66,11 @@ export class SendSongComponent implements OnInit {
 
   changeSelected(trackId: string) {
     this.selectedSong= trackId;
+  }
+
+  gotoUserFollow() {
+    this.router.navigate(["/user-search"])
+    this.appCmp.sendSongDialog = false
   }
 }
 
