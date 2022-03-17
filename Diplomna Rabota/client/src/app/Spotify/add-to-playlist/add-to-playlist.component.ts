@@ -47,6 +47,7 @@ export class AddToPlaylistComponent implements OnInit {
       // @ts-ignore
       const btn = document.getElementById(playlist.idSpotify).hidden= true
     } catch (e) {
+      this.appCmp.logInSpotifyDialog = true;
       this.appCmp.showToast("Song could not be added!", "", true)
     }
   }
@@ -57,6 +58,7 @@ export class AddToPlaylistComponent implements OnInit {
       this.appCmp.showToast("Playlist created!",this.name+" was created!", false)
       this.refreshData()
     } catch (e) {
+      this.appCmp.logInSpotifyDialog = true;
       this.appCmp.showToast("Playlist could not be created!","", true)
     }
   }

@@ -6,6 +6,7 @@ import {environment} from "../environments/environment";
 import {MenuItem, MessageService} from "primeng/api";
 import {AuthenticationService} from "./authentication/AuthServices/authService/authentication.service";
 import {TokensService} from "./authentication/AuthServices/TokenService/tokens.service";
+import {SpotifyService} from "./Spotify/SpotifyService/spotify.service";
 
 @Component({
   selector: 'app-root',
@@ -36,20 +37,20 @@ export class AppComponent implements OnInit {
   // @ts-ignore
   logged: boolean = this.checkLogin()
   sendSongDialog: boolean = false;
-
+  logInSpotifyDialog: boolean = false;
 
 
   constructor(private authenticationService: AuthenticationService
     , private tokenService: TokensService
     , private messageService: MessageService
     , private elementRef: ElementRef
-    , private router: Router) {
+    , private router: Router
+    , private spotifyService: SpotifyService) {
 
     if (this.savedTheme) {
       this.clickTest(this.savedTheme)
     }
   }
-
 
 
   ngOnInit(): void {
@@ -73,8 +74,8 @@ export class AppComponent implements OnInit {
 
   }
 
-   checkLogin() {
-    this.logged =  this.authenticationService.checkLogin();
+  checkLogin() {
+    this.logged = this.authenticationService.checkLogin();
     // console.log(this.logged)
     return this.logged;
   }
@@ -87,16 +88,16 @@ export class AppComponent implements OnInit {
     element.dispatchEvent(mouseoverEvent);
     // @ts-ignore
     setTimeout(() => element.animate(
-      [
-        {
-          color: 'var(--neon-clr2)',
-          boxShadow: '0 0 1em 0.5em var(--neon-clr)',
-          textShadow: 'none',
-          "background": "var(--neon-clr)"//hsl(31, 100%, 50%) orange
-        }
+        [
+          {
+            color: 'var(--neon-clr2)',
+            boxShadow: '0 0 1em 0.5em var(--neon-clr)',
+            textShadow: 'none',
+            "background": "var(--neon-clr)"//hsl(31, 100%, 50%) orange
+          }
 
-      ],
-      {duration: 1000, iterations: Math.random() * 2}
+        ],
+        {duration: 1000, iterations: Math.random() * 2}
       )
       , 1000)
 
@@ -170,5 +171,9 @@ export class AppComponent implements OnInit {
     // @ts-ignore
     elementContent.scroll(0, 0)
     this.router.navigate(['user-search'])
+  }
+
+  async logInSpotifyRedirect() {
+    window.open(await this.spotifyService.getReddirectUrl(), "_blank")
   }
 }

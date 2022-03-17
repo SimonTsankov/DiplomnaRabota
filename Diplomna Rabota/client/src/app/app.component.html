@@ -1,10 +1,19 @@
 <p-toast></p-toast>
 
-<p-dialog  *ngIf="sendSongDialog"  [(visible)]="sendSongDialog" [style]="{width: '550px', height: '100%'}" header="Send a song to someone!"
+<p-dialog  *ngIf="sendSongDialog" [(visible)]="sendSongDialog" [style]="{width: '550px', height: '100%'}"
+          header="Send a song to someone!"
           styleClass="p-fluid">
-<app-send-song></app-send-song>
+  <app-send-song></app-send-song>
+</p-dialog>
 
+<p-dialog *ngIf="logInSpotifyDialog" [(visible)]="logInSpotifyDialog" [style]="{width: '550px', height: '50%', backgroundColor: 'grey'}"
+          header="You haven't logged in your spotify account!"
+          styleClass="p-fluid">
 
+  <button style="width: 90%" pButton pRipple
+          label="Log into your spotify account"
+          icon="pi pi-music" class="button-spotify-login"
+          (click)="logInSpotifyRedirect()"></button>
 </p-dialog>
 
 <mat-toolbar class="mat-elevation-z8 toolbar">

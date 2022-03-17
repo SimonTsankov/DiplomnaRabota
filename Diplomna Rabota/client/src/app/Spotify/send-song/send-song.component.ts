@@ -24,8 +24,10 @@ export class SendSongComponent implements OnInit {
   followedUsers: User[] = [];
   songs: Song[] = [];
 
-  searchWord: string="";
-  selectedSong: string="-1";
+  searchWord: string = "";
+  selectedSongTrackId: string = "-1";
+  // @ts-ignore
+  selectedSongAsObj: Song;
 
   constructor(private spotifyService: SpotifyService,
               private userService: UserService,
@@ -49,14 +51,22 @@ export class SendSongComponent implements OnInit {
     this.userService.getFollowed("si").subscribe(
       data => this.followedUsers = data)
   }
-  searchForSongs(){
-    if(this.searchWord.trim()=="")
+
+  searchForSongs() {
+    if (this.searchWord.trim() == "")
       return
 
-    this.spotifyService.getAllSongsLike(this.searchWord).subscribe(data=> this.songs = data)
+    this.spotifyService.getAllSongsLike(this.searchWord).subscribe(data => this.songs = data)
   }
-  save() {
 
+  async send() {
+    try {
+      await this.spotifyService.sendSongRec(this.selectedSongAsObj, this.selectedUser)
+      this.appCmp.showToast("Sent!", "Song " + this.selectedSongAsObj.name + "was sent to " + this.selectedUser?.username, false)
+    } catch (e) {
+      console.log(e)
+      this.appCmp.showToast("Could not be sent!", "", true)
+    }
   }
 
   onUserSelect(user: any) {
@@ -64,8 +74,9 @@ export class SendSongComponent implements OnInit {
     this.index++;
   }
 
-  changeSelected(trackId: string) {
-    this.selectedSong= trackId;
+  changeSelected(song: Song) {
+    this.selectedSongTrackId = song.track_id;
+    this.selectedSongAsObj = song;
   }
 
   gotoUserFollow() {

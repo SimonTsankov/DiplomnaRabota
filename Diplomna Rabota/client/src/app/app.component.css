@@ -15,9 +15,11 @@
   --font-color: black;
 
 }
-body{
+
+body {
   color: white !important;
 }
+
 .toolbar {
   color: white;
   height: 13%;
@@ -201,7 +203,7 @@ mat-sidenav-container {
 }
 
 @media only screen and (max-width: 1250px) {
-  .neon-button{
+  .neon-button {
     font-size: small;
   }
 }
@@ -211,4 +213,29 @@ mat-sidenav-container {
   color: white;
   margin-right: 1%;
   margin-left: auto;
+}
+
+.button-spotify-login{
+  color: var(--font-color)!important;
+  background-color: var(--button-color-two)!important;
+  width: 40%;
+  margin: 5%;
+  margin-top: 2%;
+}
+
+::ng-deep.p-dialog-title {
+  color: white;
+}
+
+::ng-deep.p-dialog-header {
+  background: #3b3a3a !important;
+}
+
+::ng-deep.p-dialog-content {
+  background: var(--content-bckg-color-Back) !important;
+}
+
+.ui-dialog.ui-widget-content. {
+  background-image: none;
+  background-color: var(--content-bckg-color-Back);
 }

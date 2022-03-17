@@ -1,9 +1,7 @@
 package com.example.Song.link.api;
 
-import com.example.Song.link.model.Playlist;
-import com.example.Song.link.model.Post;
-import com.example.Song.link.model.Song;
-import com.example.Song.link.model.User;
+import com.example.Song.link.model.*;
+import com.example.Song.link.repository.NotificationRepository;
 import com.example.Song.link.repository.PlaylistRepository;
 import com.example.Song.link.repository.SongRepository;
 import com.example.Song.link.repository.UserRepository;
@@ -43,6 +41,9 @@ public class SpotifyController {
 
     @Autowired
     SpotifyService spotifyService;
+
+    @Autowired
+    NotificationRepository notificationRepository;
 
     @GetMapping("/searchTracks")
     public ResponseEntity<?> findAll(@RequestParam String searchWord) throws IOException, ParseException, SpotifyWebApiException {
@@ -86,6 +87,26 @@ public class SpotifyController {
         }catch (Exception e){
             return  ResponseEntity.badRequest().body("Error");
         }
+    }
+
+    @PostMapping("/sendSong")
+    public ResponseEntity<?> sendRecommendation(@RequestBody SongRecTransportM songRecTransport, Principal principal){
+        User userFrom = userRepository.findByEmail(principal.getName());
+        User userFor = userRepository.findById(songRecTransport.getUser().getId());
+
+        Song song = songRepository.findByTrack_id(songRecTransport.getSong().getTrack_id());
+        if(song == null) {
+            songRepository.save(songRecTransport.getSong());
+            song = songRepository.findByTrack_id(songRecTransport.getSong().getTrack_id());
+        }
+        Notification notification = new Notification();
+        notification.setSong(song);
+        notification.setUser(userFor);
+        notification.setTitle(userFrom.getUsername() + " sent you a song!");
+        notification.setMessage("He recommended you: " + song.getName());
+        notificationRepository.save(notification);
+
+        return ResponseEntity.ok("Added successfully");
     }
 
 }

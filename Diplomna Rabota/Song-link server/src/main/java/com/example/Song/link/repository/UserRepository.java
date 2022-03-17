@@ -12,6 +12,7 @@ import java.util.List;
 @Repository
 public interface UserRepository extends JpaRepository<User, Long> {
     User findByEmail(String email);
+    User findById(long id);
     List<User> findByUsernameContains(String username);
     @Query(value = "select  u.username, u.id from users u where id in(select u2.user_followed from userfollow u2 where u2.user_following = :userId);",
     nativeQuery = true)

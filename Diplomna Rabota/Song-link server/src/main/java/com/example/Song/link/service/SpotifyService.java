@@ -58,7 +58,7 @@ public class SpotifyService {
         return spotifyApi;
     }
 
-    public void refreshToken(Principal principal) {
+    public void refreshToken(Principal principal) throws Exception {
         User user = userRepository.findByEmail(principal.getName());
         SpotifyApi spotifyApi = new SpotifyApi.Builder()
                 .setClientId(clientId)
@@ -79,11 +79,11 @@ public class SpotifyService {
 
             userRepository.save(user);
         } catch (IOException | SpotifyWebApiException | ParseException e) {
-            System.out.println("Error: " + e.getMessage());
+           throw new Exception("Error: " + e.getMessage());
         }
     }
 
-    public void createPlaylist(Principal principal, String name, Boolean isPublic) throws IOException, ParseException, SpotifyWebApiException {
+    public void createPlaylist(Principal principal, String name, Boolean isPublic) throws Exception {
         User user = userRepository.findByEmail(principal.getName());
         refreshToken(principal);
         SpotifyApi spotifyApi = new SpotifyApi.Builder().setAccessToken(user.getSpotifyAccessToken()).build();
@@ -102,7 +102,7 @@ public class SpotifyService {
         playlistRepository.save(playlist1);
     }
 
-    public void addToPlaylist(String playlistId, Song song, User user, Principal principal){
+    public void addToPlaylist(String playlistId, Song song, User user, Principal principal) throws Exception {
         refreshToken(principal);
 
         SpotifyApi spotifyApi = new SpotifyApi.Builder().setAccessToken(user.getSpotifyAccessToken()).build();

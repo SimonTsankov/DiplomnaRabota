@@ -52,8 +52,9 @@ button:hover {
 }
 
 .searchBar {
-  margin: 0 auto !important;
+  margin: 0 auto;
   width: 50%;
+  margin-bottom: 10px;
 }
 
 span > .pInputText:enabled:focus {
@@ -75,6 +76,7 @@ img {
   position: relative;
   height: 6em;
   border-radius: 25px;
+  background: white;
 }
 
 .main-container-no-hover {
@@ -86,7 +88,7 @@ img {
 
 .main-container:hover,
 .main-container:focus {
-  background-color: #c9eaea !important;
+  background-color: #b5d0b5 !important;
 }
 
 
@@ -98,4 +100,11 @@ img {
   display: grid;
   /*grid-template-columns: 1.5fr 1fr;*/
   grid-gap: 0px;
+}
+
+::ng-deep.p-menuitem-link{
+  background: transparent!important;
+}
+::ng-deep.p-steps-title{
+  color: var(--font-color)!important;
 }
