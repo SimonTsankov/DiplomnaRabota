@@ -13,7 +13,7 @@ import {SpotifyService} from "../../Spotify/SpotifyService/spotify.service";
   selector: 'app-register',
   templateUrl: './register.component.html',
   styleUrls: ['./register.component.css'],
-  providers: [ConfirmationService,MessageService]
+  providers: [ConfirmationService, MessageService]
 })
 export class RegisterComponent implements OnInit {
   matcher = new MyErrorStateMatcher();
@@ -23,7 +23,7 @@ export class RegisterComponent implements OnInit {
   passwordConfirm = new FormControl('', [Validators.required, Validators.minLength(3)])
   username = new FormControl('', [Validators.minLength(4), Validators.required]);
 
-  hideRegFields= false;
+  hideRegFields = false;
   counter = 8;
 
   signin: FormGroup = new FormGroup({
@@ -54,9 +54,14 @@ export class RegisterComponent implements OnInit {
     try {
       this.user.password = this.password.value;
       this.user.email = this.email.value;
-      await this.registerService.register(this.user)
-      this.hideRegFields = true;
-      this.startCounter()
+      if (this.password.value == this.passwordConfirm.value) {
+        await this.registerService.register(this.user)
+        this.hideRegFields = true;
+        this.startCounter()
+      }else {
+        this.appCmp.showToast("Passwords don't match", "", true);
+        return
+      }
     } catch (e) {
       this.appCmp.showToast("Error", e.error, true)
     }
@@ -65,7 +70,7 @@ export class RegisterComponent implements OnInit {
   startCounter() {
     setInterval(() => {
       this.counter -= 1
-      if(this.counter == 0) {
+      if (this.counter == 0) {
         this.changePath('login');
       }
     }, 1000);

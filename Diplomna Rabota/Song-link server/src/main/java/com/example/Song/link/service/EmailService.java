@@ -61,7 +61,7 @@ public class EmailService {
             helper.setText(emailContent, true);
             javaMailSender.send(mimeMessage);
         } catch (Exception e) {
-            throw new CustomException("Email could not be sent due to a server error!");
+            throw new CustomException("Email could not be sent due to a server error or email doesn't exist!");
         }
     }
 

@@ -69,8 +69,12 @@ public class UserController {
     @PostMapping(value = "/register")
     public ResponseEntity<?> register(@RequestBody User user) throws Exception {
         if (userRepository.findByEmail(user.getEmail()) == null && user.getId() == 0) {
+            if(userRepository.findByUsername(user.getUsername()) !=null && user.getId() !=0){
+                throw new CustomException("Username already taken!");
+            }
             user.setPassword(passwordEncoder.encode(user.getPassword()));
-            user.setEmailVerification(true);//TODO CHANGE TO FALSE
+            user.setEmailVerification(false);//TODO CHANGE TO FALSE
+            user.setUsername(user.getUsername());
             userRepository.save(user);
 
             setDefUserRole(user);// gives a registered user role of User
@@ -84,7 +88,7 @@ public class UserController {
 
             return ResponseEntity.ok("user has been created");
         } else {
-            throw new Exception("User exists");
+            throw new CustomException("User exists");
             //  throw new UserAlreadyExists("User with this email already exists!");
         }
     }
@@ -111,11 +115,15 @@ public class UserController {
         userRole.setRole(roleRepository.findByName("User").getId());
         userRoleRepository.save(userRole);
     }
+
     //send email for password reset
     @PostMapping(value = "/send-password-reset")
     public ResponseEntity<?> sendPasswordReset(@RequestBody String email) throws MessagingException, IOException, TemplateException, CustomException, CustomException {
         User user = userRepository.findByEmail(email);
         if (user != null) {
+            if(passwordResetRepository.findByUser(user)!=null){
+                passwordResetRepository.delete(passwordResetRepository.findByUser(user));
+            }
             String hash = jwtProvider.generateHash();
 
             savePasswordReset(hash, user);//saves password reset hash with the user's id in the db
@@ -142,13 +150,13 @@ public class UserController {
         String hash = passwordRequestModel.getHash();
         PasswordReset passwordReset = passwordResetRepository.findByHash(hash);
         if (passwordReset == null)
-            throw new Exception("Does not found request for reset password. Plesase request new password reset");
+            throw new CustomException("Does not found request for reset password. Please request new password reset");
 
         LocalDateTime date = passwordReset.getDateCreated();
 
         if (date.plusMinutes(30L).isBefore(LocalDateTime.now())) {
             passwordResetRepository.delete(passwordReset);
-            throw new Exception("Link has expired. Please request new password reset");
+            throw new CustomException("Link has expired. Please request new password reset");
         }
         String password = passwordRequestModel.getPassword();
 
@@ -194,12 +202,12 @@ public class UserController {
 
     @GetMapping(value = "/getFollowed")
     public ResponseEntity<?> getFollowed(Principal principal) {
-        List<UsernameAndId> users= userRepository.findFollowedUsers(userRepository.findByEmail(principal.getName()).getId());
+        List<UsernameAndId> users = userRepository.findFollowedUsers(userRepository.findByEmail(principal.getName()).getId());
         return ResponseEntity.ok().body(users);
     }
 
     @GetMapping(value = "/token/refresh")
-    public void refreshToken(HttpServletRequest request, HttpServletResponse response) throws IOException {
+    public void refreshToken(HttpServletRequest request, HttpServletResponse response) throws IOException, CustomException {
 
         String authorizationHeader = request.getHeader(AUTHORIZATION);
         if (authorizationHeader != null && authorizationHeader.startsWith("Bearer ")) {
@@ -219,7 +227,7 @@ public class UserController {
                 new ObjectMapper().writeValue(response.getOutputStream(), error);
             }
         } else {
-            throw new RuntimeException("Refresh token is missing");
+            throw new CustomException("Refresh token is missing");
         }
     }
 

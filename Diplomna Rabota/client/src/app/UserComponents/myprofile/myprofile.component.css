@@ -2,6 +2,7 @@
   width: 100vw;
   height: auto;
   margin-left: 1em;
+  color: var(--font-color);
 }
 
 div {

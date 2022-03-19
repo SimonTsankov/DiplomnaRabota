@@ -52,8 +52,8 @@
 </div>
 <p-confirmDialog [style]="{width: '50vw'}" [baseZIndex]="10000" rejectButtonStyleClass="p-button-text"></p-confirmDialog>
 
-<div *ngIf="hideRegFields" class="post-regi-component">
-  <h1 class="created-text">Your account has been created, confirmation email has been sent to  <strong style="font-size: 1.2em">{{email.value}}</strong></h1>
+<div  *ngIf="hideRegFields" class="post-regi-component">
+  <h3 class="created-text" style="color:var(--font-color)">Your account has been created, confirmation email has been sent to  <strong style="color:var(--main-color-two); background-color: rgba(255,255,255,0.35)">{{email.value}}</strong></h3>
   <div class="bar-text">
     Redirecting to login in : {{counter}}
     <div class="bar">

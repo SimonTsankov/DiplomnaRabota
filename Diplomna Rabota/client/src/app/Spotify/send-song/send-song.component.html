@@ -2,8 +2,8 @@
 <div [ngSwitch]="index">
   <div *ngSwitchCase="PageNames.whoTo">
     <div *ngIf="followedUsers.length==0">
-      <h1>You haven't followed any users</h1>
-      <button style="width: 90%" pButton pRipple
+      <h1 style = "color: var(--font-color)">You haven't followed any users</h1>
+      <button style="width: 90%; " pButton pRipple
               label="Follow users here"
               icon="pi pi-user" class="p-button-text"
               (click)="gotoUserFollow()"></button>

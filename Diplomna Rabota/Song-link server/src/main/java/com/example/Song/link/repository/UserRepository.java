@@ -23,4 +23,6 @@ public interface UserRepository extends JpaRepository<User, Long> {
     nativeQuery = true)
 
     List<UsernameAndId> findNonFollowedUsersSearch(@Param("userId")Long userId, @Param("search")String search);
+
+    User findByUsername(String username);
 }
