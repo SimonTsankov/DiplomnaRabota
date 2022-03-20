@@ -1,0 +1,31 @@
+
+.bar-text {
+  width: 100%;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+}
+
+.bar {
+  border: 1px solid #666;
+  height: 20px;
+  width: 100%;
+}
+.bar .in {
+  animation: fill 8s linear 1;
+  height: 100%;
+  background-color: var(--main-color-two);
+}
+.created-text {
+  text-align: center;
+  color: black;
+}
+
+@keyframes fill {
+  0% {
+    width: 0;
+  }
+  100% {
+    width: 100%;
+  }
+}

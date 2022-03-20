@@ -54,6 +54,10 @@ export class LoginComponent implements OnInit {
       this.appComponent.showToast("Could not log in","Wrong credentials or unconfirmed email", true)
     }
   }
+
+  gotoRequestPassword() {
+    this.router.navigate(["request-new-password"]);
+  }
 }
 
 export class MyErrorStateMatcher implements ErrorStateMatcher {

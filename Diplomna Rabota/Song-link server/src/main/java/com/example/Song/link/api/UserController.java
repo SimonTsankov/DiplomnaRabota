@@ -182,7 +182,34 @@ public class UserController {
             return ResponseEntity.ok("user has been updated");
         }
     }
+    @PostMapping(value = "/verify")
+    public ResponseEntity<?> verify(@RequestParam(value = "hash") String hash) throws CustomException, MessagingException, TemplateException, IOException {
 
+        EmailVerification emailVerification = emailVerificationRepository.findByHash(hash);
+
+        if (emailVerification != null) {
+            User user = emailVerification.getUser();
+            LocalDateTime date = emailVerification.getDateCreated();
+            final Calendar cal = Calendar.getInstance();
+
+            if (date.plusMinutes(30L).isBefore(LocalDateTime.now())) {
+                emailVerificationRepository.delete(emailVerification);
+                saveEmailVerification(hash, user);//New email verification
+
+                RecipientConfirmation recepient = getRecipient(hash, user.getEmail(), "Confirm your email at Sl", "bonus text!");
+                emailService.sendConfirmationMail(recepient, emailVerificationTemplate);
+
+                throw new CustomException("Expired, try again");
+            }
+
+            user.setEmailVerification(true);// verify user
+
+            emailVerificationRepository.delete(emailVerification);
+
+            return ResponseEntity.ok("user validated");
+        }
+        throw new CustomException("Already confirmed or wrong url");
+    }
     @PostMapping(value = "/saveFollow")
     public ResponseEntity<?> saveFollow(@RequestParam Long id, Principal principal) {
         UserFollow userFollow = new UserFollow();

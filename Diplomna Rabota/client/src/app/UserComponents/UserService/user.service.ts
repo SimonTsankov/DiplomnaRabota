@@ -16,7 +16,8 @@ export class UserService {
   searchUsersUrl = environment.apiUrl + "user-info/getUsersForFollow";
   updateCurrentUserInfoUrl = environment.apiUrl + "user-info/updateUserInfo";
   passResetUrl = environment.apiUrl + "user/reset-password-request"
-   sendPassResetUrl = environment.apiUrl + "user/send-password-reset"
+  sendPassResetUrl = environment.apiUrl + "user/send-password-reset"
+  confirmEmailUrl = environment.apiUrl +"user/verify"
   constructor(private http: HttpClient) {
   }
 
@@ -36,10 +37,13 @@ export class UserService {
     }
   }
 
-
+  async confirmEmail(hash: string) {
+    return await this.http.post(this.confirmEmailUrl + "?hash=" + hash, "", {responseType: "text"}).toPromise()
+  }
   getCurrentUser() {
     return this.http.get<User>(this.getCurrentUserUrl);
   }
+
   async doSendPasswordReset(hash: string, password: string) {
     return await this.http.post(this.passResetUrl, {
       hash: hash,

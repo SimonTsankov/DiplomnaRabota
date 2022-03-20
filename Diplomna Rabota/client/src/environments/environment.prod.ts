@@ -11,7 +11,8 @@ export const environment = {
     "user/send-password-reset",
     "user/reset-password-request",
     "post/findAll",
-    "spotify/getReddirectUrl"
+    "spotify/getReddirectUrl",
+    "user/confirm-email"
   ],
   production: true,
   redTheme: [

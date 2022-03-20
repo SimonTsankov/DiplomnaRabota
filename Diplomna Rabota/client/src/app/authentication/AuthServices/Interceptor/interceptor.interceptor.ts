@@ -24,7 +24,7 @@ export class InterceptorInterceptor implements HttpInterceptor {
     this.access_token = this.tokenService.getAccessToken();
     this.refresh_token = this.tokenService.getRefreshToken();
 
-    if (environment.urlsToSkip.includes(request.url.replace(environment.apiUrl, "")) || request.url == environment.loginUrl) {
+    if (environment.urlsToSkip.includes(request.url.replace(environment.apiUrl, "")) || request.url == environment.loginUrl || request.url.includes("/verify")) {
       console.log("skiped interceptor: "+request.url)
       return next.handle(request);
     }

@@ -38,7 +38,7 @@ export class NotificationComponent implements OnInit {
   }
 
   openAddDialog(notification: any) {
-    console.log(notification)
+    this.read(notification.id)
     window.location.replace(environment.url+"/add-to-playlist?id="+notification.song.track_id)
   }
 }

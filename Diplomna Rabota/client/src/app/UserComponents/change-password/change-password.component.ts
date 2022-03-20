@@ -26,7 +26,6 @@ export class ChangePasswordComponent implements OnInit {
     this.route.queryParams
       .subscribe(params => {
           this.hash = params.hash;
-          console.log(this.hash)
         }
       );
   }

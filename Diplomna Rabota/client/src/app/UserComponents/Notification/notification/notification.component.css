@@ -1,5 +1,6 @@
 :host {
   width: 100%;
+  height: 15em;
 }
 
 img {
@@ -13,10 +14,14 @@ img {
   border-radius: 25px;
 }
 
-p {
-
+.scrollContainer {
+  height: 400px;
+  width: 100%;
 }
-
+.scrollContainerSmall{
+  height: auto;
+  width: 100%;
+}
 .main-container:hover,
 .main-container:focus {
   background-color: #c9eaea !important;

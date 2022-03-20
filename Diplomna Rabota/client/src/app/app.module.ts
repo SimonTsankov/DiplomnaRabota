@@ -54,6 +54,7 @@ import {StepsModule} from "primeng/steps";
 import { SendSongComponent } from './Spotify/send-song/send-song.component';
 import { ChangePasswordComponent } from './UserComponents/change-password/change-password.component';
 import { RequestNewpasswordComponent } from './UserComponents/request-newpassword/request-newpassword.component';
+import { ConfirmEmailComponent } from './UserComponents/confirm-email/confirm-email.component';
 
 
 @NgModule({
@@ -72,7 +73,8 @@ import { RequestNewpasswordComponent } from './UserComponents/request-newpasswor
     AddToPlaylistComponent,
     SendSongComponent,
     ChangePasswordComponent,
-    RequestNewpasswordComponent
+    RequestNewpasswordComponent,
+    ConfirmEmailComponent
   ],
     imports: [
         HttpClientModule,

@@ -11,12 +11,13 @@ export const environment = {
     "user/send-password-reset",
     "user/reset-password-request",
     "post/findAll",
-    "spotify/getReddirectUrl"
+    "spotify/getReddirectUrl",
+    "user/confirm-email"
   ],
   production: false,
   redTheme: [
     { attribute: "--neon-clr", value: "#1DB954"},
-    { attribute: "--neon-clr2", value: "#1DB954"},
+    { attribute: "--neon-clr2", value: "#0e5c2a"},
     { attribute: "--bckg-menu", value: "#191414"},
     { attribute: "--LogRegColor", value: "#848484"},
     { attribute: "--LogRegColorTwo", value: "rgb(114,114,114)"},

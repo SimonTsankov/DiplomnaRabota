@@ -3,6 +3,7 @@ import {FormControl, FormGroup, Validators} from "@angular/forms";
 import {MyErrorStateMatcher} from "../../authentication/login/login.component";
 import {UserService} from "../UserService/user.service";
 import {AppComponent} from "../../app.component";
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-request-newpassword',
@@ -17,7 +18,7 @@ export class RequestNewpasswordComponent implements OnInit {
     email: this.email
   });
 
-  constructor(private userService: UserService, private appCmp: AppComponent) { }
+  constructor(private router: Router, private userService: UserService, private appCmp: AppComponent) { }
 
   ngOnInit(): void {
   }
@@ -36,6 +37,6 @@ export class RequestNewpasswordComponent implements OnInit {
     }
   }
   redirectLogin() {
-
+      this.router.navigate(["/login"])
   }
 }
