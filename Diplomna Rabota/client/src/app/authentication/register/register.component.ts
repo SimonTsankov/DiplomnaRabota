@@ -52,8 +52,13 @@ export class RegisterComponent implements OnInit {
 
   async register() {
     try {
-      this.user.password = this.password.value;
-      this.user.email = this.email.value;
+      this.user.password = this.password.value.trim();
+      this.user.email = this.email.value.trim();
+      this.user.username = this.username.value.trim();
+      if(this.username.value.trim()==""|| this.username.value==null){
+        this.appCmp.showToast("Username cant be empty", "", true);
+        return
+      }
       if (this.password.value == this.passwordConfirm.value) {
         await this.registerService.register(this.user)
         this.hideRegFields = true;

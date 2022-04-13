@@ -45,8 +45,8 @@
 
 <mat-sidenav-container>
   <mat-sidenav #sidenav="matSidenav" class="mat-elevation-z8">
-    <img style="width: 150px" src="/assets/images/logo.png" alt="image">
-    <h4 class="name">Rockmend me</h4>
+    <img style="width: 150px" src="/assets/images/logo-simon.png" alt="image">
+    <h4 class="name">Recommend me me</h4>
     <p class="designation">Who wants to explore new music?</p>
 
     <mat-divider></mat-divider>
@@ -110,13 +110,13 @@
     <section class="fixedThemeMenu">
       <mat-button-toggle-group value="{{savedTheme}}" style="font-size: small;" name="favoriteColor"
                                aria-label="Favorite Color">
-        <mat-button-toggle id="red" class="mat-button-toggle" style="color: #c76a80" (click)="clickTest('red')"
+        <mat-button-toggle id="red" class="mat-button-toggle" style="color: #c76a80" (click)="changeTheme('red')"
                            value="red">Dark
         </mat-button-toggle>
-        <mat-button-toggle id="green" class="mat-button-toggle" style="color: #a3c76a" (click)="clickTest('green')"
+        <mat-button-toggle id="green" class="mat-button-toggle" style="color: #a3c76a" (click)="changeTheme('green')"
                            value="green">Emerald
         </mat-button-toggle>
-        <mat-button-toggle id="purple" class="mat-button-toggle" style="color: #a66ac7" (click)="clickTest('purple')"
+        <mat-button-toggle id="purple" class="mat-button-toggle" style="color: #a66ac7" (click)="changeTheme('purple')"
                            value="purple">Majestic
         </mat-button-toggle>
       </mat-button-toggle-group>

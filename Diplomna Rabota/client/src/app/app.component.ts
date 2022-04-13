@@ -15,7 +15,7 @@ import {SpotifyService} from "./Spotify/SpotifyService/spotify.service";
 })
 export class AppComponent implements OnInit {
 
-  title = 'Reccomend me a song!';
+  title = 'Recommend me a song!';
   @ViewChild(MatSidenav)
   sidenav!: MatSidenav;
   component: string = "";
@@ -48,7 +48,7 @@ export class AppComponent implements OnInit {
     , private spotifyService: SpotifyService) {
 
     if (this.savedTheme) {
-      this.clickTest(this.savedTheme)
+      this.changeTheme(this.savedTheme)
     }
   }
 
@@ -56,7 +56,8 @@ export class AppComponent implements OnInit {
   ngOnInit(): void {
 
     this.logged = this.authenticationService.checkLogin();
-    this.clickTest('red')
+    if(!this.savedTheme)
+    this.changeTheme('red')
     let themePicker = document.getElementById("red");
     if (themePicker != null) {
       themePicker.style.setProperty("background-color", "#8dbcee")
@@ -107,7 +108,7 @@ export class AppComponent implements OnInit {
 
   }
 
-  clickTest(item: any) {
+  changeTheme(item: any) {
     this.themeButtons.forEach(element => this.resetButton(element));
     window.localStorage.setItem("theme", item);
     this.savedTheme = item

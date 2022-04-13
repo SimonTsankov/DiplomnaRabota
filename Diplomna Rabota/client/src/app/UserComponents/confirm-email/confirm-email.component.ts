@@ -33,7 +33,7 @@ export class ConfirmEmailComponent implements OnInit {
     setInterval(() => {
       this.counter -= 1
       if (this.counter == 0) {
-        // this.router.navigate(["/posts"])
+        this.router.navigate(["/login"])
       }
     }, 1000);
   }

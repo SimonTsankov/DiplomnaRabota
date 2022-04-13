@@ -69,27 +69,30 @@ public class UserController {
     @PostMapping(value = "/register")
     public ResponseEntity<?> register(@RequestBody User user) throws Exception {
         if (userRepository.findByEmail(user.getEmail()) == null && user.getId() == 0) {
-            if(userRepository.findByUsername(user.getUsername()) !=null && user.getId() !=0){
+            if (userRepository.findByUsername(user.getUsername()) != null && user.getId() != 0) {
                 throw new CustomException("Username already taken!");
             }
+
+            String hash = jwtProvider.generateEmailVerificationHash();
+            try {
+            RecipientConfirmation recepient = getRecipient(hash, user.getEmail(), "Confirm your email at Sl", "bonus text!");
+            emailService.sendConfirmationMail(recepient, emailVerificationTemplate);
+
+            }catch (Exception e){
+                 throw new CustomException("Email could not be sent, try registering with a valid email");
+            }
             user.setPassword(passwordEncoder.encode(user.getPassword()));
-            user.setEmailVerification(false);//TODO CHANGE TO FALSE
+            user.setEmailVerification(false);
             user.setUsername(user.getUsername());
             userRepository.save(user);
-
             setDefUserRole(user);// gives a registered user role of User
-            String hash = jwtProvider.generateEmailVerificationHash();
             saveEmailVerification(hash, user);
 
-            RecipientConfirmation recepient = getRecipient(hash, user.getEmail(), "Confirm your email at Sl", "bonus text!");
-
-            emailService.sendConfirmationMail(recepient, emailVerificationTemplate);
 
 
             return ResponseEntity.ok("user has been created");
         } else {
             throw new CustomException("User exists");
-            //  throw new UserAlreadyExists("User with this email already exists!");
         }
     }
 
@@ -121,7 +124,7 @@ public class UserController {
     public ResponseEntity<?> sendPasswordReset(@RequestBody String email) throws MessagingException, IOException, TemplateException, CustomException, CustomException {
         User user = userRepository.findByEmail(email);
         if (user != null) {
-            if(passwordResetRepository.findByUser(user)!=null){
+            if (passwordResetRepository.findByUser(user) != null) {
                 passwordResetRepository.delete(passwordResetRepository.findByUser(user));
             }
             String hash = jwtProvider.generateHash();
@@ -182,6 +185,7 @@ public class UserController {
             return ResponseEntity.ok("user has been updated");
         }
     }
+
     @PostMapping(value = "/verify")
     public ResponseEntity<?> verify(@RequestParam(value = "hash") String hash) throws CustomException, MessagingException, TemplateException, IOException {
 
@@ -199,7 +203,7 @@ public class UserController {
                 RecipientConfirmation recepient = getRecipient(hash, user.getEmail(), "Confirm your email at Sl", "bonus text!");
                 emailService.sendConfirmationMail(recepient, emailVerificationTemplate);
 
-                throw new CustomException("Expired, try again");
+                throw new CustomException("Expired, try again! New mail has been sent");
             }
 
             user.setEmailVerification(true);// verify user
@@ -210,6 +214,7 @@ public class UserController {
         }
         throw new CustomException("Already confirmed or wrong url");
     }
+
     @PostMapping(value = "/saveFollow")
     public ResponseEntity<?> saveFollow(@RequestParam Long id, Principal principal) {
         UserFollow userFollow = new UserFollow();
