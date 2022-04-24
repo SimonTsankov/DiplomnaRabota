@@ -103,7 +103,7 @@ public class SpotifyController {
         notification.setSong(song);
         notification.setUser(userFor);
         notification.setTitle(userFrom.getUsername() + " sent you a song!");
-        notification.setMessage("He recommended you: " + song.getName());
+        notification.setMessage("They recommended you: " + song.getName());
         notificationRepository.save(notification);
 
         return ResponseEntity.ok("Added successfully");

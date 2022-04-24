@@ -11,6 +11,13 @@ public class User {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
+    public long getId() {
+        return id;
+    }
+
+    public void setId(long id) {
+        this.id = id;
+    }
     @Column(unique = true)
     private String email;
 
@@ -47,13 +54,7 @@ public class User {
         this.spotifyRefreshToken = spotifyRefreshToken;
     }
 
-    public long getId() {
-        return id;
-    }
 
-    public void setId(long id) {
-        this.id = id;
-    }
 
     public String getEmail() {
         return email;

@@ -32,6 +32,7 @@ import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
 @RestController
 @RequestMapping("/api/user")
 public class UserController {
+
     @Value("${vwp.email.template.password.reset}")
     private String passwordResetTemplate;
 
@@ -58,7 +59,7 @@ public class UserController {
 
     @Autowired
     private JwtProvider jwtProvider;
-    //TODO
+
     @Autowired
     private EmailService emailService;
 
@@ -210,7 +211,7 @@ public class UserController {
 
             emailVerificationRepository.delete(emailVerification);
 
-            return ResponseEntity.ok("user validated");
+            return ResponseEntity.ok("User validated");
         }
         throw new CustomException("Already confirmed or wrong url");
     }
@@ -222,7 +223,7 @@ public class UserController {
         userFollow.setUserFollowing(userRepository.findByEmail(principal.getName()).getId());
         userFollowRepository.save(userFollow);
 
-        return ResponseEntity.ok("Followed user succesfully");
+        return ResponseEntity.ok("Followed user successfully");
     }
 
     @Transactional
